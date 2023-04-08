@@ -1,6 +1,8 @@
 <div>
     @include('livewire.normal-view.products.view')
     @include('livewire.normal-view.carts.add-to-cart')
+    @include('livewire.normal-view.carts.delete')
+    @include('livewire.normal-view.orders.check-out')
     <div style="backdrop-filter: blur(15px);" class="bg-transparent p-2 rounded sticky-top" id="cats">
         @role('user')
             <div class="float-end mr-3">
@@ -30,11 +32,12 @@
                                 <div class="cart-item-price mt-4">
                                     &#8369;{{ number_format($item->product->product_price, 2, '.', ',') }}
 
-                                    <button class="btn btn-link text-danger"
-                                        wire:click="removeCartItem({{ $item->id }})">
+                                    <button class="btn btn-link text-danger" data-toggle="modal" data-target="#remove"
+                                        wire:click="remove({{ $item->id }})">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
-                                    <button class="btn btn-link text-primary" wire:click="checkOut({{ $item->id }})">
+                                    <button class="btn btn-link text-primary" data-toggle="modal" data-target="#checkOut"
+                                        wire:click="checkOut({{ $item->id }})">
                                         <i class="fas fa-check"></i>
                                     </button>
                                 </div>
@@ -148,7 +151,7 @@
         <hr>
         <div class="row">
             @foreach ($products as $product)
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-4">
                     <div class="card shadow product show" id="product-card" style="min-width: 50px;">
                         <div class="p-2" style="position: relative;">
                             <div class="image-container">

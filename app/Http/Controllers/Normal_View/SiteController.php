@@ -41,6 +41,14 @@ class SiteController extends Controller
     {
         return view('pages.normal-view.products.index');
     }
+    public function order()
+    {
+        return view('pages.normal-view.orders.index');
+    }
+    public function recentOrder()
+    {
+        return view('pages.normal-view.orders.recent-orders');
+    }
     /**
      * Display a listing of the resource.
      */

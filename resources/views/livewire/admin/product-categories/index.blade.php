@@ -72,13 +72,23 @@
                             <td>{{ $product_category->category_name }}</td>
                             <td style="max-width: 550px;">{{ $product_category->category_description }}</td>
                             <td style="max-width: 100px;">
-                                <a href="" class="btn btn-primary mt-1" data-toggle="modal"
-                                    data-target="#editProductCategory" wire:click="edit({{ $product_category->id }})"><i
-                                        class="fa-light fa-pen-to-square"></i> Update</a>
-                                <a href="" class="btn btn-danger mt-1" data-toggle="modal"
-                                    data-target="#deleteProductCategory"
-                                    wire:click="delete({{ $product_category->id }})"><i class="fa-solid fa-trash"></i>
-                                    Remove</a>
+                                <div class="dropdown dropup">
+                                    <span class="badge badge-pill badge-primary py-2" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i style="font-size: 18px; cursor: pointer;"
+                                            class="fas fa-plus-circle fa-fw rounded-circle"></i>
+                                    </span>
+                                    <div class="dropdown-menu text-center p-2" aria-labelledby="dropdownMenuButton">
+                                        <a href="" class="btn btn-primary mt-1 form-control" data-toggle="modal"
+                                            data-target="#editProductCategory"
+                                            wire:click="edit({{ $product_category->id }})"><i
+                                                class="fa-light fa-pen-to-square"></i> Update</a>
+                                        <a href="" class="btn btn-danger mt-1 form-control" data-toggle="modal"
+                                            data-target="#deleteProductCategory"
+                                            wire:click="delete({{ $product_category->id }})"><i
+                                                class="fa-solid fa-trash"></i> Remove</a>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

@@ -19,9 +19,10 @@
                     <hr>
                     <form wire:submit.prevent="register">
                         <div class="form-floating">
-                            <input type="file" class="form-control" accept=".png, .jpg, .jpeg, .gif" id="profile_image"
-                                wire:model="profile_image">
-                            <label for="profile_image" class=" p-2">Select Profile Image: (jpg, jpeg, png, gif)</label>
+                            <input type="file" class="form-control" accept=".png, .jpg, .jpeg, .gif"
+                                id="profile_image" wire:model="profile_image">
+                            <label for="profile_image" class=" p-2">Select Profile Image: (jpg, jpeg, png,
+                                gif)</label>
                             @if ($profile_image && in_array($profile_image->getClientOriginalExtension(), ['jpg', 'jpeg', 'png', 'gif']))
                                 <img src="{{ $profile_image->temporaryUrl() }}" style="width: 120px; height:120px;"
                                     class="mt-1">
@@ -31,39 +32,50 @@
                             <span class="text-danger">{{ $message }} (jpg, jpeg, png, gif) is only accepted.</span>
                         @enderror
                         <div class="form-floating mt-3">
-                            <input type="text" id="name" wire:model.defer="name" class="form-control" placeholder="Name"
-                                required>
+                            <input type="text" id="name" wire:model.defer="name" class="form-control"
+                                placeholder="Name" required>
                             <label for="name">Name:</label>
                         </div>
                         @error('name')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                         <div class="form-floating mt-3">
-                            <input type="text" id="address" wire:model.defer="address" class="form-control" placeholder="Address"
-                                required>
+                            <input type="text" id="address" wire:model.defer="address" class="form-control"
+                                placeholder="Address" required>
                             <label for="address">Address:</label>
                         </div>
                         @error('name')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                         <div class="form-floating mt-3">
-                            <input type="email" id="email" wire:model="email" class="form-control" placeholder="Email" required>
+                            <input type="email" id="email" wire:model="email" class="form-control"
+                                placeholder="Email" required>
                             <label for="email">Email:</label>
                         </div>
                         @error('email')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                         <div class="form-floating mt-3">
-                            <input type="password" id="password" wire:model.defer="password" placeholder="Password" class="form-control"
-                                required>
+                            <input type="password" id="password" wire:model.defer="password" placeholder="Password"
+                                class="form-control" required>
+                            <button type="button"
+                                class="position-absolute no-focus top-50 end-0 mr-2 translate-middle-y"
+                                onclick="togglePasswordVisibility()">
+                                <i id="password-toggle-icon" class="fas fa-eye-slash"></i>
+                            </button>
                             <label for="password">Password:</label>
                         </div>
                         @error('password')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                         <div class="form-floating mt-3">
-                            <input type="password" id="password_confirmation" placeholder="Confirm Password" wire:model.defer="password_confirmation"
-                                class="form-control" required>
+                            <input type="password" id="password_confirmation" placeholder="Confirm Password"
+                                wire:model.defer="password_confirmation" class="form-control" required>
+                            <button type="button"
+                                class="position-absolute no-focus top-50 end-0 mr-2 translate-middle-y"
+                                onclick="toggleConfirmPasswordVisibility()">
+                                <i id="password_confirmation-toggle-icon" class="fas fa-eye-slash"></i>
+                            </button>
                             <label for="password_confirmation">Confirm Password:</label>
                         </div>
                         @error('password')
@@ -83,8 +95,8 @@
                             @enderror
                         </div>
                         <div class="form-floating mt-3">
-                            <input type="number" id="phone_number" wire:model="phone_number" class="form-control" placeholder="Phone Number"
-                                required>
+                            <input type="number" id="phone_number" wire:model="phone_number" class="form-control"
+                                placeholder="Phone Number" required>
                             <label for="phone_number">Phone Number: (09-xxxxxxxxx) (must 11 digits)</label>
                         </div>
                         @error('phone_number')
@@ -92,8 +104,8 @@
                         @enderror
                         <div class="d-flex mt-3">
                             <div class="flex-grow-1">
-                                <p><input type="checkbox"> I agree to the <a href="/terms-and-conditions" target="_"
-                                        class="text-primary">Terms &
+                                <p><input type="checkbox"> I agree to the <a href="/terms-and-conditions"
+                                        target="_" class="text-primary">Terms &
                                         Conditions</a>.</p>
                                 <p href="/register">Already have an account? <a href="/login">Login</a></p>
                             </div>
@@ -105,8 +117,50 @@
         </div>
     </div>
 </div>
+
+<style>
+    .no-focus:focus {
+        outline: none;
+    }
+
+    .no-focus {
+        border: none;
+        background: transparent;
+        font-size: 18px;
+    }
+</style>
+
 <script>
     $(document).ready(function() {
         $('[data-toggle="tooltip"]').tooltip();
     });
+
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("password");
+        var passwordToggleIcon = document.getElementById("password-toggle-icon");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordToggleIcon.classList.remove("fa-eye-slash");
+            passwordToggleIcon.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            passwordToggleIcon.classList.remove("fa-eye");
+            passwordToggleIcon.classList.add("fa-eye-slash");
+        }
+    }
+    function toggleConfirmPasswordVisibility() {
+        var passwordInput = document.getElementById("password_confirmation");
+        var passwordToggleIcon = document.getElementById("password_confirmation-toggle-icon");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordToggleIcon.classList.remove("fa-eye-slash");
+            passwordToggleIcon.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            passwordToggleIcon.classList.remove("fa-eye");
+            passwordToggleIcon.classList.add("fa-eye-slash");
+        }
+    }
 </script>

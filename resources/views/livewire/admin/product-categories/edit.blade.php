@@ -33,6 +33,9 @@
                                             <option value="Juice">Juice</option>
                                             <option value="Soda">Soda</option>
                                         </optgroup>
+                                        <optgroup label="Others">
+                                            <option value="Others">Others</option>
+                                        </optgroup>
                                     </select>
                                     @error('category_name')
                                         <span class="text-danger">*{{ $message }}</span>

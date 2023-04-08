@@ -51,15 +51,16 @@
             <div class="dropdown-menu dropdown-menu-right" id="dropdown-setting" aria-labelledby="dropdownMenuButton">
                 @if (auth()->check())
                     <a class="nav-link" href="/profile">
-                        <div class="d-flex align-items-center">
-                            <div class="mr-3 outline"
+                        <div class="d-flex flex-column align-items-center">
+                            <div class="mr-3 outline mb-3"
                                 style="width: 45px; height: 46px; border-radius: 50%; border: 2px solid white;">
                                 <img style="width: 41px; height: 41px; border-radius: 50%;"
                                     src="{{ auth()->user()->profile_image === null ? Storage::url('asset/profile-pic.jpg') : Storage::url(auth()->user()->profile_image) }}"
                                     alt="{{ auth()->user()->name }}">
                             </div>
-                            <div>
-                                {{ auth()->user()->name }}
+                            <div class="text-center">
+                                <span>{{ auth()->user()->name }}</span><br>
+                                <span>{{ auth()->user()->email }}</span>
                             </div>
                         </div>
                     </a>
@@ -70,6 +71,14 @@
                             <span>Admin Dashboard</span></a>
                         <div class="dropdown-divider"></div>
                     @endrole
+                    <a class="nav-link p-3" href="/orders">
+                        <i class="fa-light fa-bag-shopping"></i>&nbsp;
+                        <span>My Orders</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="nav-link p-3" href="/recent-orders">
+                        <i class="fa-light fa-memo-circle-check"></i>&nbsp;
+                        <span>Recent Orders</span></a>
+                    <div class="dropdown-divider"></div>
                     <a class="nav-link p-3" href="#" data-toggle="modal" data-target="#logout"><i
                             class="fa-light fa-right-from-bracket col-sm-1"></i>&nbsp;
                         <span>Logout</span></a>

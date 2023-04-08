@@ -30,6 +30,8 @@ Route::get('/view-products', [SiteController::class, 'viewProducts']);
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/profile', [SiteController::class, 'profile']);
     Route::get('/products', [SiteController::class, 'product']);
+    Route::get('/orders', [SiteController::class, 'order']);
+    Route::get('/recent-orders', [SiteController::class, 'recentOrder']);
     // Route::get('/cart', [SiteController::class, 'myCart']);
 });
 
@@ -41,4 +43,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin/users', [AdminSiteController::class, 'user']);
     Route::get('/admin/products', [AdminSiteController::class, 'product']);
     Route::get('/admin/product-categories', [AdminSiteController::class, 'category']);
+    Route::get('/admin/orders', [AdminSiteController::class, 'order']);
+    Route::get('/admin/product-sales', [AdminSiteController::class, 'productSales']);
 });

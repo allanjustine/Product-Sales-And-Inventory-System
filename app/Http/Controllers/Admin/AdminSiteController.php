@@ -54,6 +54,14 @@ class AdminSiteController extends Controller
     {
         return view('pages.admin.product-categories.index');
     }
+    public function order()
+    {
+        return view('pages.admin.orders.index');
+    }
+    public function productSales()
+    {
+        return view('pages.admin.orders.product-sales');
+    }
     /**
      * Display the specified resource.
      */

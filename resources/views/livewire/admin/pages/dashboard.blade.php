@@ -43,6 +43,17 @@
                     </div>
                 </a>
             </div>
+            <div class="col-md-3">
+                <a href="/admin/orders" style="color: black">
+                    <div class="info-box dash elevation-3" style="height: 110px;">
+                        <div class="info-box-content">
+                            <span class="info-box-text">ORDERS</span>
+                            <span class="info-box-number">{{ $ordersCount }}</span>
+                        </div>
+                        <span class="info-box-icon"><i class="fa-solid fa-bag-shopping" style="font-size: 55px;"></i></span>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

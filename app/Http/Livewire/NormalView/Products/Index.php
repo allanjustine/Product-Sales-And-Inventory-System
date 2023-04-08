@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\NormalView\Products;
 
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Session;
@@ -11,6 +12,9 @@ use Livewire\WithPagination;
 
 class Index extends Component
 {
+
+    protected $listeners = ['resetInputs'];
+
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
@@ -26,7 +30,13 @@ class Index extends Component
     public $quantity = 1;
     public $product;
     public $cartItems;
+    public $cartItemToRemove;
+    public $cartItemToCheckOut;
+    public $itemRemove;
+    public $itemPlaceOrder;
     public $item, $updateCartItem;
+    public $order_payment_method;
+    public $user_location;
 
     public function displayProducts()
     {
@@ -38,9 +48,9 @@ class Index extends Component
             });
         }
         if ($this->sort === 'low_to_high') {
-            $query->orderBy('product_price', 'asc');
-        } else {
             $query->orderBy('product_price', 'desc');
+        } else {
+            $query->orderBy('product_price', 'asc');
         }
 
         if ($this->product_rating != 'All') {
@@ -153,23 +163,102 @@ class Index extends Component
         }
     }
 
-    public function removeCartItem($itemId)
+    public function remove($itemId)
     {
-        $item = Cart::findOrFail($itemId);
+        $this->cartItemToRemove = Cart::find($itemId);
 
-        $item->delete();
+        $this->itemRemove = $itemId;
+    }
+
+    public function removeItemToCart()
+    {
+        $product = Cart::where('id', $this->itemRemove)->first();
+
+        $product->delete();
 
         alert()->toast('Removed from cart successfully', 'success');
 
         return redirect('/products');
     }
 
-    public function checkOut()
+    public function checkOut($itemId)
     {
+        $this->cartItemToCheckOut = Cart::find($itemId);
 
-        alert()->toast('You checkout the product successfully', 'success');
+        $this->itemPlaceOrder = $itemId;
+    }
 
-        return redirect('/products');
+    public function placeOrder()
+    {
+        $cartItem = Cart::find($this->itemPlaceOrder);
+
+        $this->validate([
+            'order_payment_method'  =>      'required',
+            'user_location'         =>      'required|max:255'
+        ]);
+
+        $product = $cartItem->product;
+        $productQuantity = $product->product_stock;
+
+        if ($cartItem->quantity <= $productQuantity) {
+
+            $existingOrder = Order::where([
+                ['user_id', auth()->id()],
+                ['product_id', $product->id]
+            ])->first();
+
+            if ($existingOrder) {
+                if ($existingOrder->order_status == 'Paid') {
+                    // Create a new order with "pending" status
+                    $order = new Order();
+                    $order->user_id = auth()->id();
+                    $order->product_id = $product->id;
+                    $order->order_quantity = $cartItem->quantity;
+                    $order->user_location = $this->user_location;
+                    $order->order_price = $product->product_price;
+                    $order->order_total_amount = $cartItem->quantity * $product->product_price;
+                    $order->order_payment_method = $this->order_payment_method;
+                    $order->order_status = 'Pending'; // Set status to pending
+                    $order->save();
+                } else {
+                    // Add to the quantity and total amount of the existing order
+                    $existingOrder->order_quantity += $cartItem->quantity;
+                    $existingOrder->order_total_amount += ($cartItem->quantity * $product->product_price);
+                    $existingOrder->save();
+                }
+            } else {
+                // Create a new order with "pending" status
+                $order = new Order();
+                $order->user_id = auth()->id();
+                $order->product_id = $product->id;
+                $order->order_quantity = $cartItem->quantity;
+                $order->user_location = $this->user_location;
+                $order->order_price = $product->product_price;
+                $order->order_total_amount = $cartItem->quantity * $product->product_price;
+                $order->order_payment_method = $this->order_payment_method;
+                $order->order_status = 'Pending'; // Set status to pending
+                $order->save();
+            }
+
+            $product->product_stock -= $cartItem->quantity;
+            $product->save();
+            $cartItem->delete();
+
+            alert()->success('Congrats', 'The product ordered successfully');
+            return redirect('/orders');
+        } else {
+            alert()->error('Sorry', 'The product stock is insufficient please reduce your cart quantity');
+            return redirect('/products');
+        }
+    }
+
+
+    public function resetInputs()
+    {
+        $this->order_payment_method = '';
+        $this->user_location = '';
+
+        $this->resetValidation();
     }
 
     public function render()

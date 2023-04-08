@@ -35,13 +35,18 @@
                             <input type="password" id="password" wire:model.defer="password" class="form-control"
                                 placeholder="Password">
                             <label for="password"><i class="fas fa-key"></i> Password:</label>
+                            <button type="button" class="position-absolute no-focus top-50 end-0 mr-2 translate-middle-y"
+                                onclick="togglePasswordVisibility()">
+                                <i id="password-toggle-icon" class="fas fa-eye-slash"></i>
+                            </button>
                         </div>
                         @error('password')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                         <div class="d-flex mt-3">
                             <div class="flex-grow-1">
-                                <a href="" class="float-end" data-toggle="modal" data-target="#forgotPassword">Forgot password?</a>
+                                <a href="" class="float-end" data-toggle="modal"
+                                    data-target="#forgotPassword">Forgot password?</a>
                                 <p><input type="checkbox" wire:model.defer="remember"> Remember me</p>
                                 <p href="/register">Don't have an account? <a href="/register">Register</a></p>
                             </div>
@@ -53,8 +58,35 @@
         </div>
     </div>
 </div>
+
+<style>
+    .no-focus:focus {
+      outline: none;
+    }
+    .no-focus {
+        border: none;
+        background: transparent;
+        font-size: 18px;
+    }
+  </style>
+
 <script>
     $(document).ready(function() {
         $('[data-toggle="tooltip"]').tooltip();
     });
+
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("password");
+        var passwordToggleIcon = document.getElementById("password-toggle-icon");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordToggleIcon.classList.remove("fa-eye-slash");
+            passwordToggleIcon.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            passwordToggleIcon.classList.remove("fa-eye");
+            passwordToggleIcon.classList.add("fa-eye-slash");
+        }
+    }
 </script>

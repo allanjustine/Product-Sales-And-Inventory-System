@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Layout;
 
+use App\Models\Order;
 use App\Models\ProductCategory;
 use App\Models\Product;
 use App\Models\User;
@@ -15,8 +16,10 @@ class Sidebar extends Component
         $usersCount = User::where('id', '<>', auth()->id())->count();
         $productsCount = Product::count();
         $categoriesCount = ProductCategory::count();
+        $ordersCount = Order::where('order_status', 'Pending')->count();
+        $productSalesCount = Order::where('order_status', 'Paid')->count();
 
-        return compact('usersCount', 'productsCount', 'categoriesCount');
+        return compact('usersCount', 'productsCount', 'categoriesCount', 'ordersCount', 'productSalesCount');
     }
     public function render()
     {

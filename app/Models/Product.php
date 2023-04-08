@@ -26,6 +26,11 @@ class Product extends Model
         return $this->belongsToMany(Product::class)->withPivot('quantity');
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function scopeSearch($query, $terms)
     {
         collect(explode(" ", $terms))

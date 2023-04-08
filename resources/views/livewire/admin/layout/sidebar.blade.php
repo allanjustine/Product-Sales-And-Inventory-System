@@ -74,12 +74,48 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-header">PRODUCT MANAGEMENT</li>
-                        <li class="nav-item menu-close">
+                        <li class="nav-header">ORDERS MANAGEMENT</li>
+                        <li
+                            class="nav-item {{ in_array(request()->path(), ['admin/orders', 'admin/product-sales']) ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa-solid fa-hand-pointer"></i>
                                 <p>
-                                   Select Category
+                                    Select Category
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/admin/orders"
+                                        class="nav-link {{ 'admin/orders' == request()->path() ? 'active2' : '' }}">
+                                        <i class="nav-icon fa-solid fa-bag-shopping"></i>
+                                        <p>
+                                            Users Order
+                                            <span class="right badge badge-info"></span>
+                                            <span class="right badge badge-info">{{ $ordersCount }}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/product-sales"
+                                        class="nav-link {{ 'admin/product-sales' == request()->path() ? 'active2' : '' }}">
+                                        <i class="nav-icon fa-solid fa-database"></i>
+                                        <p>
+                                            Product Sales
+                                            <span class="right badge badge-info"></span>
+                                            <span class="right badge badge-info">{{ $productSalesCount }}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-header">PRODUCT MANAGEMENT</li>
+                        <li
+                            class="nav-item {{ in_array(request()->path(), ['admin/products', 'admin/product-categories']) ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa-solid fa-hand-pointer"></i>
+                                <p>
+                                    Select Category
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>

@@ -92,7 +92,7 @@
         <hr>
         <div class="row">
             @foreach ($products as $product)
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-4">
                     <div class="card shadow product show" id="product-card" style="min-width: 50px;">
                         <div class="p-2" style="position: relative;">
                             <div class="image-container">
