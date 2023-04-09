@@ -49,7 +49,7 @@
 
 <footer class="bg-dark text-light py-4" onload="updateTime()">
     <div class="container">
-        <div class="row">
+        <div class="row p-2">
             <div class="col-md-4">
                 <h5>AJM Company</h5>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -99,7 +99,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <p class="text-center mt-3">Current date and time: <span class="border-bottom"><span id="date"></span>
+                <p style="font-size: 12px;" class="text-center mt-3">Current date and time: <span class="border-bottom"><span id="date"></span>
                         <span id="time"></span></span></p>
                 <hr>
                 <p>&copy; 2023 <strong>AJM</strong>. All rights reserved.</p>

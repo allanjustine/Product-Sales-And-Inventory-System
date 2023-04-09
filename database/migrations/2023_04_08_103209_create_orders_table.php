@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('order_total_amount', 10, 2);
             $table->string('order_payment_method');
             $table->string('user_location');
+            $table->unsignedInteger('product_sold')->default(0);
             $table->string('order_status')->default('Pending');
             $table->timestamps();
         });

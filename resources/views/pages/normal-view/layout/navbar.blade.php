@@ -9,25 +9,25 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mx-auto p-3">
             <li class="nav-item p-2">
-                <a class="nav-link text-white text-center {{ '/' == request()->path() ? 'active' : '' }}"
+                <a class="nav-link text-white text-center {{ '/' == request()->path() ? 'active2' : '' }}"
                     href="/"><i class="fa-light fa-house"></i> Home</a>
             </li>
             <li class="nav-item p-2">
-                <a class="nav-link text-white text-center {{ 'about-us' == request()->path() ? 'active' : '' }}"
+                <a class="nav-link text-white text-center {{ 'about-us' == request()->path() ? 'active2' : '' }}"
                     href="/about-us"><i class="fa-light fa-question"></i> About Us</a>
             </li>
             <li class="nav-item p-2">
-                <a class="nav-link text-white text-center {{ 'contact-us' == request()->path() ? 'active' : '' }}"
+                <a class="nav-link text-white text-center {{ 'contact-us' == request()->path() ? 'active2' : '' }}"
                     href="/contact-us"><i class="fa-light fa-users"></i> Contact Us</a>
             </li>
             @if (auth()->check())
                 <li class="nav-item p-2">
-                    <a class="nav-link text-white text-center {{ 'products' == request()->path() ? 'active' : '' }}"
+                    <a class="nav-link text-white text-center {{ 'products' == request()->path() ? 'active2' : '' }}"
                         href="/products"><i class="fa-light fa-box-open"></i> Products</a>
                 </li>
             @else
                 <li class="nav-item p-2">
-                    <a class="nav-link text-white text-center {{ 'view-products' == request()->path() ? 'active' : '' }}"
+                    <a class="nav-link text-white text-center {{ 'view-products' == request()->path() ? 'active2' : '' }}"
                         href="/view-products"><i class="fa-light fa-box-open"></i> View Products</a>
                 </li>
             @endif
@@ -80,7 +80,7 @@
                         <span>Recent Orders</span></a>
                     <div class="dropdown-divider"></div>
                     <a class="nav-link p-3" href="#" data-toggle="modal" data-target="#logout"><i
-                            class="fa-light fa-right-from-bracket col-sm-1"></i>&nbsp;
+                            class="fa-light fa-right-from-bracket"></i>&nbsp;
                         <span>Logout</span></a>
                 @else
                     <a class="nav-link p-3" href="/login"><i class="fa-light fa-right-to-bracket col-sm-1"></i>&nbsp;

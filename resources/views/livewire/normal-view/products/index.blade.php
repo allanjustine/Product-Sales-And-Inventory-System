@@ -3,151 +3,155 @@
     @include('livewire.normal-view.carts.add-to-cart')
     @include('livewire.normal-view.carts.delete')
     @include('livewire.normal-view.orders.check-out')
-    <div style="backdrop-filter: blur(15px);" class="bg-transparent p-2 rounded sticky-top" id="cats">
-        @role('user')
-            <div class="float-end mr-3">
-                <div class="dropdown">
-                    <a class="nav-link text-center cartdropdown" id="cart-dropdown" data-bs-toggle="dropdown"
-                        aria-expanded="false" href=""><i class="fa-regular fa-cart-shopping pt-3"></i>
-                        <span class="badge badge-pill badge-danger" id="badge-cart"><span
-                                style="font-size: 19px;">{{ $cartItems->count() }}</span></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end cartmenu" aria-labelledby="cart-dropdown">
-                        @foreach ($cartItems as $item)
-                            <li class="cart-item px-3 py-2 d-flex justify-content-between">
-                                <div class="cart-item-image">
-                                    <button class="btn btn-link text-primary"
-                                        wire:click.prevent="decreaseQuantity({{ $item->id }})">
-                                        <i class="fas fa-minus text-black"></i>
-                                    </button>
-                                    x{{ $item->quantity }}
-                                    <button class="btn btn-link text-primary"
-                                        wire:click.prevent="updateCartItem({{ $item->id }})">
-                                        <i class="fas fa-plus text-black"></i>
-                                    </button>
-                                    <img style="width: 70px; height: 70px; border-radius:50%;"
-                                        src="{{ Storage::url($item->product->product_image) }}"
-                                        alt="">&nbsp;&nbsp;{{ $item->product->product_name }}
-                                </div>
-                                <div class="cart-item-price mt-4">
-                                    &#8369;{{ number_format($item->product->product_price, 2, '.', ',') }}
-
-                                    <button class="btn btn-link text-danger" data-toggle="modal" data-target="#remove"
-                                        wire:click="remove({{ $item->id }})">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                    <button class="btn btn-link text-primary" data-toggle="modal" data-target="#checkOut"
-                                        wire:click="checkOut({{ $item->id }})">
-                                        <i class="fas fa-check"></i>
-                                    </button>
-                                </div>
-
-                            </li>
-                            <li class="dropdown-divider"></li>
+    <div style="backdrop-filter: blur(15px);" class="bg-transparent sticky-top rounded" id="cats">
+        <details>
+            <summary class="bg-secondary p-3 text-center">
+                Click here to filter
+            </summary>
+            <p>
+            <div class="col-md-5 offset-md-4 mt-2">
+                <input type="search" class="form-control" placeholder="Search" wire:model="search"
+                    style="border-radius: 30px; height: 50px;">
+            </div>
+            <div class="row d-flex justify-content-center mt-5">
+                <div class="col-md-1 text-center">
+                    <label>Show</label>
+                    <select wire:model="perPage" class="perPageSelect form-select" id="select-cat">
+                        <option>15</option>
+                        <option>20</option>
+                        <option>25</option>
+                        <option>35</option>
+                        <option>45</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+                <div class="col-md-3 text-center">
+                    <label for="category">Categories</label>
+                    <select name="category" id="select-cat" class="form-select" wire:model="category_name">
+                        <option value="All">All</option>
+                        @foreach ($product_categories as $category)
+                            <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
                         @endforeach
-                        <li>
-                            @if ($cartItems->count() === 0)
-                                <p class="text-center">
-                                    <i class="fa-regular fa-xmark-to-slot mt-5" style="font-size: 50px;"></i>
-                                </p>
-                                <p class="text-center mb-5">No Product Added Yet.</p>
-                            @else
-                                <span class="float-end px-3 py-2">Total:
-                                    &#8369;{{ number_format($total, 2, '.', ',') }}</span>
-                            @endif
-                        </li>
-                    </ul>
+                    </select>
+                </div>
+                <div class="col-md-3 text-center">
+                    <label for="sort">Sort By</label>
+                    <select wire:model="sort" class="form-select" id="select-cat">
+                        <option value="low_to_high">Price: Low to High</option>
+                        <option value="high_to_low">Price: High to Low</option>
+                    </select>
+                </div>
+                <div class="col-md-3 text-center">
+                    <label for="sort">Ratings</label>
+                    <select wire:model="product_rating" class="form-select" id="select-cat">
+                        <option value="All">All</option>
+                        <option value="1">1
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= 1)
+                                    &#9733;
+                                @else
+                                    &#9734;
+                                @endif
+                            @endfor
+                        </option>
+                        <option value="2">2
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= 2)
+                                    &#9733;
+                                @else
+                                    &#9734;
+                                @endif
+                            @endfor
+                        </option>
+                        <option value="3">3
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= 3)
+                                    &#9733;
+                                @else
+                                    &#9734;
+                                @endif
+                            @endfor
+                        </option>
+                        <option value="4">4
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= 4)
+                                    &#9733;
+                                @else
+                                    &#9734;
+                                @endif
+                            @endfor
+                        </option>
+                        <option value="5">5
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= 5)
+                                    &#9733;
+                                @else
+                                    &#9734;
+                                @endif
+                            @endfor
+                        </option>
+                    </select>
                 </div>
             </div>
-        @endrole
-        <div class="col-md-5 offset-md-4 mt-2">
-            <input type="search" class="form-control" placeholder="Search" wire:model="search"
-                style="border-radius: 30px; height: 50px;">
-        </div>
-        <div class="row d-flex justify-content-center mt-5">
-            <div class="col-md-1 text-center">
-                <label>Show</label>
-                <select wire:model="perPage" class="perPageSelect form-select" id="select-cat">
-                    <option>15</option>
-                    <option>20</option>
-                    <option>25</option>
-                    <option>35</option>
-                    <option>45</option>
-                    <option>50</option>
-                    <option>100</option>
-                </select>
-            </div>
-            <div class="col-md-3 text-center">
-                <label for="category">Categories</label>
-                <select name="category" id="select-cat" class="form-select" wire:model="category_name">
-                    <option value="All">All</option>
-                    @foreach ($product_categories as $category)
-                        <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-3 text-center">
-                <label for="sort">Sort By</label>
-                <select wire:model="sort" class="form-select" id="select-cat">
-                    <option value="low_to_high">Price: Low to High</option>
-                    <option value="high_to_low">Price: High to Low</option>
-                </select>
-            </div>
-            <div class="col-md-3 text-center">
-                <label for="sort">Ratings</label>
-                <select wire:model="product_rating" class="form-select" id="select-cat">
-                    <option value="All">All</option>
-                    <option value="1">1
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= 1)
-                                &#9733;
-                            @else
-                                &#9734;
-                            @endif
-                        @endfor
-                    </option>
-                    <option value="2">2
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= 2)
-                                &#9733;
-                            @else
-                                &#9734;
-                            @endif
-                        @endfor
-                    </option>
-                    <option value="3">3
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= 3)
-                                &#9733;
-                            @else
-                                &#9734;
-                            @endif
-                        @endfor
-                    </option>
-                    <option value="4">4
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= 4)
-                                &#9733;
-                            @else
-                                &#9734;
-                            @endif
-                        @endfor
-                    </option>
-                    <option value="5">5
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= 5)
-                                &#9733;
-                            @else
-                                &#9734;
-                            @endif
-                        @endfor
-                    </option>
-                </select>
-            </div>
-        </div>
+        </details>
     </div>
-    <div class="container mt-5">
-        <h1>Products</h1>
+    @role('user')
+        <div class="dropdown">
+            <a class="nav-link text-right mt-3 mr-4 cartdropdown" id="cart-dropdown" data-bs-toggle="dropdown"
+                aria-expanded="false" href=""><i class="fa-regular fa-cart-shopping pt-3"></i>
+                <span class="badge badge-pill badge-danger" id="badge-cart"><span
+                        style="font-size: 19px;">{{ $cartItems->count() }}</span></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end cartmenu" aria-labelledby="cart-dropdown">
+                @foreach ($cartItems as $item)
+                    <li class="cart-item px-3 py-2">
+                        <div class="cart-item-image">
+                            <button class="btn btn-link text-primary"
+                                wire:click.prevent="decreaseQuantity({{ $item->id }})">
+                                <i class="fas fa-minus text-black"></i>
+                            </button>
+                            x{{ number_format($item->quantity) }}
+                            <button class="btn btn-link text-primary"
+                                wire:click.prevent="updateCartItem({{ $item->id }})">
+                                <i class="fas fa-plus text-black"></i>
+                            </button>
+                            <img style="width: 70px; height: 70px; border-radius:10%;"
+                                src="{{ Storage::url($item->product->product_image) }}"
+                                alt="">&nbsp;&nbsp;<strong>{{ $item->product->product_name }}</strong>
+                        </div>
+                        <div class="cart-item-price mt-2">
+                            &#8369;{{ number_format($item->product->product_price, 2, '.', ',') }}
+
+                            <button class="btn btn-link text-danger" data-toggle="modal" data-target="#remove"
+                                wire:click="remove({{ $item->id }})">
+                                <i class="fas fa-trash-alt"></i>&nbsp;Delete
+                            </button>
+                            <button class="btn btn-link text-primary" data-toggle="modal" data-target="#checkOut"
+                                wire:click="checkOut({{ $item->id }})">
+                                <i class="fas fa-check"></i>&nbsp;Checkout
+                            </button>
+                        </div>
+
+                    </li>
+                    <li class="dropdown-divider"></li>
+                @endforeach
+                <li>
+                    @if ($cartItems->count() === 0)
+                        <p class="text-center">
+                            <i class="fa-regular fa-xmark-to-slot mt-5" style="font-size: 50px;"></i>
+                        </p>
+                        <p class="text-center mb-5">No Product Added Yet.</p>
+                    @else
+                        <span class="px-3 py-2">Total:
+                            &#8369;{{ number_format($total, 2, '.', ',') }}</span>
+                    @endif
+                </li>
+            </ul>
+        </div>
+    @endrole
+    <div class="container">
+        <h3>Products</h3>
         <hr>
         <div class="row">
             @foreach ($products as $product)
@@ -157,6 +161,9 @@
                             <div class="image-container">
                                 <img class="card-img-top mt-4" src="{{ Storage::url($product->product_image) }}"
                                     alt="{{ $product->product_name }}">
+                            </div>
+                            <div>
+                                <span>Sold: {{ $product->product_sold }}</span>
                             </div>
 
                             <div class="pt-3 pr-3" style="position: absolute; top:0; right: 0;">
@@ -207,7 +214,8 @@
                                         Add to Cart</a>
                                 @endif
 
-                                <a href="" class="btn btn-primary mt-1 form-control btn-block"><i
+                                <a href="" class="btn btn-primary mt-1 form-control btn-block" data-toggle="modal"
+                                    data-target="#toBuyNow" wire:click="toBuyNow({{ $product->id }})"><i
                                         class="fa-solid fa-cart-shopping"></i> Buy Now</a>
                             @endrole
                             @role('admin')
@@ -226,7 +234,6 @@
                                     @endfor
                                 </span>
                             </div>
-
                         </div>
                     </div>
                 </div>

@@ -13,7 +13,7 @@
                         tells it what to do.</h3>
                     @if (auth()->check())
                         <a href="#" class="btn" id="view-btn">Have a nice day, {{ auth()->user()->name }}</a>
-                        <a href="/products" class="btn btn-primary">Order now</a>
+                        <a href="/products" class="btn btn-primary mt-1">Order now</a>
                     @else
                         <a href="/view-products" class="btn" id="view-btn">View Products</a>
                         <a href="/login" class="btn btn-primary">Get Started</a>
@@ -27,7 +27,7 @@
                         been cooked with passion, served with warmth, and enjoyed with pleasure.</h3>
                     @if (auth()->check())
                         <a href="#" class="btn" id="view-btn">Have a nice day, {{ auth()->user()->name }}</a>
-                        <a href="/products" class="btn btn-primary">Order now</a>
+                        <a href="/products" class="btn btn-primary mt-1">Order now</a>
                     @else
                         <a href="/view-products" class="btn" id="view-btn">View Products</a>
                         <a href="/login" class="btn btn-primary">Get Started</a>
@@ -41,7 +41,7 @@
                         the restaurant and the customer.</h3>
                     @if (auth()->check())
                         <a href="#" class="btn" id="view-btn">Have a nice day, {{ auth()->user()->name }}</a>
-                        <a href="/products" class="btn btn-primary">Order now</a>
+                        <a href="/products" class="btn btn-primary mt-1">Order now</a>
                     @else
                         <a href="/view-products" class="btn" id="view-btn">View Products</a>
                         <a href="/login" class="btn btn-primary">Get Started</a>

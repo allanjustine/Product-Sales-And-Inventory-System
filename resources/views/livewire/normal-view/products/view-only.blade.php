@@ -1,94 +1,101 @@
 <div>
     @include('livewire.normal-view.products.view')
-    <div style="backdrop-filter: blur(15px);" class="bg-transparent p-2 rounded sticky-top" id="cats">
-        <div class="col-md-5 offset-md-4 mt-2">
-            <input type="search" class="form-control" placeholder="Search" wire:model="search"
-                style="border-radius: 30px; height: 50px;">
-        </div>
-        <div class="row d-flex justify-content-center mt-5">
-            <div class="col-md-1 text-center">
-                <label>Show</label>
-                <select wire:model="perPage" class="perPageSelect form-select" id="select-cat">
-                    <option>15</option>
-                    <option>20</option>
-                    <option>25</option>
-                    <option>35</option>
-                    <option>45</option>
-                    <option>50</option>
-                    <option>100</option>
-                </select>
+    <div style="backdrop-filter: blur(15px);" class="bg-transparent sticky-top rounded" id="cats">
+        <details>
+            <summary class="bg-secondary p-3 text-center">
+                Click here to filter
+            </summary>
+            <p>
+            <div class="col-md-5 offset-md-4 mt-2">
+                <input type="search" class="form-control" placeholder="Search" wire:model="search"
+                    style="border-radius: 30px; height: 50px;">
             </div>
-            <div class="col-md-3 text-center">
-                <label for="category">Categories</label>
-                <select name="category" id="select-cat" class="form-select" wire:model="category_name">
-                    <option value="All">All</option>
-                    @foreach ($product_categories as $category)
-                        <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
-                    @endforeach
-                </select>
+            <div class="row d-flex justify-content-center mt-5">
+                <div class="col-md-1 text-center">
+                    <label>Show</label>
+                    <select wire:model="perPage" class="perPageSelect form-select" id="select-cat">
+                        <option>15</option>
+                        <option>20</option>
+                        <option>25</option>
+                        <option>35</option>
+                        <option>45</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+                <div class="col-md-3 text-center">
+                    <label for="category">Categories</label>
+                    <select name="category" id="select-cat" class="form-select" wire:model="category_name">
+                        <option value="All">All</option>
+                        @foreach ($product_categories as $category)
+                            <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3 text-center">
+                    <label for="sort">Sort By</label>
+                    <select wire:model="sort" class="form-select" id="select-cat">
+                        <option value="low_to_high">Price: Low to High</option>
+                        <option value="high_to_low">Price: High to Low</option>
+                    </select>
+                </div>
+                <div class="col-md-3 text-center">
+                    <label for="sort">Ratings</label>
+                    <select wire:model="product_rating" class="form-select" id="select-cat">
+                        <option value="All">All</option>
+                        <option value="1">1
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= 1)
+                                    &#9733;
+                                @else
+                                    &#9734;
+                                @endif
+                            @endfor
+                        </option>
+                        <option value="2">2
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= 2)
+                                    &#9733;
+                                @else
+                                    &#9734;
+                                @endif
+                            @endfor
+                        </option>
+                        <option value="3">3
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= 3)
+                                    &#9733;
+                                @else
+                                    &#9734;
+                                @endif
+                            @endfor
+                        </option>
+                        <option value="4">4
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= 4)
+                                    &#9733;
+                                @else
+                                    &#9734;
+                                @endif
+                            @endfor
+                        </option>
+                        <option value="5">5
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= 5)
+                                    &#9733;
+                                @else
+                                    &#9734;
+                                @endif
+                            @endfor
+                        </option>
+                    </select>
+                </div>
             </div>
-            <div class="col-md-3 text-center">
-                <label for="sort">Sort By</label>
-                <select wire:model="sort" class="form-select" id="select-cat">
-                    <option value="low_to_high">Price: Low to High</option>
-                    <option value="high_to_low">Price: High to Low</option>
-                </select>
-            </div>
-            <div class="col-md-3 text-center">
-                <label for="sort">Ratings</label>
-                <select wire:model="product_rating" class="form-select" id="select-cat">
-                    <option value="All">All</option>
-                    <option value="1">1
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= 1)
-                                &#9733;
-                            @else
-                                &#9734;
-                            @endif
-                        @endfor
-                    </option>
-                    <option value="2">2
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= 2)
-                                &#9733;
-                            @else
-                                &#9734;
-                            @endif
-                        @endfor
-                    </option>
-                    <option value="3">3
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= 3)
-                                &#9733;
-                            @else
-                                &#9734;
-                            @endif
-                        @endfor
-                    </option>
-                    <option value="4">4
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= 4)
-                                &#9733;
-                            @else
-                                &#9734;
-                            @endif
-                        @endfor
-                    </option>
-                    <option value="5">5
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= 5)
-                                &#9733;
-                            @else
-                                &#9734;
-                            @endif
-                        @endfor
-                    </option>
-                </select>
-            </div>
-        </div>
+            </p>
+        </details>
     </div>
     <div class="container mt-5">
-        <h1>Products</h1>
+        <h3>Products</h3>
         <hr>
         <div class="row">
             @foreach ($products as $product)

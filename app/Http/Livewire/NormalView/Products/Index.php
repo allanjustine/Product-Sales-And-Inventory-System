@@ -37,6 +37,7 @@ class Index extends Component
     public $item, $updateCartItem;
     public $order_payment_method;
     public $user_location;
+    public $product_sold;
 
     public function displayProducts()
     {
@@ -199,8 +200,9 @@ class Index extends Component
 
         $product = $cartItem->product;
         $productQuantity = $product->product_stock;
+        $productStatus = $product->product_status;
 
-        if ($cartItem->quantity <= $productQuantity) {
+        if ($cartItem->quantity <= $productQuantity && $productStatus == 'Available') {
 
             $existingOrder = Order::where([
                 ['user_id', auth()->id()],
@@ -209,7 +211,6 @@ class Index extends Component
 
             if ($existingOrder) {
                 if ($existingOrder->order_status == 'Paid') {
-                    // Create a new order with "pending" status
                     $order = new Order();
                     $order->user_id = auth()->id();
                     $order->product_id = $product->id;
@@ -218,16 +219,14 @@ class Index extends Component
                     $order->order_price = $product->product_price;
                     $order->order_total_amount = $cartItem->quantity * $product->product_price;
                     $order->order_payment_method = $this->order_payment_method;
-                    $order->order_status = 'Pending'; // Set status to pending
+                    $order->order_status = 'Pending';
                     $order->save();
                 } else {
-                    // Add to the quantity and total amount of the existing order
                     $existingOrder->order_quantity += $cartItem->quantity;
                     $existingOrder->order_total_amount += ($cartItem->quantity * $product->product_price);
                     $existingOrder->save();
                 }
             } else {
-                // Create a new order with "pending" status
                 $order = new Order();
                 $order->user_id = auth()->id();
                 $order->product_id = $product->id;
@@ -236,7 +235,7 @@ class Index extends Component
                 $order->order_price = $product->product_price;
                 $order->order_total_amount = $cartItem->quantity * $product->product_price;
                 $order->order_payment_method = $this->order_payment_method;
-                $order->order_status = 'Pending'; // Set status to pending
+                $order->order_status = 'Pending';
                 $order->save();
             }
 
@@ -245,10 +244,18 @@ class Index extends Component
             $cartItem->delete();
 
             alert()->success('Congrats', 'The product ordered successfully');
+
             return redirect('/orders');
         } else {
-            alert()->error('Sorry', 'The product stock is insufficient please reduce your cart quantity');
-            return redirect('/products');
+            if ($productStatus == 'Not Available') {
+                alert()->error('Sorry', 'The product is Not Available');
+
+                return redirect('/products');
+            } else {
+                alert()->error('Sorry', 'The product stock is insufficient please reduce your cart quantity');
+
+                return redirect('/orders');
+            }
         }
     }
 

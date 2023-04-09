@@ -1,83 +1,169 @@
 <div>
     @include('livewire.normal-view.orders.cancel-order')
     <div class="container">
-        <h1 class="mt-3">My Orders</h1>
+        <h3 class="mt-3">My Orders</h3>
         <hr>
-        <table class="table table-bordered mt-5">
-            <thead class="bg-dark">
-                <tr>
-                    <th>
-                        Product Name
-                    </th>
-                    <th>
-                        Price
-                    </th>
-                    <th>
-                        Quantity
-                    </th>
-                    <th>
-                        Total
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                    <th>
-                        Order Date
-                    </th>
-                    <th>
-                        Action
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($orders as $order)
-                    <tr>
-                        <td>{{ $order->product->product_name }}</td>
-                        <td>&#8369;{{ number_format($order->product->product_price, 2, '.', ',') }}</td>
-                        <td>{{ number_format($order->order_quantity) }}</td>
-                        <td>&#8369;{{ number_format($order->order_total_amount, 2, '.', ',') }}</td>
-                        @if ($order->order_status === 'Pending')
-                            <td><span class="badge badge-warning">PENDING</span></td>
-                        @else
-                            <td><span class="badge badge-success"><i class="fa fa-solid fa-check"></i> PAID</span></td>
-                        @endif
-                        <td>{{ date_format($order->created_at, 'F j, Y g:i A') }}</td>
-                        <td>
-                            @if ($order->order_status === 'Pending')
-                                <a href="" class="btn btn-danger" data-toggle="modal" data-target="#cancel"
-                                    wire:click="toCancel({{ $order->id }})">
-                                    <i class="fa-solid fa-xmark"></i>
-                                    Cancel Order
-                                </a>
-                            @else
-                                <a href="" class="btn btn-warning">
-                                    <i class="fa-solid fa-eye"></i>
-                                    View
-                                </a>
-                        </td>
-                @endif
-                </tr>
-                @endforeach
-                @if ($orders->count() === 0)
-                    <tr>
-                        <td colspan="8" class="text-center">
-                            <i class="fa-regular fa-xmark-to-slot mt-5" style="font-size: 50px;"></i>
-                            <h5 class="mb-2 mt-4">No orders yet. <a href="/products">Click here to order</a></h5>
-                        </td>
-                    </tr>
-                @endif
-            </tbody>
-            <tfoot class="bg-dark">
-                <tr>
-                    <td colspan="3">
-                        <h5>Grand Total:</h5>
-                    </td>
-                    <td>
-                        &#8369;{{ number_format($grandTotal, 2, '.', ',') }}
-                    </td>
-                    <td colspan="3"></td>
-                </tr>
-            </tfoot>
-        </table>
+        <div class="col-md-12">
+
+            <div class="card card-primary card-outline card-outline-tabs" style="height: 100%">
+                <div class="card-header p-0 border-bottom-0">
+                    <ul class="nav nav-tabs" id="schedulesTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="today-list" data-toggle="pill" href="#pending" role="tab"
+                                aria-controls="custom-tabs-four-home" aria-selected="true">PENDING
+                                ORDERS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="requests-list" data-toggle="pill" href="#recent" role="tab"
+                                aria-controls="custom-tabs-four-profile" aria-selected="false">RECENT ORDERS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="cancelled-list" data-toggle="pill" href="#cancelled" role="tab"
+                                aria-controls="custom-tabs-four-profile" aria-selected="false">CANCELLED ORDERS</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="pending" role="tabpanel"
+                            aria-labelledby="custom-tabs-four-home-tab">
+                            @foreach ($orders as $order)
+                                <div class="col-md-12">
+                                    <div class="info-box elevation-3">
+                                        <span class="info-box-icon"><img
+                                                src="{{ Storage::url($order->product->product_image) }}"
+                                                alt="{{ $order->product->product_name }}"></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">{{ $order->product->product_name }}</span>
+                                            <span
+                                                class="info-box-text">&#8369;{{ number_format($order->product->product_price, 2, '.', ',') }}</span>
+                                            <span
+                                                class="info-box-text">x{{ number_format($order->order_quantity) }}PC(s)</span>
+                                            <span
+                                                class="info-box-text">{{ date_format($order->created_at, 'F j, Y g:i A') }}</span>
+                                            <span class="info-box-number">Total:
+                                                &#8369;{{ number_format($order->order_total_amount, 2, '.', ',') }}</span>
+                                        </div>
+                                        <span>
+                                            @if ($order->order_status === 'Pending')
+                                                <a href="" class="btn btn-danger" data-toggle="modal"
+                                                    data-target="#cancel" wire:click="toCancel({{ $order->id }})">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                    Cancel Order
+                                                </a>
+                                            @else
+                                                <a href="" class="btn btn-warning">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                    View
+                                                </a>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </div>
+                            @endforeach
+                            @if ($orders->count() === 0)
+                                <span class="text-center">
+                                    <h5><i class="fa-regular fa-xmark-to-slot" style="font-size: 50px;"></i><br>
+                                        No orders yet. <a href="/products">Click
+                                            here to order</a></h5>
+                                </span>
+                            @endif
+                            <strong>Grand Total: &#8369;{{ number_format($grandTotal, 2, '.', ',') }}</strong>
+                        </div>
+                        <div class="tab-pane fade" id="recent" role="tabpanel"
+                            aria-labelledby="custom-tabs-four-home-tab">
+                            @foreach ($orders as $order)
+                                <div class="col-md-12">
+                                    <div class="info-box elevation-3">
+                                        <span class="info-box-icon"><img
+                                                src="{{ Storage::url($order->product->product_image) }}"
+                                                alt="{{ $order->product->product_name }}"></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">{{ $order->product->product_name }}</span>
+                                            <span
+                                                class="info-box-text">&#8369;{{ number_format($order->product->product_price, 2, '.', ',') }}</span>
+                                            <span
+                                                class="info-box-text">x{{ number_format($order->order_quantity) }}PC(s)</span>
+                                            <span
+                                                class="info-box-text">{{ date_format($order->created_at, 'F j, Y g:i A') }}</span>
+                                            <span class="info-box-number">Total:
+                                                &#8369;{{ number_format($order->order_total_amount, 2, '.', ',') }}</span>
+                                        </div>
+                                        <span>
+                                            @if ($order->order_status === 'Pending')
+                                                <a href="" class="btn btn-danger" data-toggle="modal"
+                                                    data-target="#cancel" wire:click="toCancel({{ $order->id }})">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                    Cancel Order
+                                                </a>
+                                            @else
+                                                <a href="" class="btn btn-warning">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                    View
+                                                </a>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </div>
+                            @endforeach
+                            @if ($orders->count() === 0)
+                                <span class="text-center">
+                                    <h5><i class="fa-regular fa-xmark-to-slot" style="font-size: 50px;"></i><br>
+                                        No orders yet. <a href="/products">Click
+                                            here to order</a></h5>
+                                </span>
+                            @endif
+                            <strong>Grand Total: &#8369;{{ number_format($grandTotal, 2, '.', ',') }}</strong>
+                        </div>
+
+                        <div class="tab-pane fade" id="cancelled" role="tabpanel"
+                            aria-labelledby="custom-tabs-four-home-tab">
+                            @foreach ($orders as $order)
+                                <div class="col-md-12">
+                                    <div class="info-box elevation-3">
+                                        <span class="info-box-icon"><img
+                                                src="{{ Storage::url($order->product->product_image) }}"
+                                                alt="{{ $order->product->product_name }}"></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">{{ $order->product->product_name }}</span>
+                                            <span
+                                                class="info-box-text">&#8369;{{ number_format($order->product->product_price, 2, '.', ',') }}</span>
+                                            <span
+                                                class="info-box-text">x{{ number_format($order->order_quantity) }}PC(s)</span>
+                                            <span
+                                                class="info-box-text">{{ date_format($order->created_at, 'F j, Y g:i A') }}</span>
+                                            <span class="info-box-number">Total:
+                                                &#8369;{{ number_format($order->order_total_amount, 2, '.', ',') }}</span>
+                                        </div>
+                                        <span>
+                                            @if ($order->order_status === 'Pending')
+                                                <a href="" class="btn btn-danger" data-toggle="modal"
+                                                    data-target="#cancel" wire:click="toCancel({{ $order->id }})">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                    Cancel Order
+                                                </a>
+                                            @else
+                                                <a href="" class="btn btn-warning">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                    View
+                                                </a>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </div>
+                            @endforeach
+                            @if ($orders->count() === 0)
+                                <span class="text-center">
+                                    <h5><i class="fa-regular fa-xmark-to-slot" style="font-size: 50px;"></i><br>
+                                        No orders yet. <a href="/products">Click
+                                            here to order</a></h5>
+                                </span>
+                            @endif
+                            <strong>Grand Total: &#8369;{{ number_format($grandTotal, 2, '.', ',') }}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -63,7 +63,7 @@ body {
     background-clip: text;
     color: transparent;
 }
-.active {
+.active2 {
     border-bottom: 2px solid rgb(77, 89, 121) !important;
     border-radius: 4px;
 }
@@ -109,7 +109,8 @@ body {
 }
 
 .cartmenu {
-    width: 500px;
+    max-width: 550px;
+    min-width: 340px;
     max-height: 450px;
     overflow-y: auto;
     border-radius: 20px;
@@ -201,7 +202,7 @@ button.close:hover {
 }
 
 .carousel img {
-    height: 700px;
+    height: 530px;
 }
 
 .navbar {
@@ -247,7 +248,7 @@ button.close:hover {
 }
 
 .fa-star {
-    color: yellow;
+    color: #ffd700;
 }
 
 #info-box {
@@ -265,7 +266,7 @@ button.close:hover {
     outline: 1px solid white;
 }
 
-.social-icons li a{
+.social-icons li a {
     font-size: 25px;
     margin-left: 20px;
     color: white;

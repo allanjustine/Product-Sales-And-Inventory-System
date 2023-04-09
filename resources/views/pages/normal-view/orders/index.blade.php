@@ -1,6 +1,6 @@
 @extends('pages.normal-view.layout.base')
 
-@section('title', '| Orders')
+@section('title', '| My Orders')
 
 @section('content')
     <div>

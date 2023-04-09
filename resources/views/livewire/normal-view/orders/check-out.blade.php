@@ -2,10 +2,10 @@
     <!-- Modal Delete To Cart -->
     <div wire:ignore.self class="modal fade" id="checkOut" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4>Are you sure you want to place this item to order?</h4>
+                    <h6>Are you sure you want to place this item to order?</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="float-right" aria-hidden="true">&times;</span>
                     </button>
@@ -14,7 +14,7 @@
                     <div>
                         @if ($cartItemToCheckOut)
                             <p class="text-center">
-                                <img style="widht: 70px; height: 70px; border-radius: 50%;"
+                                <img style="width: 90px; height: 90px; border-radius: 10%;"
                                     src="{{ Storage::url($cartItemToCheckOut->product->product_image) }}"
                                     alt="{{ $cartItemToCheckOut->product->product_name }}">
                             </p>
