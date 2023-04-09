@@ -34,7 +34,7 @@ class Index extends Component
     {
         $order = Order::where('id', $this->cancelled)->first();
 
-        if ($order) {
+        if ($order->order_status == 'Pending') {
             $product = Product::find($order->product_id);
             $product->product_stock += $order->order_quantity;
             $product->save();

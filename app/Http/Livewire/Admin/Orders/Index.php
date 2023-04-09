@@ -17,6 +17,20 @@ class Index extends Component
             ->sum('order_total_amount');
     }
 
+    public function markAsDeliver($orderId)
+    {
+        $order = Order::findOrFail($orderId);
+
+        $order->update([
+            'order_status' => 'To Deliver'
+        ]);
+
+        alert()->success('Congrats', 'The order is to deliver');
+
+        return redirect('/admin/orders');
+    }
+
+
     public function markAsPaid($orderId)
     {
         $order = Order::findOrFail($orderId);
