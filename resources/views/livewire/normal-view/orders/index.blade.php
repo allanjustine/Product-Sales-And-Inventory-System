@@ -27,20 +27,27 @@
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="pending" role="tabpanel"
                             aria-labelledby="custom-tabs-four-home-tab">
-                            @foreach ($orders as $order)
+                            @foreach ($pendings as $order)
                                 <div class="col-md-12">
                                     <div class="info-box elevation-3">
                                         <span class="info-box-icon"><img
                                                 src="{{ Storage::url($order->product->product_image) }}"
                                                 alt="{{ $order->product->product_name }}"></span>
                                         <div class="info-box-content">
-                                            <span class="info-box-text">{{ $order->product->product_name }}</span>
+                                            <strong class="info-box-text">{{ $order->product->product_name }}</strong>
                                             <span
                                                 class="info-box-text">&#8369;{{ number_format($order->product->product_price, 2, '.', ',') }}</span>
                                             <span
                                                 class="info-box-text">x{{ number_format($order->order_quantity) }}PC(s)</span>
                                             <span
                                                 class="info-box-text">{{ date_format($order->created_at, 'F j, Y g:i A') }}</span>
+                                            @if ($order->order_status === 'Paid')
+                                                <span class="info-box-text badge badge-success align-self-start"><i
+                                                        class="fa fa-solid fa-check"></i> PAID</span>
+                                            @else
+                                                <span
+                                                    class="info-box-text badge badge-warning align-self-start">PENDING</span>
+                                            @endif
                                             <span class="info-box-number">Total:
                                                 &#8369;{{ number_format($order->order_total_amount, 2, '.', ',') }}</span>
                                         </div>
@@ -61,7 +68,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            @if ($orders->count() === 0)
+                            @if ($pendings->count() === 0)
                                 <span class="text-center">
                                     <h5><i class="fa-regular fa-xmark-to-slot" style="font-size: 50px;"></i><br>
                                         No orders yet. <a href="/products">Click
@@ -72,12 +79,13 @@
                         </div>
                         <div class="tab-pane fade" id="recent" role="tabpanel"
                             aria-labelledby="custom-tabs-four-home-tab">
-                            @foreach ($orders as $order)
+                            @foreach ($recents as $order)
                                 <div class="col-md-12">
                                     <div class="info-box elevation-3">
-                                        <span class="info-box-icon"><img
-                                                src="{{ Storage::url($order->product->product_image) }}"
-                                                alt="{{ $order->product->product_name }}"></span>
+                                        <span class="info-box-icon">
+                                            <img src="{{ Storage::url($order->product->product_image) }}"
+                                                alt="{{ $order->product->product_name }}">
+                                        </span>
                                         <div class="info-box-content">
                                             <span class="info-box-text">{{ $order->product->product_name }}</span>
                                             <span
@@ -86,6 +94,13 @@
                                                 class="info-box-text">x{{ number_format($order->order_quantity) }}PC(s)</span>
                                             <span
                                                 class="info-box-text">{{ date_format($order->created_at, 'F j, Y g:i A') }}</span>
+                                            @if ($order->order_status === 'Paid')
+                                                <span class="info-box-text badge badge-success align-self-start"><i
+                                                        class="fa fa-solid fa-check"></i> PAID</span>
+                                            @else
+                                                <span
+                                                    class="info-box-text badge badge-warning align-self-start">PENDING</span>
+                                            @endif
                                             <span class="info-box-number">Total:
                                                 &#8369;{{ number_format($order->order_total_amount, 2, '.', ',') }}</span>
                                         </div>
@@ -106,7 +121,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            @if ($orders->count() === 0)
+                            @if ($recents->count() === 0)
                                 <span class="text-center">
                                     <h5><i class="fa-regular fa-xmark-to-slot" style="font-size: 50px;"></i><br>
                                         No orders yet. <a href="/products">Click
@@ -118,7 +133,7 @@
 
                         <div class="tab-pane fade" id="cancelled" role="tabpanel"
                             aria-labelledby="custom-tabs-four-home-tab">
-                            @foreach ($orders as $order)
+                            @foreach ($pendings as $order)
                                 <div class="col-md-12">
                                     <div class="info-box elevation-3">
                                         <span class="info-box-icon"><img
@@ -152,7 +167,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            @if ($orders->count() === 0)
+                            @if ($pendings->count() === 0)
                                 <span class="text-center">
                                     <h5><i class="fa-regular fa-xmark-to-slot" style="font-size: 50px;"></i><br>
                                         No orders yet. <a href="/products">Click

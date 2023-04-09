@@ -9,17 +9,23 @@ use Livewire\Component;
 class Index extends Component
 {
 
-    public $orders;
+    public $recents;
+    public $pendings;
     public $grandTotal;
     public $cancel;
     public $cancelled;
 
     public function mount()
     {
-        $this->orders = Order::where('user_id', auth()->id())->with('product')->get();
-        $this->orders = Order::where('order_status', 'Pending')->where('user_id', auth()->id())->get();
+
+        $this->pendings = Order::where('order_status', 'Pending')->where('user_id', auth()->id())->get();
         $this->grandTotal = Order::where('user_id', auth()->id())
             ->whereNotIn('order_status', ['Paid'])
+            ->sum('order_total_amount');
+
+        $this->recents = Order::where('order_status', 'Paid')->where('user_id', auth()->id())->get();
+        $this->grandTotal = Order::where('user_id', auth()->id())
+            ->whereNotIn('order_status', ['Pending'])
             ->sum('order_total_amount');
     }
 
