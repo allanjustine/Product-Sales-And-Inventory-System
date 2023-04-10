@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('product_status');
             $table->string('product_stock');
             $table->string('product_price');
-            $table->string('product_rating');
+            $table->unsignedInteger('product_rating')->default(0);
             $table->string('product_code');
             $table->unsignedInteger('product_sold')->default(0);
             $table->timestamps();

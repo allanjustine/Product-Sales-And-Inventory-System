@@ -24,7 +24,7 @@ class Index extends Component
     public $search;
     public $sortBy = 'product_name';
     public $sortDirection = 'asc';
-    public $product_category_id, $product_image, $product_name, $product_description, $product_status, $product_stock, $product_price, $product_rating, $product_code;
+    public $product_category_id, $product_image, $product_name, $product_description, $product_status, $product_stock, $product_price, $product_code;
     public $productEdit, $product_image_url, $productToDelete, $productRemove, $productView;
 
     public function sortBy($field)
@@ -61,7 +61,6 @@ class Index extends Component
             'product_description'       =>          'required|string|max:65535',
             'product_price'             =>          'required|string|numeric|min:1',
             'product_stock'             =>          'required|string|numeric',
-            'product_rating'            =>          'required|string',
             'product_status'            =>          'required|string',
             'product_image'             =>          'required|image|max:10000',
             'product_category_id'       =>          'required'
@@ -75,7 +74,6 @@ class Index extends Component
             'product_description'           => $validatedData['product_description'],
             'product_price'                 => $validatedData['product_price'],
             'product_stock'                 => $validatedData['product_stock'],
-            'product_rating'                => $validatedData['product_rating'],
             'product_status'                => $validatedData['product_status'],
             'product_category_id'           => $validatedData['product_category_id'],
             'product_image'                 => $path,
@@ -93,7 +91,6 @@ class Index extends Component
         $this->product_description = '';
         $this->product_price = '';
         $this->product_stock = '';
-        $this->product_rating = '';
         $this->product_status = '';
         $this->product_category_id = '';
         $this->product_image = '';
@@ -109,7 +106,6 @@ class Index extends Component
         $this->product_description = $this->productEdit->product_description;
         $this->product_price = $this->productEdit->product_price;
         $this->product_stock = $this->productEdit->product_stock;
-        $this->product_rating = $this->productEdit->product_rating;
         $this->product_status = $this->productEdit->product_status;
         $this->product_category_id = $this->productEdit->product_category_id;
         $this->product_code = $this->productEdit->product_code;
@@ -126,7 +122,7 @@ class Index extends Component
     {
         $this->validate([
             'product_name'             =>      ['required', 'string', 'max:255', 'unique:products,product_name,' . $this->productEdit->id],
-            'product_image'     =>      $this->product_image ? ['image', 'max:10000'] : ''
+            'product_image'            =>      $this->product_image ? ['image', 'max:10000'] : ''
         ]);
 
         if ($this->product_image) {
@@ -138,7 +134,6 @@ class Index extends Component
             'product_description' => $this->product_description,
             'product_price' => $this->product_price,
             'product_stock' => $this->product_stock,
-            'product_rating' => $this->product_rating,
             'product_status' => $this->product_status,
             'product_category_id' => $this->product_category_id,
             'product_image' => $this->product_image ? $this->product_image->store('public/product/images') : $this->productEdit->product_image

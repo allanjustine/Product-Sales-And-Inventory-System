@@ -151,7 +151,7 @@
         </div>
     @endrole
     <div class="container">
-        <h3>Products</h3>
+        <h3 class="mt-5"><i class="fa-light fa-box-open"></i> Products</h3>
         <hr>
         <div class="row">
             @foreach ($products as $product)
@@ -220,11 +220,18 @@
                                         class="fa-light fa-pen-to-square"></i> Update</a>
                             @endrole
 
-                            <div class="d-block font-size-1 mb-2">
+                            <div class="d-flex font-size-1 mb-2">
                                 <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">Sold:
-                                    {{ $product->product_sold }}</strong>
+
+                                    {{ $product->product_sold }}
+                                </strong>
                                 <span class="font-weight-medium pr-2" style="position: absolute; bottom:0; right: 0;">
-                                    <i class="fa-solid fa-star"></i>{{ $product->product_rating }}/5
+                                    <i class="fa-solid fa-star"></i>
+                                    @if ($product->product_rating === 0)
+                                        No ratings yet
+                                    @else
+                                        {{ $product->product_rating }}/5
+                                    @endif
                                 </span>
                             </div>
                         </div>

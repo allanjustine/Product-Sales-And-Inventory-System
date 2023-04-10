@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group mb-3">
                                     <label for="product_category_id">Product Category:</label>
                                     <select class="form-select" id="product_category_id"
@@ -104,64 +104,6 @@
                                     </select>
                                     @error('product_category_id')
                                         <span class="text-danger">*The product category field is required.</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label for="product_rating">Rating:</label>
-                                    <select class="form-select" id="product_rating" wire:model.defer="product_rating"
-                                        required>
-                                        <option selected hidden="true">Select Rating</option>
-                                        <option disabled>Select Product Rating</option>
-                                        <option value="1">1
-                                            @for ($i = 1; $i <= 5; $i++)
-                                                @if ($i <= 1)
-                                                    &#9733;
-                                                @else
-                                                    &#9734;
-                                                @endif
-                                            @endfor
-                                        </option>
-                                        <option value="2">2
-                                            @for ($i = 1; $i <= 5; $i++)
-                                                @if ($i <= 2)
-                                                    &#9733;
-                                                @else
-                                                    &#9734;
-                                                @endif
-                                            @endfor
-                                        </option>
-                                        <option value="3">3
-                                            @for ($i = 1; $i <= 5; $i++)
-                                                @if ($i <= 3)
-                                                    &#9733;
-                                                @else
-                                                    &#9734;
-                                                @endif
-                                            @endfor
-                                        </option>
-                                        <option value="4">4
-                                            @for ($i = 1; $i <= 5; $i++)
-                                                @if ($i <= 4)
-                                                    &#9733;
-                                                @else
-                                                    &#9734;
-                                                @endif
-                                            @endfor
-                                        </option>
-                                        <option value="5">5
-                                            @for ($i = 1; $i <= 5; $i++)
-                                                @if ($i <= 5)
-                                                    &#9733;
-                                                @else
-                                                    &#9734;
-                                                @endif
-                                            @endfor
-                                        </option>
-                                    </select>
-                                    @error('product_rating')
-                                        <span class="text-danger">*{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>

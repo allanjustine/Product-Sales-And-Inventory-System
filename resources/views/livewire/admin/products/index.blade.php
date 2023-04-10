@@ -149,7 +149,12 @@
                             @else
                                 <td><span class="badge badge-warning">OUT OF STOCK</span></td>
                             @endif
-                            <td>{{ $product->product_rating }} <i class="fa-solid fa-star"></i></td>
+                            @if ($product->product_rating === 0)
+                                <td>No ratings yet</td>
+                            @else
+                                <td>{{ $product->product_rating }} <i class="fa-solid fa-star"
+                                        style="color: #ffd700;"></i></td>
+                            @endif
                             <td>&#8369;{{ number_format($product->product_price, 2, '.', ',') }}</td>
                             @if ($product->product_status === 'Available')
                                 <td><span class="badge badge-success">AVAILABLE</span></td>
@@ -157,7 +162,11 @@
                                 <td><span class="badge badge-danger">NOT AVAILABLE</span></td>
                             @endif
                             <td>{{ $product->product_category->category_name }}</td>
-                            <td>x{{ $product->product_sold }}</td>
+                            @if ($product->product_sold === 0)
+                                <td>No sold yet</td>
+                            @else
+                                <td>x{{ $product->product_sold }}</td>
+                            @endif
                             <td>
                                 <div class="dropdown dropup">
                                     <span class="badge badge-pill badge-primary py-2" id="dropdownMenuButton"
