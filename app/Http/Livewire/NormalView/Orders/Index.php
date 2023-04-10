@@ -44,11 +44,12 @@ class Index extends Component
         if ($order->order_status == 'Pending') {
             $product = Product::find($order->product_id);
             $product->product_stock += $order->order_quantity;
+            $product->product_sold -= $order->order_quantity;
             $product->save();
 
             $order->delete();
 
-            alert()->success('Congrats', 'The order has been cancelled successfully');
+            alert()->info('Cancelled', 'The order has been cancelled successfully');
 
             return redirect('/orders');
         } else {

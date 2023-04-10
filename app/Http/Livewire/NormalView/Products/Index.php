@@ -6,7 +6,6 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -204,32 +203,20 @@ class Index extends Component
         $productStatus = $product->product_status;
 
         if ($cartItem->quantity <= $productQuantity && $productStatus == 'Available') {
-            $transactionCode = 'AJM-' . Str::random(10);
-
             $existingOrder = Order::where([
                 ['user_id', auth()->id()],
-                ['product_id', $product->id]
+                ['product_id', $product->id],
+                ['order_status', 'Pending']
             ])->first();
 
             if ($existingOrder) {
-                if ($existingOrder->order_status == 'Paid') {
-                    $order = new Order();
-                    $order->user_id = auth()->id();
-                    $order->product_id = $product->id;
-                    $order->order_quantity = $cartItem->quantity;
-                    $order->user_location = $this->user_location;
-                    $order->order_price = $product->product_price;
-                    $order->order_total_amount = $cartItem->quantity * $product->product_price;
-                    $order->order_payment_method = $this->order_payment_method;
-                    $order->order_status = 'Pending';
-                    $order->transaction_code = $transactionCode;
-                    $order->save();
-                } else {
-                    $existingOrder->order_quantity += $cartItem->quantity;
-                    $existingOrder->order_total_amount += ($cartItem->quantity * $product->product_price);
-                    $existingOrder->save();
-                }
+                $existingOrder->user_location = $this->user_location;
+                $existingOrder->order_quantity += $cartItem->quantity;
+                $existingOrder->order_total_amount += ($cartItem->quantity * $product->product_price);
+                $existingOrder->save();
             } else {
+                $transactionCode = 'AJM-' . Str::random(10);
+
                 $order = new Order();
                 $order->user_id = auth()->id();
                 $order->product_id = $product->id;
@@ -248,10 +235,15 @@ class Index extends Component
             $product->save();
             $cartItem->delete();
 
-            alert()->success('Congrats', 'The product ordered successfully. Your transaction code is "' . $order->transaction_code . '"');
+            if ($existingOrder) {
+                alert()->success('Congrats', 'The product is added/changed');
+            } else {
+                alert()->success('Congrats', 'The product ordered successfully. Your transaction code is "' . $order->transaction_code . '"');
+            }
 
             return redirect('/orders');
         } else {
+
             if ($productStatus == 'Not Available') {
                 alert()->error('Sorry', 'The product is Not Available');
 
