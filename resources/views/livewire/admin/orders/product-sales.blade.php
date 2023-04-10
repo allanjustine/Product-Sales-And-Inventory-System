@@ -2,7 +2,7 @@
     <table class="table table-bordered">
         <thead class="bg-dark">
             <tr>
-                <th>ID.</th>
+                <th>Transaction Code</th>
                 <th>Buyer</th>
                 <th>Product Name</th>
                 <th>Price</th>
@@ -16,7 +16,7 @@
         <tbody>
             @foreach ($orders as $order)
                 <tr>
-                    <td>{{ $order->id }}</td>
+                    <td><strong>{{ $order->transaction_code }}</strong></td>
                     <td>{{ $order->user->name }}</td>
                     <td>{{ $order->product->product_name }}</td>
                     <td>&#8369;{{ $order->order_price }}</td>

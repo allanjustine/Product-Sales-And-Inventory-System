@@ -204,7 +204,7 @@ class Index extends Component
         $productStatus = $product->product_status;
 
         if ($cartItem->quantity <= $productQuantity && $productStatus == 'Available') {
-            $transactionCode = 'AJM-' . Str::upper(Str::random(8));
+            $transactionCode = 'AJM-' . Str::random(10);
 
             $existingOrder = Order::where([
                 ['user_id', auth()->id()],
@@ -248,7 +248,7 @@ class Index extends Component
             $product->save();
             $cartItem->delete();
 
-            alert()->success('Congrats', 'The product ordered successfully');
+            alert()->success('Congrats', 'The product ordered successfully. Your transaction code is "' . $order->transaction_code . '"');
 
             return redirect('/orders');
         } else {

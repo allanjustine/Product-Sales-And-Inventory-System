@@ -48,6 +48,8 @@
                                                 <span
                                                     class="info-box-text badge badge-warning align-self-start">PENDING</span>
                                             @endif
+                                            <span
+                                                class="info-box-text"><strong>{{ $order->transaction_code }}</strong></span>
                                             <span class="info-box-number">Total:
                                                 &#8369;{{ number_format($order->order_total_amount, 2, '.', ',') }}</span>
                                         </div>
@@ -101,6 +103,8 @@
                                                 <span
                                                     class="info-box-text badge badge-warning align-self-start">PENDING</span>
                                             @endif
+                                            <span
+                                                class="info-box-text"><strong>{{ $order->transaction_code }}</strong></span>
                                             <span class="info-box-number">Total:
                                                 &#8369;{{ number_format($order->order_total_amount, 2, '.', ',') }}</span>
                                         </div>
