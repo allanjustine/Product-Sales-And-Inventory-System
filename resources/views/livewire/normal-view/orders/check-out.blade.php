@@ -61,7 +61,7 @@
                             cols="20" rows="5" placeholder="Enter specific location for the delivery"
                             wire:model.defer="user_location"></textarea>
                         @if ($errors->has('user_location'))
-                            <span class="text-red-500">*Please your delivery address first.</span>
+                            <span class="text-danger">*Please your delivery address first.</span>
                         @endif
                     </form>
                     </p>
