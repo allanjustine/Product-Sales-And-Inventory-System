@@ -67,22 +67,28 @@
                     <div class="dropdown-divider"></div>
                     @role('admin')
                         <a class="nav-link p-3" href="/admin/dashboard"><i
-                                class="fa-light fa-user-lock col-sm-1"></i>&nbsp;&nbsp;&nbsp;
+                                class="fa-light fa-user-lock"></i>&nbsp;
                             <span>Admin Dashboard</span></a>
                         <div class="dropdown-divider"></div>
+                        <a class="nav-link p-3" href="/admin/orders"><i
+                                class="fa-light fa-bag-shopping"></i>&nbsp;
+                            <span>Users Order</span></a>
+                        <div class="dropdown-divider"></div>
                     @endrole
-                    <a class="nav-link p-3" href="/orders">
-                        <i class="fa-light fa-bag-shopping"></i>&nbsp;
-                        <span>My Orders</span></a>
-                    <div class="dropdown-divider"></div>
+                    @role('user')
+                        <a class="nav-link p-3" href="/orders">
+                            <i class="fa-light fa-bag-shopping"></i>&nbsp;
+                            <span>My Orders</span></a>
+                        <div class="dropdown-divider"></div>
+                    @endrole
                     <a class="nav-link p-3" href="#" data-toggle="modal" data-target="#logout"><i
                             class="fa-light fa-right-from-bracket"></i>&nbsp;
                         <span>Logout</span></a>
                 @else
-                    <a class="nav-link p-3" href="/login"><i class="fa-light fa-right-to-bracket col-sm-1"></i>&nbsp;
+                    <a class="nav-link p-3" href="/login"><i class="fa-light fa-right-to-bracket"></i>&nbsp;
                         <span>Login</span></a>
                     <div class="dropdown-divider"></div>
-                    <a class="nav-link p-3" href="/register"><i class="fa-light fa-registered col-sm-1"></i>&nbsp;
+                    <a class="nav-link p-3" href="/register"><i class="fa-light fa-registered"></i>&nbsp;
                         <span>Register</span></a>
                 @endif
             </div>
