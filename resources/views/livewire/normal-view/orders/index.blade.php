@@ -1,7 +1,7 @@
 <div>
     @include('livewire.normal-view.orders.cancel-order')
     <div class="container">
-        <h3 class="mt-3">My Orders</h3>
+        <h3 class="mt-4"><i class="fa-light fa-bag-shopping"></i> My Orders</h3>
         <hr>
         <div class="col-md-12">
 
@@ -75,7 +75,7 @@
                                             here to order</a></h5>
                                 </span>
                             @endif
-                            <strong>Grand Total: &#8369;{{ number_format($grandTotal, 2, '.', ',') }}</strong>
+                            <strong>Grand Total: &#8369;{{ number_format($grandTotalPending, 2, '.', ',') }}</strong>
                         </div>
                         <div class="tab-pane fade" id="recent" role="tabpanel"
                             aria-labelledby="custom-tabs-four-home-tab">
@@ -128,7 +128,7 @@
                                             here to order</a></h5>
                                 </span>
                             @endif
-                            <strong>Grand Total: &#8369;{{ number_format($grandTotal, 2, '.', ',') }}</strong>
+                            <strong>Grand Total: &#8369;{{ number_format($grandTotalRecent, 2, '.', ',') }}</strong>
                         </div>
 
                         <div class="tab-pane fade" id="cancelled" role="tabpanel"
@@ -174,7 +174,7 @@
                                             here to order</a></h5>
                                 </span>
                             @endif
-                            <strong>Grand Total: &#8369;{{ number_format($grandTotal, 2, '.', ',') }}</strong>
+                            <strong>Grand Total: &#8369;{{ number_format($grandTotalRecent, 2, '.', ',') }}</strong>
                         </div>
                     </div>
                 </div>

@@ -13,22 +13,33 @@
                 <div class="modal-body">
                     <form>
                         @csrf
-                        <div class="form-group mb-3">
-                            <label for="title">Product Image:</label>
-                            <br>
-                            @error('product_image')
-                                <span class="text-danger">*{{ $message }} (jpg, jpeg, png, gif) is only
-                                    accepted.</span>
-                            @enderror
-                            <input type="file" accept=".png, .jpg, .jpeg, .gif" class="form-control"
-                                id="product_image" wire:model="product_image" required>
-                            @if ($product_image && in_array($product_image->getClientOriginalExtension(), ['jpg', 'jpeg', 'png', 'gif']))
-                                <img src="{{ $product_image->temporaryUrl() }}" style="width: 100px; height: 100px;"
-                                    class="mt-1 rounded">
-                            @else
-                                <img src="{{ $product_image_url }}" style="width: 100px; height: 100px;"
-                                    class="mt-1 rounded">
-                            @endif
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="title">Product Image:</label>
+                                    <br>
+                                    @error('product_image')
+                                        <span class="text-danger">*{{ $message }} (jpg, jpeg, png, gif) is only
+                                            accepted.</span>
+                                    @enderror
+                                    <input type="file" accept=".png, .jpg, .jpeg, .gif" class="form-control"
+                                        id="product_image" wire:model="product_image" required>
+                                    @if ($product_image && in_array($product_image->getClientOriginalExtension(), ['jpg', 'jpeg', 'png', 'gif']))
+                                        <img src="{{ $product_image->temporaryUrl() }}"
+                                            style="width: 100px; height: 100px;" class="mt-1 rounded">
+                                    @else
+                                        <img src="{{ $product_image_url }}" style="width: 100px; height: 100px;"
+                                            class="mt-1 rounded">
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="product-code">Product Code:</label>
+                                    <input type="text" id="product-code" class="form-control" name="product_code"
+                                        wire:model="product_code" readonly>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-6">

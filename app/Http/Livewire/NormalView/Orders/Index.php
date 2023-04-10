@@ -11,7 +11,8 @@ class Index extends Component
 
     public $recents;
     public $pendings;
-    public $grandTotal;
+    public $grandTotalPending;
+    public $grandTotalRecent;
     public $cancel;
     public $cancelled;
 
@@ -19,12 +20,12 @@ class Index extends Component
     {
 
         $this->pendings = Order::where('order_status', 'Pending')->where('user_id', auth()->id())->get();
-        $this->grandTotal = Order::where('user_id', auth()->id())
+        $this->grandTotalPending = Order::where('user_id', auth()->id())
             ->whereNotIn('order_status', ['Paid'])
             ->sum('order_total_amount');
 
         $this->recents = Order::where('order_status', 'Paid')->where('user_id', auth()->id())->get();
-        $this->grandTotal = Order::where('user_id', auth()->id())
+        $this->grandTotalRecent = Order::where('user_id', auth()->id())
             ->whereNotIn('order_status', ['Pending'])
             ->sum('order_total_amount');
     }

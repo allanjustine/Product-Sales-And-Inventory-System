@@ -24,7 +24,7 @@ class Index extends Component
     public $search;
     public $sortBy = 'product_name';
     public $sortDirection = 'asc';
-    public $product_category_id, $product_image, $product_name, $product_description, $product_status, $product_stock, $product_price, $product_rating;
+    public $product_category_id, $product_image, $product_name, $product_description, $product_status, $product_stock, $product_price, $product_rating, $product_code;
     public $productEdit, $product_image_url, $productToDelete, $productRemove, $productView;
 
     public function sortBy($field)
@@ -68,6 +68,8 @@ class Index extends Component
         ]);
         $path = $this->product_image->store('public/product/images');
 
+        $this->product_code = 'AJM-' . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 5);
+
         $product = Product::create([
             'product_name'                  => $validatedData['product_name'],
             'product_description'           => $validatedData['product_description'],
@@ -76,7 +78,8 @@ class Index extends Component
             'product_rating'                => $validatedData['product_rating'],
             'product_status'                => $validatedData['product_status'],
             'product_category_id'           => $validatedData['product_category_id'],
-            'product_image'                 => $path
+            'product_image'                 => $path,
+            'product_code'                  => $this->product_code
         ]);
 
         alert()->info('Product Added', 'The product "' . $product->product_name . '" is added to list.')->showConfirmButton('Okay');
@@ -109,6 +112,7 @@ class Index extends Component
         $this->product_rating = $this->productEdit->product_rating;
         $this->product_status = $this->productEdit->product_status;
         $this->product_category_id = $this->productEdit->product_category_id;
+        $this->product_code = $this->productEdit->product_code;
 
         if (is_string($this->productEdit->product_image)) {
             $this->product_image_url = Storage::url($this->productEdit->product_image);

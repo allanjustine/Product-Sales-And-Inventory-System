@@ -34,8 +34,8 @@
             <table class="table table-hovered table-bordered">
                 <thead class="bg-dark">
                     <tr>
-                        <th wire:click="sortBy('id')" style="cursor: pointer;">
-                            @if ($sortBy === 'id')
+                        <th wire:click="sortBy('product_code')" style="cursor: pointer;">
+                            @if ($sortBy === 'product_code')
                                 @if ($sortDirection === 'asc')
                                     <i class="fa-light fa-sort-alpha-up"></i>
                                 @else
@@ -44,7 +44,7 @@
                             @else
                                 <i class="fa-thin fa-sort"></i>
                             @endif
-                            ID.
+                            Product Code
                         </th>
                         <th>Product Image</th>
                         <th wire:click="sortBy('product_name')" style="cursor: pointer;">
@@ -117,7 +117,19 @@
                             @else
                                 <i class="fa-thin fa-sort"></i>
                             @endif
-                            Categories
+                            Category
+                        </th>
+                        <th wire:click="sortBy('product_sold')" style="cursor: pointer;">
+                            @if ($sortBy === 'product_sold')
+                                @if ($sortDirection === 'asc')
+                                    <i class="fa-light fa-sort-alpha-up"></i>
+                                @else
+                                    <i class="fa-light fa-arrow-down-z-a"></i>
+                                @endif
+                            @else
+                                <i class="fa-thin fa-sort"></i>
+                            @endif
+                            Sold
                         </th>
                         <th>Action</th>
                     </tr>
@@ -125,7 +137,7 @@
                 <tbody>
                     @foreach ($products as $product)
                         <tr>
-                            <td>{{ $product->id }}</td>
+                            <td>{{ $product->product_code }}</td>
                             <td>
                                 <img src="{{ Storage::url($product->product_image) }}"
                                     style="height: 50px; width: 60px; border-radius: 5px;"
@@ -145,6 +157,7 @@
                                 <td><span class="badge badge-danger">NOT AVAILABLE</span></td>
                             @endif
                             <td>{{ $product->product_category->category_name }}</td>
+                            <td>x{{ $product->product_sold }}</td>
                             <td>
                                 <div class="dropdown dropup">
                                     <span class="badge badge-pill badge-primary py-2" id="dropdownMenuButton"

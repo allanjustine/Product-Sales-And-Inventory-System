@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -203,6 +204,7 @@ class Index extends Component
         $productStatus = $product->product_status;
 
         if ($cartItem->quantity <= $productQuantity && $productStatus == 'Available') {
+            $transactionCode = 'AJM-' . Str::upper(Str::random(8));
 
             $existingOrder = Order::where([
                 ['user_id', auth()->id()],
@@ -220,6 +222,7 @@ class Index extends Component
                     $order->order_total_amount = $cartItem->quantity * $product->product_price;
                     $order->order_payment_method = $this->order_payment_method;
                     $order->order_status = 'Pending';
+                    $order->transaction_code = $transactionCode;
                     $order->save();
                 } else {
                     $existingOrder->order_quantity += $cartItem->quantity;
@@ -236,10 +239,12 @@ class Index extends Component
                 $order->order_total_amount = $cartItem->quantity * $product->product_price;
                 $order->order_payment_method = $this->order_payment_method;
                 $order->order_status = 'Pending';
+                $order->transaction_code = $transactionCode;
                 $order->save();
             }
 
             $product->product_stock -= $cartItem->quantity;
+            $product->product_sold += $cartItem->quantity;
             $product->save();
             $cartItem->delete();
 
@@ -251,13 +256,18 @@ class Index extends Component
                 alert()->error('Sorry', 'The product is Not Available');
 
                 return redirect('/products');
+            } elseif ($product->product_stock == 0) {
+                alert()->error('Sorry', 'The product is out of stock');
+
+                return redirect('/products');
             } else {
                 alert()->error('Sorry', 'The product stock is insufficient please reduce your cart quantity');
 
-                return redirect('/orders');
+                return redirect('/products');
             }
         }
     }
+
 
 
     public function resetInputs()

@@ -43,6 +43,8 @@
                     </div>
                     <hr>
                     <p class="text-center">
+                    <form>
+                        @csrf
                         <label for="order_payment_method">Payment Method</label>
                         <select id="select-cat" class="form-select" style="" name="order_payment_method"
                             id="order_payment_method" wire:model.defer="order_payment_method" required>
@@ -55,11 +57,13 @@
                         @enderror
                         <br>
                         <label class="mt-3" for="user_location">Your delivery address</label>
-                        <textarea name="" class="form-control {{ $errors->has('user_location') ? 'border-danger' : '' }}" id="" cols="20" rows="5"
-                            placeholder="Enter specific location for the delivery" wire:model.defer="user_location"></textarea>
-                            @if ($errors->has('user_location'))
+                        <textarea name="" class="form-control {{ $errors->has('user_location') ? 'border-danger' : '' }}" id=""
+                            cols="20" rows="5" placeholder="Enter specific location for the delivery"
+                            wire:model.defer="user_location"></textarea>
+                        @if ($errors->has('user_location'))
                             <span class="text-red-500">*Please your delivery address first.</span>
                         @endif
+                    </form>
                     </p>
                 </div>
                 <div class="modal-footer">

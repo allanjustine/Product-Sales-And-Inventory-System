@@ -41,7 +41,7 @@ class Index extends Component
 
         alert()->success('Congrats', 'The order is now paid');
 
-        return redirect('/admin/product-sales');
+        return redirect('/admin/orders');
     }
 
     public function render()

@@ -23,6 +23,8 @@
                                         <div class="col-md-6">
                                             <h4 class="text-center border-bottom border-secondary py-2 border-1">
                                                 {{ $productView->product_name }}</h4>
+                                            <p class="d-flex justify-content-between"><strong>Product Code:</strong>
+                                                <strong>{{ $productView->product_code }}</strong></p>
                                             <p class="d-flex justify-content-between"><strong>Category:</strong>
                                                 {{ $productView->product_category->category_name }}</p>
                                             <p class="d-flex justify-content-between"><strong>Status:</strong>
@@ -41,6 +43,8 @@
                                             </p>
                                             <p class="d-flex justify-content-between"><strong>Price:</strong>
                                                 &#8369;{{ number_format($productView->product_price, 2, '.', ',') }}</p>
+                                            <p class="d-flex justify-content-between"><strong>Sold:</strong>
+                                                {{ number_format($productView->product_sold) }}</p>
                                             <p class="d-flex justify-content-between"><strong>Rating(s):</strong>
                                                 <span>
                                                     @for ($i = 1; $i <= 5; $i++)

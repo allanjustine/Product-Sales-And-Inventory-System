@@ -38,7 +38,8 @@ class Product extends Model
             ->each(function ($term) use ($query) {
                 $term = '%' . $term . '%';
                 $query->where('product_name', 'like', $term)
-                    ->orWhere('product_status', 'like', $term);
+                    ->orWhere('product_status', 'like', $term)
+                    ->orWhere('product_code', 'like', $term);
             });
     }
 }

@@ -75,10 +75,6 @@
                         <i class="fa-light fa-bag-shopping"></i>&nbsp;
                         <span>My Orders</span></a>
                     <div class="dropdown-divider"></div>
-                    <a class="nav-link p-3" href="/recent-orders">
-                        <i class="fa-light fa-memo-circle-check"></i>&nbsp;
-                        <span>Recent Orders</span></a>
-                    <div class="dropdown-divider"></div>
                     <a class="nav-link p-3" href="#" data-toggle="modal" data-target="#logout"><i
                             class="fa-light fa-right-from-bracket"></i>&nbsp;
                         <span>Logout</span></a>

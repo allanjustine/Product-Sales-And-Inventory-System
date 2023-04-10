@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('product_stock');
             $table->string('product_price');
             $table->string('product_rating');
+            $table->string('product_code');
+            $table->unsignedInteger('product_sold')->default(0);
             $table->timestamps();
 
             $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade');
