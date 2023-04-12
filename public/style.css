@@ -271,3 +271,26 @@ button.close:hover {
     margin-left: 20px;
     color: white;
 }
+
+.rating {
+    float: left;
+}
+
+.rating input[type="radio"] {
+    display: none;
+}
+
+.rating label {
+    font-size: 30px;
+    color: #8b8787;
+    float: right;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.rating label:hover,
+.rating label:hover ~ label,
+.rating input[type="radio"]:checked ~ label {
+    color: #ffcc00;
+    opacity: 1;
+}

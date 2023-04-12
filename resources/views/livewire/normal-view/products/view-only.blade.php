@@ -145,15 +145,18 @@
                             <a href="/login" class="btn btn-primary mt-1 form-control"><i
                                     class="fa-solid fa-cart-shopping"></i> Buy Now</a>
 
-                            <div class="d-block font-size-1 mb-2">
+                            <div class="d-flex font-size-1 mb-2">
+                                <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">Sold:
+
+                                    {{ $product->product_sold }}
+                                </strong>
                                 <span class="font-weight-medium pr-2" style="position: absolute; bottom:0; right: 0;">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        @if ($i <= $product->product_rating)
-                                            <i class="fa-solid fa-star"></i>
-                                        @else
-                                            <i class="fa-light fa-star"></i>
-                                        @endif
-                                    @endfor
+                                    <i class="fa-solid fa-star"></i>
+                                    @if ($product->product_rating === 0)
+                                        No ratings yet
+                                    @else
+                                        {{ $product->product_rating }}/5
+                                    @endif
                                 </span>
                             </div>
                         </div>

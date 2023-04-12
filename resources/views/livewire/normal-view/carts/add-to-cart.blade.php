@@ -46,7 +46,7 @@
                     <button type="button" class="btn btn-primary" wire:click="addToCartNow()"><i
                             class="fa-solid fa-cart-plus"></i> Add to
                         Cart</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>

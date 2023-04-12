@@ -1,5 +1,5 @@
 <div>
-    <!-- Modal Delete To Cart -->
+    <!-- Modal Add To Cart -->
     <div wire:ignore.self class="modal fade" id="checkOut" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
@@ -61,7 +61,7 @@
                             cols="20" rows="5" placeholder="Enter specific location for the delivery"
                             wire:model.defer="user_location"></textarea>
                         @if ($errors->has('user_location'))
-                            <span class="text-danger">*Please your delivery address first.</span>
+                            <span class="text-danger">*Please your enter delivery address first.</span>
                         @endif
                     </form>
                     </p>

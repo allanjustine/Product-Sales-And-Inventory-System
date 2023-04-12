@@ -20,9 +20,10 @@ return new class extends Migration
             $table->string('product_status');
             $table->string('product_stock');
             $table->string('product_price');
-            $table->unsignedInteger('product_rating')->default(0);
+            $table->decimal('product_rating', 3, 1)->default(0);
             $table->string('product_code');
             $table->unsignedInteger('product_sold')->default(0);
+            $table->unsignedInteger('product_votes')->default(0);
             $table->timestamps();
 
             $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade');

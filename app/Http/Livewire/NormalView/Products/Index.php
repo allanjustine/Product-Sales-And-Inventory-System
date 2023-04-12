@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -262,10 +263,12 @@ class Index extends Component
 
 
 
+
     public function resetInputs()
     {
         $this->order_payment_method = '';
         $this->user_location = '';
+        $this->quantity = '';
 
         $this->resetValidation();
     }

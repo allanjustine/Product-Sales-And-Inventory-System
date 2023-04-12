@@ -3,6 +3,7 @@
     @include('livewire.normal-view.carts.add-to-cart')
     @include('livewire.normal-view.carts.delete')
     @include('livewire.normal-view.orders.check-out')
+    @include('livewire.normal-view.orders.buy-now')
     <div style="backdrop-filter: blur(15px);" class="bg-transparent sticky-top rounded" id="cats">
         <details>
             <summary class="bg-secondary p-3 text-center">
@@ -104,6 +105,8 @@
                         style="font-size: 19px;">{{ $cartItems->count() }}</span></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end cartmenu" aria-labelledby="cart-dropdown">
+                <h4 class="pl-3"><strong><i class="fa-regular fa-cart-shopping"></i> My Cart</strong></h4>
+                <hr>
                 @foreach ($cartItems as $item)
                     <li class="cart-item px-3 py-2">
                         <div class="cart-item-image">
@@ -212,7 +215,7 @@
                                 @endif
 
                                 <a href="" class="btn btn-primary mt-1 form-control btn-block" data-toggle="modal"
-                                    data-target="#toBuyNow" wire:click="toBuyNow({{ $product->id }})"><i
+                                    data-target="#toBuyNow"><i
                                         class="fa-solid fa-cart-shopping"></i> Buy Now</a>
                             @endrole
                             @role('admin')
@@ -230,7 +233,7 @@
                                     @if ($product->product_rating === 0)
                                         No ratings yet
                                     @else
-                                        {{ $product->product_rating }}/5
+                                        {{ round($product->product_rating, 1) }}/5
                                     @endif
                                 </span>
                             </div>

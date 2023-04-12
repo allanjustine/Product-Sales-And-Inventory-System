@@ -20,15 +20,23 @@
                     <td><strong>{{ $order->transaction_code }}</strong></td>
                     <td>{{ $order->user->name }}</td>
                     <td>{{ $order->product->product_name }}</td>
-                    <td>&#8369;{{ number_format($order->order_price , 2, '.', ',') }}</td>
+                    <td>&#8369;{{ number_format($order->order_price, 2, '.', ',') }}</td>
                     <td>{{ $order->order_quantity }}</td>
-                    <td>&#8369;{{ number_format($order->order_price * $order->order_quantity , 2, '.', ',') }}</td>
+                    <td>&#8369;{{ number_format($order->order_price * $order->order_quantity, 2, '.', ',') }}</td>
                     <td>{{ $order->order_payment_method }}</td>
                     <td>{{ $order->user_location }}</td>
                     <td>{{ date_format($order->created_at, 'F j, Y g:i A') }}</td>
                     <td>
-                        <button wire:click="markAsPaid({{ $order->id }})" class="btn btn-success mr-2"><i
-                                class="fa fa-solid fa-check"></i> Paid Order</button>
+                        @if ($order->order_status === 'Pending')
+                            <button wire:click="markAsDeliver({{ $order->id }})" class="btn btn-primary"><i
+                                    class="fa-regular fa-truck-container"></i> Deliver</button>
+                        @elseif ($order->order_status === 'To Deliver')
+                            <button wire:click="markAsDelivered({{ $order->id }})" class="btn btn-info"><i
+                                    class="fa-solid fa-truck"></i> Delivered</button>
+                        @else
+                            <button wire:click="markAsPaid({{ $order->id }})" class="btn btn-success"><i
+                                    class="fa fa-solid fa-check"></i> Paid Order</button>
+                        @endif
                     </td>
                 </tr>
             @endforeach

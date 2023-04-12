@@ -1,5 +1,6 @@
 <div>
     @include('livewire.normal-view.orders.cancel-order')
+    @include('livewire.normal-view.orders.order-received')
     <div class="container">
         <h3 class="mt-4"><i class="fa-light fa-bag-shopping"></i> My Orders</h3>
         <hr>
@@ -44,6 +45,15 @@
                                             @if ($order->order_status === 'Paid')
                                                 <span class="info-box-text badge badge-success align-self-start"><i
                                                         class="fa fa-solid fa-check"></i> PAID</span>
+                                            @elseif ($order->order_status === 'To Deliver')
+                                                <span class="info-box-text badge badge-primary align-self-start">TO
+                                                    DELIVER</span>
+                                            @elseif ($order->order_status === 'Delivered')
+                                                <span
+                                                    class="info-box-text badge badge-info align-self-start">DELIVERED</span>
+                                            @elseif ($order->order_status === 'Complete')
+                                                <span
+                                                    class="info-box-text badge badge-primary align-self-start">COMPLETE</span>
                                             @else
                                                 <span
                                                     class="info-box-text badge badge-warning align-self-start">PENDING</span>
@@ -59,6 +69,18 @@
                                                     data-target="#cancel" wire:click="toCancel({{ $order->id }})">
                                                     <i class="fa-solid fa-xmark"></i>
                                                     Cancel Order
+                                                </a>
+                                            @elseif ($order->order_status === 'To Deliver')
+                                                <a href="#" class="btn btn-primary">
+                                                    <i class="fa-solid fa-car-side"></i>
+                                                    To Deliver
+                                                </a>
+                                            @elseif ($order->order_status === 'Delivered')
+                                                <a href="#" class="btn btn-warning" data-toggle="modal"
+                                                    data-target="#order-received"
+                                                    wire:click="toReceived({{ $order->id }})">
+                                                    <i class="fa-solid fa-hand-holding-box"></i>
+                                                    Order Received
                                                 </a>
                                             @else
                                                 <a href="" class="btn btn-warning">
@@ -89,7 +111,8 @@
                                                 alt="{{ $order->product->product_name }}">
                                         </span>
                                         <div class="info-box-content">
-                                            <span class="info-box-text">{{ $order->product->product_name }}</span>
+                                            <span
+                                                class="info-box-text"><strong>{{ $order->product->product_name }}</strong></span>
                                             <span
                                                 class="info-box-text">&#8369;{{ number_format($order->product->product_price, 2, '.', ',') }}</span>
                                             <span
@@ -99,6 +122,15 @@
                                             @if ($order->order_status === 'Paid')
                                                 <span class="info-box-text badge badge-success align-self-start"><i
                                                         class="fa fa-solid fa-check"></i> PAID</span>
+                                            @elseif ($order->order_status === 'To Deliver')
+                                                <span class="info-box-text badge badge-primary align-self-start">TO
+                                                    DELIVER</span>
+                                            @elseif ($order->order_status === 'Delivered')
+                                                <span
+                                                    class="info-box-text badge badge-info align-self-start">DELIVERED</span>
+                                            @elseif ($order->order_status === 'Complete')
+                                                <span
+                                                    class="info-box-text badge badge-primary align-self-start">COMPLETE</span>
                                             @else
                                                 <span
                                                     class="info-box-text badge badge-warning align-self-start">PENDING</span>
@@ -144,7 +176,8 @@
                                                 src="{{ Storage::url($order->product->product_image) }}"
                                                 alt="{{ $order->product->product_name }}"></span>
                                         <div class="info-box-content">
-                                            <span class="info-box-text">{{ $order->product->product_name }}</span>
+                                            <span
+                                                class="info-box-text"><strong>{{ $order->product->product_name }}</strong></span>
                                             <span
                                                 class="info-box-text">&#8369;{{ number_format($order->product->product_price, 2, '.', ',') }}</span>
                                             <span

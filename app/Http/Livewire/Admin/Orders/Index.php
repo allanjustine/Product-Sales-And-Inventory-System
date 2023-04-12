@@ -12,7 +12,11 @@ class Index extends Component
 
     public function mount()
     {
-        $this->orders = Order::where('order_status', 'Pending')->get();
+        $this->orders = Order::where('order_status', 'Pending')
+        ->orWhere('order_status', 'To Deliver')
+        ->orWhere('order_status', 'Delivered')
+        ->orWhere('order_status', 'Complete')
+        ->get();
         $this->grandTotal = Order::whereNotIn('order_status', ['Paid'])
             ->sum('order_total_amount');
     }
@@ -25,7 +29,20 @@ class Index extends Component
             'order_status' => 'To Deliver'
         ]);
 
-        alert()->success('Congrats', 'The order is to deliver');
+        alert()->success('Congrats', 'The order is on going to deliver');
+
+        return redirect('/admin/orders');
+    }
+
+    public function markAsDelivered($orderId)
+    {
+        $order = Order::findOrFail($orderId);
+
+        $order->update([
+            'order_status' => 'Delivered'
+        ]);
+
+        alert()->success('Congrats', 'The order is now delivered');
 
         return redirect('/admin/orders');
     }

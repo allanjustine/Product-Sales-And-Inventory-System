@@ -43,13 +43,17 @@
                                                 &#8369;{{ number_format($productView->product_price, 2, '.', ',') }}</p>
                                             <p class="d-flex justify-content-between"><strong>Rating(s):</strong>
                                                 <span>
-                                                    @for ($i = 1; $i <= 5; $i++)
-                                                        @if ($i <= $productView->product_rating)
-                                                            <i class="fa-solid fa-star"></i>
-                                                        @else
-                                                            <i class="fa-light fa-star"></i>
-                                                        @endif
-                                                    @endfor
+                                                    @if ($productView->product_rating === 0)
+                                                    No ratings yet
+                                                    @else
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $productView->product_rating)
+                                                                <i class="fa-solid fa-star"></i>
+                                                            @else
+                                                                <i class="fa-light fa-star"></i>
+                                                            @endif
+                                                        @endfor
+                                                    @endif
                                                 </span>
                                             </p>
                                         </div>

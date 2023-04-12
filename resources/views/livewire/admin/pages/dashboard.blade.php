@@ -50,7 +50,8 @@
                             <span class="info-box-text">ORDERS</span>
                             <span class="info-box-number">{{ $ordersCount }}</span>
                         </div>
-                        <span class="info-box-icon"><i class="fa-solid fa-bag-shopping" style="font-size: 55px;"></i></span>
+                        <span class="info-box-icon"><i class="fa-solid fa-bag-shopping"
+                                style="font-size: 55px;"></i></span>
                     </div>
                 </a>
             </div>
@@ -62,6 +63,24 @@
                             <span class="info-box-number">{{ $productSalesCount }}</span>
                         </div>
                         <span class="info-box-icon"><i class="fa-solid fa-database" style="font-size: 55px;"></i></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <h4>Sales Management</h4>
+        <hr>
+        <div class="row">
+            <div class="col-md-3">
+                <a href="#" style="color: black">
+                    <div class="info-box dash elevation-3" style="height: 110px;">
+                        <div class="info-box-content">
+                            <span class="info-box-text">TOTAL REVENUE</span>
+                            <span class="info-box-number">P200,000.00</span>
+                        </div>
+                        <span class="info-box-icon"><i class="fa-solid fa-hand-holding-dollar"
+                                style="font-size: 55px;"></i></span>
                     </div>
                 </a>
             </div>
