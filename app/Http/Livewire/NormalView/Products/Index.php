@@ -6,7 +6,6 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -36,9 +35,12 @@ class Index extends Component
     public $itemRemove;
     public $itemPlaceOrder;
     public $item, $updateCartItem;
-    public $order_payment_method;
+    public $order_payment_method, $order_quantity = 1;
     public $user_location;
     public $product_sold;
+    public $orderToBuy;
+    public $orderPlaceOrder;
+    public $order;
 
     public function displayProducts()
     {
@@ -217,7 +219,6 @@ class Index extends Component
                 $existingOrder->save();
             } else {
                 $transactionCode = 'AJM-' . Str::random(10);
-
                 $order = new Order();
                 $order->user_id = auth()->id();
                 $order->product_id = $product->id;
@@ -261,14 +262,90 @@ class Index extends Component
         }
     }
 
+    public function toBuyNow($productId)
+    {
+
+        $this->orderToBuy = Product::findOrFail($productId);
+
+        $this->orderPlaceOrder = $productId;
+    }
+
+    public function orderPlaceOrder()
+    {
+
+        $product = Product::find($this->orderPlaceOrder);
+
+        $this->validate([
+            'order_payment_method'  =>      'required',
+            'user_location'         =>      'required|max:255',
+            'order_quantity'        =>      'required|numeric|min:1'
+        ]);
+
+        $productQuantity = $product->product_stock;
+        $productStatus = $product->product_status;
+
+        if ($productStatus == 'Available' && $productQuantity >= $this->order_quantity) {
+            $existingOrder = Order::where([
+                ['user_id', auth()->id()],
+                ['product_id', $product->id],
+                ['order_status', 'Pending']
+            ])->first();
+
+            if ($existingOrder) {
+                $existingOrder->user_location = $this->user_location;
+                $existingOrder->order_quantity += $this->order_quantity;
+                $existingOrder->order_total_amount += ($this->order_quantity * $product->product_price);
+                $existingOrder->save();
+            } else {
+                $transactionCode = 'AJM-' . Str::random(10);
+
+                $order = new Order();
+                $order->user_id = auth()->id();
+                $order->product_id = $product->id;
+                $order->order_quantity = $this->order_quantity;
+                $order->user_location = $this->user_location;
+                $order->order_price = $product->product_price;
+                $order->order_total_amount = $this->order_quantity * $product->product_price;
+                $order->order_payment_method = $this->order_payment_method;
+                $order->order_status = 'Pending';
+                $order->transaction_code = $transactionCode;
+                $order->save();
+            }
+
+            $product->product_stock -= $this->order_quantity;
+            $product->product_sold += $this->order_quantity;
+            $product->save();
 
 
+            if ($existingOrder) {
+                alert()->success('Congrats', 'The product is added/changed');
+            } else {
+                alert()->success('Congrats', 'The product ordered successfully. Your transaction code is "' . $order->transaction_code . '"');
+            }
+
+            return redirect('/orders');
+        } else {
+
+            if ($productStatus == 'Not Available') {
+                alert()->error('Sorry', 'The product is Not Available');
+
+                return redirect('/products');
+            } elseif ($product->product_stock == 0) {
+                alert()->error('Sorry', 'The product is out of stock');
+
+                return redirect('/products');
+            } else {
+                alert()->error('Sorry', 'The product stock is insufficient please reduce entering order quantity');
+
+                return redirect('/products');
+            }
+        }
+    }
 
     public function resetInputs()
     {
         $this->order_payment_method = '';
         $this->user_location = '';
-        $this->quantity = '';
 
         $this->resetValidation();
     }

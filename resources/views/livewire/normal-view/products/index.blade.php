@@ -209,13 +209,13 @@
                                         Add to Cart</a>
                                 @else
                                     <a href="" class="btn btn-warning mt-1 form-control" data-toggle="modal"
-                                        data-target="#addToCart" wire:click="addToCart({{ $product->id }})"><i
+                                        data-target="#addToCart" wire:click.prevent="addToCart({{ $product->id }})"><i
                                             class="fa-solid fa-cart-plus"></i>
                                         Add to Cart</a>
                                 @endif
 
                                 <a href="" class="btn btn-primary mt-1 form-control btn-block" data-toggle="modal"
-                                    data-target="#toBuyNow"><i
+                                    data-target="#toBuyNow" wire:click.prevent="toBuyNow({{ $product->id }})"><i
                                         class="fa-solid fa-cart-shopping"></i> Buy Now</a>
                             @endrole
                             @role('admin')

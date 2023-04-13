@@ -17,19 +17,19 @@
                             <div class="card-body">
                                 <h5>Are you sure you want to buy this product and place it to order?</h5>
 
-                                @if ($productToBuy)
+                                @if ($orderToBuy)
                                     <div class="text-center">
-                                        <img src="{{ Storage::url($productToBuy->product_image) }}"
-                                            alt="{{ $productToBuy->product_name }}" class="img-fluid"
+                                        <img src="{{ Storage::url($orderToBuy->product_image) }}"
+                                            alt="{{ $orderToBuy->product_name }}" class="img-fluid"
                                             style="width: 150px; height: 150px;">
-                                        <h6 class="mt-5"><strong>{{ $productToBuy->product_name }}</strong></h6>
-                                        <p><strong>&#8369;{{ number_format($productToBuy->product_price, 2, '.', ',') }}</strong>
+                                        <h6 class="mt-5"><strong>{{ $orderToBuy->product_name }}</strong></h6>
+                                        <p><strong>&#8369;{{ number_format($orderToBuy->product_price, 2, '.', ',') }}</strong>
                                         </p>
                                         <form>
                                             @csrf
                                             <p>
                                                 <span><strong>Quantity:</strong><input type="number"
-                                                        placeholder="Enter Quantity" wire:model.defer="order_quantity">
+                                                        placeholder="Enter Quantity" wire:model.defer="order_quantity"><br>
                                                     @error('order_quantity')
                                                         <span
                                                             class="text-center text-danger">*{{ $message }}</span><br>
@@ -41,7 +41,7 @@
                                                         Method</label>
                                                     <select id="select-cat" class="form-select" style=""
                                                         name="order_payment_method" id="order_payment_method"
-                                                        wire:model.defer="order_payment_method" required>
+                                                        wire:model="order_payment_method" required>
                                                         <option selected hidden="true">Select a Payment Method</option>
                                                         <option disabled>Select a Payment Method</option>
                                                         <option value="Cash On Delivery">Cash On Delivery</option>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" wire:click="buyNowPlaceOrder()">Place Order</button>
+                    <button type="button" class="btn btn-primary" wire:click="orderPlaceOrder()">Place Order</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
