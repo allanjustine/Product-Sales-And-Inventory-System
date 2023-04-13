@@ -1,7 +1,7 @@
 <div>
     <!-- Modal Add To Cart Info-->
     <div wire:ignore.self class="modal fade" id="addToCart" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        aria-labelledby="exampleModalLongTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -28,7 +28,7 @@
                                         <form>
                                             @csrf
                                             <p>
-                                                <strong>Quantity:</strong><input type="number"
+                                                <strong>Quantity</strong><input class="form-control" type="number"
                                                     placeholder="Enter Quantity" wire:model.defer="quantity">
 
                                             </p>

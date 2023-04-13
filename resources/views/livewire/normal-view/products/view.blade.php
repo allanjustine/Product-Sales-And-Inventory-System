@@ -1,7 +1,7 @@
 <div>
     <!-- Modal Product Info-->
     <div wire:ignore.self class="modal fade" id="viewProduct" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        aria-labelledby="exampleModalLongTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header border-0">

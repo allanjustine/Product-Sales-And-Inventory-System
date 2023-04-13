@@ -25,6 +25,12 @@
                     <a class="nav-link text-white text-center {{ 'products' == request()->path() ? 'active2' : '' }}"
                         href="/products"><i class="fa-light fa-box-open"></i> Products</a>
                 </li>
+                @role('user')
+                    <li class="nav-item p-2">
+                        <a class="nav-link text-white text-center {{ 'orders' == request()->path() ? 'active2' : '' }}"
+                            href="/orders"><i class="fa-light fa-bag-shopping"></i> My Orders</a>
+                    </li>
+                @endrole
             @else
                 <li class="nav-item p-2">
                     <a class="nav-link text-white text-center {{ 'view-products' == request()->path() ? 'active2' : '' }}"
@@ -66,12 +72,10 @@
                     </a>
                     <div class="dropdown-divider"></div>
                     @role('admin')
-                        <a class="nav-link p-3" href="/admin/dashboard"><i
-                                class="fa-light fa-user-lock"></i>&nbsp;
+                        <a class="nav-link p-3" href="/admin/dashboard"><i class="fa-light fa-user-lock"></i>&nbsp;
                             <span>Admin Dashboard</span></a>
                         <div class="dropdown-divider"></div>
-                        <a class="nav-link p-3" href="/admin/orders"><i
-                                class="fa-light fa-bag-shopping"></i>&nbsp;
+                        <a class="nav-link p-3" href="/admin/orders"><i class="fa-light fa-bag-shopping"></i>&nbsp;
                             <span>Users Order</span></a>
                         <div class="dropdown-divider"></div>
                     @endrole
@@ -97,7 +101,7 @@
 </nav>
 
 <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-    aria-hidden="true">
+    aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

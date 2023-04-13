@@ -1,7 +1,7 @@
 <div>
     <!-- Modal Delete User-->
     <div wire:ignore.self class="modal fade" id="forgotPassword" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        aria-labelledby="exampleModalLongTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">

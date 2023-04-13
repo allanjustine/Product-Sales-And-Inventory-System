@@ -160,13 +160,13 @@
             @foreach ($products as $product)
                 <div class="col-md-3 col-sm-4">
                     <div class="card shadow product show" id="product-card" style="min-width: 50px;">
-                        <div class="p-2" style="position: relative;">
+                        <div class="px-2" style="position: relative;">
                             <div class="image-container">
                                 <img class="card-img-top mt-4" src="{{ Storage::url($product->product_image) }}"
                                     alt="{{ $product->product_name }}">
                             </div>
 
-                            <div class="pt-3 pr-3" style="position: absolute; top:0; right: 0;">
+                            <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
                                 @if ($product->product_stock >= 20)
                                     <span
                                         class="badge badge-success badge-pill">{{ number_format($product->product_stock) }}</span>

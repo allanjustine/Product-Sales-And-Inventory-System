@@ -10,16 +10,16 @@
                 <div class="card-header p-0 border-bottom-0">
                     <ul class="nav nav-tabs" id="schedulesTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="today-list" data-toggle="pill" href="#pending" role="tab"
+                            <a class="nav-link active" data-toggle="pill" href="#pending" role="tab"
                                 aria-controls="custom-tabs-four-home" aria-selected="true">PENDING
                                 ORDERS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="requests-list" data-toggle="pill" href="#recent" role="tab"
+                            <a class="nav-link" data-toggle="pill" href="#recent" role="tab"
                                 aria-controls="custom-tabs-four-profile" aria-selected="false">RECENT ORDERS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="cancelled-list" data-toggle="pill" href="#cancelled" role="tab"
+                            <a class="nav-link" data-toggle="pill" href="#cancelled" role="tab"
                                 aria-controls="custom-tabs-four-profile" aria-selected="false">CANCELLED ORDERS</a>
                         </li>
                     </ul>
@@ -83,9 +83,9 @@
                                                     Order Received
                                                 </a>
                                             @else
-                                                <a href="" class="btn btn-warning">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                    View
+                                                <a href="#" class="btn btn-warning">
+                                                    <i class="fa-solid fa-check"></i>
+                                                    Paid
                                                 </a>
                                             @endif
                                         </span>
@@ -147,10 +147,14 @@
                                                     <i class="fa-solid fa-xmark"></i>
                                                     Cancel Order
                                                 </a>
+                                            @elseif ($order->order_status === 'Complete')
+                                                <a href="#" class="btn btn-outline-primary">
+                                                    Please Wait...
+                                                </a>
                                             @else
-                                                <a href="" class="btn btn-warning">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                    View
+                                                <a href="#" class="btn btn-outline-success">
+                                                    <i class="fa-solid fa-check"></i>
+                                                    Paid
                                                 </a>
                                             @endif
                                         </span>
@@ -160,7 +164,7 @@
                             @if ($recents->count() === 0)
                                 <span class="text-center">
                                     <h5><i class="fa-regular fa-xmark-to-slot" style="font-size: 50px;"></i><br>
-                                        No orders yet. <a href="/products">Click
+                                        No recent order yet. <a href="/products">Click
                                             here to order</a></h5>
                                 </span>
                             @endif
@@ -169,7 +173,7 @@
 
                         <div class="tab-pane fade" id="cancelled" role="tabpanel"
                             aria-labelledby="custom-tabs-four-home-tab">
-                            @foreach ($pendings as $order)
+                            @foreach ($cancels as $order)
                                 <div class="col-md-12">
                                     <div class="info-box elevation-3">
                                         <span class="info-box-icon"><img
@@ -184,34 +188,59 @@
                                                 class="info-box-text">x{{ number_format($order->order_quantity) }}PC(s)</span>
                                             <span
                                                 class="info-box-text">{{ date_format($order->created_at, 'F j, Y g:i A') }}</span>
+                                            @if ($order->order_status === 'Paid')
+                                                <span class="info-box-text badge badge-success align-self-start"><i
+                                                        class="fa fa-solid fa-check"></i> PAID</span>
+                                            @elseif ($order->order_status === 'To Deliver')
+                                                <span class="info-box-text badge badge-primary align-self-start">TO
+                                                    DELIVER</span>
+                                            @elseif ($order->order_status === 'Delivered')
+                                                <span
+                                                    class="info-box-text badge badge-info align-self-start">DELIVERED</span>
+                                            @elseif ($order->order_status === 'Complete')
+                                                <span
+                                                    class="info-box-text badge badge-primary align-self-start">COMPLETE</span>
+                                            @elseif ($order->order_status === 'Cancelled')
+                                                <span
+                                                    class="info-box-text badge badge-danger align-self-start">CANCELLED</span>
+                                            @else
+                                                <span
+                                                    class="info-box-text badge badge-warning align-self-start">PENDING</span>
+                                            @endif
+                                            <span
+                                                class="info-box-text"><strong>{{ $order->transaction_code }}</strong></span>
                                             <span class="info-box-number">Total:
                                                 &#8369;{{ number_format($order->order_total_amount, 2, '.', ',') }}</span>
                                         </div>
                                         <span>
-                                            @if ($order->order_status === 'Pending')
-                                                <a href="" class="btn btn-danger" data-toggle="modal"
-                                                    data-target="#cancel" wire:click="toCancel({{ $order->id }})">
+                                            @if ($order->order_status === 'Cancelled')
+                                                {{-- <a href="#" class="btn btn-danger" data-toggle="modal"
+                                                    data-target="#toRemove"
+                                                    wire:click="toRemove({{ $order->id }})">
                                                     <i class="fa-solid fa-xmark"></i>
-                                                    Cancel Order
+                                                    Remove
+                                                </a> --}}
+                                                <a href="#" class="btn btn-outline-danger">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                    Cancelled
                                                 </a>
-                                            @else
-                                                <a href="" class="btn btn-warning">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                    View
+
+                                                <a href="#" class="btn btn-primary mt-1"
+                                                    wire:click="rePurchaseOrder({{ $order->id }})">
+                                                    <i class="fa-solid fa-rotate-right"></i>
+                                                    Re-purchase
                                                 </a>
                                             @endif
                                         </span>
                                     </div>
                                 </div>
                             @endforeach
-                            @if ($pendings->count() === 0)
+                            @if ($cancels->count() === 0)
                                 <span class="text-center">
                                     <h5><i class="fa-regular fa-xmark-to-slot" style="font-size: 50px;"></i><br>
-                                        No orders yet. <a href="/products">Click
-                                            here to order</a></h5>
+                                        No cancelled order.</h5>
                                 </span>
                             @endif
-                            <strong>Grand Total: &#8369;{{ number_format($grandTotalRecent, 2, '.', ',') }}</strong>
                         </div>
                     </div>
                 </div>

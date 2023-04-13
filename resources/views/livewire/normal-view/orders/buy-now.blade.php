@@ -1,7 +1,7 @@
 <div>
     <!-- Modal Buy Now Info-->
     <div wire:ignore.self class="modal fade" id="toBuyNow" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        aria-labelledby="exampleModalLongTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -28,8 +28,9 @@
                                         <form>
                                             @csrf
                                             <p>
-                                                <span><strong>Quantity:</strong><input type="number"
-                                                        placeholder="Enter Quantity" wire:model.defer="order_quantity"><br>
+                                                <span><strong>Quantity</strong><input class="form-control" type="number"
+                                                        placeholder="Enter Quantity"
+                                                        wire:model.defer="order_quantity"><br>
                                                     @error('order_quantity')
                                                         <span
                                                             class="text-center text-danger">*{{ $message }}</span><br>

@@ -14,36 +14,71 @@ class Index extends Component
     public $grandTotalPending;
     public $grandTotalRecent;
     public $cancel;
+    public $cancels;
+    public $toRemoved;
+    public $removedOrder;
     public $receive;
     public $received;
     public $cancelled;
     public $product_rating;
     public $product;
+    public $orders;
 
     protected $listeners = ['resetInputs'];
 
     public function mount()
     {
 
-        $this->pendings = Order::where('order_status', 'To Deliver')
-            ->orWhere('order_status', 'Pending')
-            ->orWhere('order_status', 'Delivered')
-            ->where('user_id', auth()->id())->get();
+        $userId = auth()->id();
+
+        $this->pendings = Order::where(function ($query) use ($userId) {
+            $query->where('order_status', 'To Deliver')
+                ->orWhere('order_status', 'Pending')
+                ->orWhere('order_status', 'Delivered');
+        })
+            ->where('user_id', $userId)
+            ->get();
         $this->grandTotalPending = Order::where('user_id', auth()->id())
             ->whereNotIn('order_status', ['Paid'])
             ->whereNotIn('order_status', ['Complete'])
+            ->whereNotIn('order_status', ['Cancelled'])
             ->sum('order_total_amount');
 
-        $this->recents = Order::where('order_status', 'Paid')
-            ->where('user_id', auth()->id())
-            ->orWhere('order_status', 'Complete')
+        $this->recents = Order::where(function ($query) use ($userId) {
+            $query->where('order_status', 'Paid')
+                ->orWhere('order_status', 'Complete');
+        })
+            ->where('user_id', $userId)
             ->get();
+
         $this->grandTotalRecent = Order::where('user_id', auth()->id())
             ->whereNotIn('order_status', ['Pending'])
             ->whereNotIn('order_status', ['To Deliver'])
             ->whereNotIn('order_status', ['Delivered'])
             ->sum('order_total_amount');
+
+        $this->cancels = Order::where('order_status', 'Cancelled')
+            ->where('user_id', auth()->id())
+            ->get();
     }
+
+    // public function toRemove($orderId)
+    // {
+    //     $this->toRemoved = Order::find($orderId);
+
+    //     $this->removedOrder = $orderId;
+    // }
+
+    // public function removeOrder()
+    // {
+    //     $order = Order::where('id', $this->removedOrder)->first();
+
+    //     $order->delete();
+
+    //     alert()->info('Removed', 'The order has been removed successfully');
+
+    //     return redirect('/orders');
+    // }
 
     public function toCancel($orderId)
     {
@@ -58,11 +93,13 @@ class Index extends Component
 
         if ($order->order_status == 'Pending') {
             $product = Product::find($order->product_id);
+
+            $order->order_status = 'Cancelled';
+            $order->save();
+
             $product->product_stock += $order->order_quantity;
             $product->product_sold -= $order->order_quantity;
             $product->save();
-
-            $order->delete();
 
             alert()->info('Cancelled', 'The order has been cancelled successfully');
 
@@ -91,6 +128,19 @@ class Index extends Component
         $this->receive = Order::find($orderId);
 
         $this->received = $orderId;
+    }
+
+    public function rePurchaseOrder($orderId)
+    {
+        $order = Order::find($orderId);
+
+        if ($order) {
+            $order->order_status = 'Pending';
+            $order->save();
+
+            alert()->success('Congrats', 'You purchase the order again.');
+            return redirect('/orders');
+        }
     }
 
     public function submitRating()
