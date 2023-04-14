@@ -23,6 +23,7 @@ class Index extends Component
     public $product_rating;
     public $product;
     public $orders;
+    public $order_quantity;
 
     protected $listeners = ['resetInputs'];
 
@@ -135,14 +136,41 @@ class Index extends Component
     {
         $order = Order::find($orderId);
 
-        if ($order) {
-            $order->order_status = 'Pending';
-            $order->save();
-
-            alert()->success('Congrats', 'You purchase the order again.');
+        if (!$order) {
+            alert()->error('Sorry', 'The order does not exist');
             return redirect('/orders');
         }
+
+        $product = Product::find($order->product_id);
+
+        if (!$product) {
+            alert()->error('Sorry', 'The product you trying to re-pruchase is does not exist');
+            return redirect('/products');
+        }
+
+        if ($product->product_status == 'Not Available') {
+            alert()->error('Sorry', 'The product you trying to re-pruchase is Not Available');
+            return redirect('/products');
+        }
+
+        $availableStock = $product->product_stock;
+
+        if ($availableStock < $order->order_quantity) {
+            alert()->error('Sorry', 'The product you trying to re-pruchase is not enough stock');
+            return redirect('/products');
+        }
+
+        $order->order_status = 'Pending';
+        $order->save();
+
+        $product->product_stock -= $order->order_quantity;
+        $product->product_sold += $order->order_quantity;
+        $product->save();
+
+        alert()->success('Congrats', 'You purchased the cancelled order again.');
+        return redirect('/orders');
     }
+
 
     public function submitRating()
     {
