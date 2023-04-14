@@ -67,9 +67,9 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" wire:click="placeOrder()">Place Order
+                    <button class="btn btn-primary form-control" wire:click="placeOrder()"><i class="fa-solid fa-cart-circle-check"></i> Place Order
                     </button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary form-control" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>

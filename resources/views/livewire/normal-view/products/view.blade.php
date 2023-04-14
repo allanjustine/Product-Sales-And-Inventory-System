@@ -41,10 +41,12 @@
                                             </p>
                                             <p class="d-flex justify-content-between"><strong>Price:</strong>
                                                 &#8369;{{ number_format($productView->product_price, 2, '.', ',') }}</p>
+                                            <p class="d-flex justify-content-between"><strong>Sold(s):</strong>
+                                                {{ number_format($productView->product_sold) }}</p>
                                             <p class="d-flex justify-content-between"><strong>Rating(s):</strong>
                                                 <span>
                                                     @if ($productView->product_rating === 0)
-                                                    No ratings yet
+                                                        No ratings yet
                                                     @else
                                                         @for ($i = 1; $i <= 5; $i++)
                                                             @if ($i <= $productView->product_rating)
@@ -70,7 +72,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary form-control" data-dismiss="modal">Close</button>
                     </div>
                 @endif
             </div>

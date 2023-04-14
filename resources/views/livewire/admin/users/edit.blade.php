@@ -110,9 +110,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" wire:click="update()">
-                        <div wire:loading><svg class="loading"></svg></div>&nbsp;Update
+                        <div wire:loading><svg class="loading"></svg></div>&nbsp;<i class="fa-solid fa-pen-to-square"></i> Update
                     </button>
-                    <button class="btn btn-outline-warning" wire:click="resetInputs()">Reset Inputs</button>
+                    <button class="btn btn-outline-warning" wire:click="resetInputs()"><i class="fa-solid fa-rotate"></i> Reset Inputs</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

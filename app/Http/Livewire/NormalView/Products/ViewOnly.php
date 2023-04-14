@@ -38,17 +38,38 @@ class ViewOnly extends Component
         }
 
         if ($this->product_rating != 'All') {
-            $query->where('product_rating', $this->product_rating);
+            if ($this->product_rating == 4) {
+                $query->where('product_rating', '>=', 1)
+                    ->where('product_rating', '>=', 2)
+                    ->where('product_rating', '>=', 3)
+                    ->where('product_rating', '>=', 4)
+                    ->where('product_rating', '<', 5);
+            } else {
+                $query->where('product_rating', $this->product_rating);
+            }
         }
+
 
         $products = $query->paginate($this->perPage);
 
         return compact('products');
     }
+
     public function view($id)
     {
         $this->productView = Product::find($id);
     }
+
+    public function clearFilters()
+    {
+        $this->search = '';
+        $this->perPage = 15;
+        $this->category_name = 'All';
+        $this->sort = 'low_to_high';
+        $this->product_rating = 'All';
+        $this->resetPage();
+    }
+
     public function render()
     {
         $product_categories = ProductCategory::all();

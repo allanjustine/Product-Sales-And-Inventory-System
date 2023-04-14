@@ -6,12 +6,12 @@
                 Click here to filter
             </summary>
             <p>
-            <div class="col-md-5 offset-md-4 mt-2">
+            <div class="col-md-5 col-sm-6 offset-md-4 offset-sm-3 mt-2">
                 <input type="search" class="form-control" placeholder="Search" wire:model="search"
                     style="border-radius: 30px; height: 50px;">
             </div>
-            <div class="row d-flex justify-content-center mt-5">
-                <div class="col-md-1 text-center">
+            <div class="row d-flex justify-content-center mt-5 pb-3">
+                <div class="col-md-1 col-sm-3 text-center">
                     <label>Show</label>
                     <select wire:model="perPage" class="perPageSelect form-select" id="select-cat">
                         <option>15</option>
@@ -23,7 +23,7 @@
                         <option>100</option>
                     </select>
                 </div>
-                <div class="col-md-3 text-center">
+                <div class="col-md-2 col-sm-4 text-center">
                     <label for="category">Categories</label>
                     <select name="category" id="select-cat" class="form-select" wire:model="category_name">
                         <option value="All">All</option>
@@ -32,14 +32,14 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-3 text-center">
+                <div class="col-md-2 col-sm-4 text-center">
                     <label for="sort">Sort By</label>
                     <select wire:model="sort" class="form-select" id="select-cat">
                         <option value="low_to_high">Price: Low to High</option>
                         <option value="high_to_low">Price: High to Low</option>
                     </select>
                 </div>
-                <div class="col-md-3 text-center">
+                <div class="col-md-2 col-sm-4 text-center">
                     <label for="sort">Ratings</label>
                     <select wire:model="product_rating" class="form-select" id="select-cat">
                         <option value="All">All</option>
@@ -90,16 +90,25 @@
                         </option>
                     </select>
                 </div>
+                <div class="col-md-3 col-sm-4 text-center">
+                    <label for="Clear Filters">Clear Filters</label>
+                    <button style="height: 40px;" wire:click="clearFilters" class="btn btn-secondary form-control"><i
+                            class="fa-solid fa-broom-wide"></i> Clear Filters</button>
+                </div>
             </div>
-            </p>
         </details>
     </div>
     <div class="container mt-5">
-        <h3>Products</h3>
+        <h3><i class="fa-light fa-box-open"></i> Products</h3>
+        @if ($products->count() === 0)
+            <h5>-</h5>
+        @else
+            <h5 class="text-danger">{{ $products->count() }} products found.</h5>
+        @endif
         <hr>
         <div class="row">
             @foreach ($products as $product)
-                <div class="col-md-3 col-sm-4">
+                <div class="col-md-3 mt-4 col-sm-4 col-6">
                     <div class="card shadow product show" id="product-card" style="min-width: 50px;">
                         <div class="p-2" style="position: relative;">
                             <div class="image-container">
@@ -107,7 +116,7 @@
                                     alt="{{ $product->product_name }}">
                             </div>
 
-                            <div class="pt-3 pr-3" style="position: absolute; top:0; right: 0;">
+                            <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
                                 @if ($product->product_stock >= 20)
                                     <span
                                         class="badge badge-success badge-pill">{{ number_format($product->product_stock) }}</span>
@@ -152,11 +161,9 @@
                                 </strong>
                                 <span class="font-weight-medium pr-2" style="position: absolute; bottom:0; right: 0;">
                                     <i class="fa-solid fa-star"></i>
-                                    @if ($product->product_rating === 0)
-                                        No ratings yet
-                                    @else
+                                    <strong>
                                         {{ $product->product_rating }}/5
-                                    @endif
+                                    </strong>
                                 </span>
                             </div>
                         </div>

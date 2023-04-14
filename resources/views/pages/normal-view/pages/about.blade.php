@@ -1,6 +1,6 @@
 @extends('pages.normal-view.layout.base')
 
-@section('title', '| About')
+@section('title', '| About Us')
 
 @section('content')
     <div class="container mt-3">

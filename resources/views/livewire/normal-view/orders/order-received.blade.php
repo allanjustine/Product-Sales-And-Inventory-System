@@ -34,9 +34,9 @@
                     @enderror
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" wire:click="submitRating()">Submit
+                    <button class="btn btn-primary form-control" wire:click="submitRating()"><i class="fa-sharp fa-solid fa-thumbs-up"></i> Submit
                     </button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary form-control" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

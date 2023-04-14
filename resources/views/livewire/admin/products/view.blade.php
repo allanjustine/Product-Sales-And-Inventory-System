@@ -43,7 +43,7 @@
                                             </p>
                                             <p class="d-flex justify-content-between"><strong>Price:</strong>
                                                 &#8369;{{ number_format($productView->product_price, 2, '.', ',') }}</p>
-                                            <p class="d-flex justify-content-between"><strong>Sold:</strong>
+                                            <p class="d-flex justify-content-between"><strong>Sold(s):</strong>
                                                 {{ number_format($productView->product_sold) }}</p>
                                             <p class="d-flex justify-content-between"><strong>Rating(s):</strong>
                                                 <span>

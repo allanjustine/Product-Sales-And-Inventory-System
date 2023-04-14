@@ -1,5 +1,5 @@
 <div>
-    <h3 class="p-2">{{ Auth::user()->name }} Profile</h3>
+    <h4 class="p-2"><u>{{ Auth::user()->name }}</u></h4>
     <hr>
     <section class="content py-2">
         <div class="container-fluid">
@@ -211,7 +211,7 @@
                 After you logout you will redirect to login page.
             </div>
             <div class="modal-footer">
-                <a href="/logout" class="btn btn-danger">Yes, Logout</a>
+                <a href="/logout" class="btn btn-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i>Yes, Logout</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>

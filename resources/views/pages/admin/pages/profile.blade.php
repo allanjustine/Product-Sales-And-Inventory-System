@@ -3,7 +3,7 @@
 @section('title', '| Profile')
 
 @section('content-header')
-    <h1><u>{{ Auth::user()->name }} Profile</u></h1>
+    <h4><u>{{ Auth::user()->name }}</u></h4>
 @endsection
 
 @section('content')

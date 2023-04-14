@@ -58,13 +58,14 @@
                 @if (auth()->check())
                     <a class="nav-link" href="/profile">
                         <div class="d-flex flex-column align-items-center">
-                            <div class="mr-3 outline mb-3"
+                            <div class="outline mb-3"
                                 style="width: 45px; height: 46px; border-radius: 50%; border: 2px solid white;">
                                 <img style="width: 41px; height: 41px; border-radius: 50%;"
                                     src="{{ auth()->user()->profile_image === null ? Storage::url('asset/profile-pic.jpg') : Storage::url(auth()->user()->profile_image) }}"
                                     alt="{{ auth()->user()->name }}">
                             </div>
                             <div class="text-center">
+                                <span class="text-white">Profile</span><br>
                                 <span>{{ auth()->user()->name }}</span><br>
                                 <span>{{ auth()->user()->email }}</span>
                             </div>
@@ -114,7 +115,7 @@
                 After you logout you will redirect to login page.
             </div>
             <div class="modal-footer">
-                <a href="/logout" class="btn btn-danger">Yes, Logout</a>
+                <a href="/logout" class="btn btn-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i>Yes, Logout</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>

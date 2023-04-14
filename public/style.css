@@ -4,6 +4,10 @@
 }
 html {
     font-size: 14px;
+    -webkit-scroll-behavior: smooth;
+    -moz-scroll-behavior: smooth;
+    -ms-scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 body {
     background-color: rgb(230, 225, 225);
@@ -22,6 +26,7 @@ body {
         width: 100%;
     }
 }
+
 #dropdown-setting a {
     color: rgb(255, 255, 255);
     font-weight: 500;
@@ -103,7 +108,7 @@ body {
     color: rgb(57, 64, 77);
 }
 #badge-cart {
-    top: 0;
+    top: 1;
     right: 1;
     position: absolute;
 }
@@ -117,7 +122,8 @@ body {
 }
 
 .cartdropdown i {
-    font-size: 40px;
+    font-size: 30px;
+    color: black;
 }
 
 ::-webkit-scrollbar {
@@ -191,6 +197,17 @@ button.close:hover {
 
 .image-container:hover img {
     transform: scale(1.05);
+}
+
+@media (max-width: 767px) {
+    .image-container {
+        height: 150px;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: 150px;
+    }
 }
 
 #product-card:hover {
@@ -293,4 +310,52 @@ button.close:hover {
 .rating input[type="radio"]:checked ~ label {
     color: #ffcc00;
     opacity: 1;
+}
+
+.grid {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+}
+
+.grid .grid-item {
+    scroll-snap-align: start;
+}
+
+.top-deals {
+    color: #ffd700;
+    font-size: 18px;
+}
+
+.top-deals-icon {
+    color: #ffd700;
+    font-size: 22px;
+}
+
+.top-deals-bg {
+    background-color: rgba(87, 85, 85, 0.712);
+}
+
+.top-popular {
+    color: rgba(255, 102, 0, 1);
+    font-size: 18px;
+}
+
+.top-popular-icon {
+    color: rgba(255, 102, 0, 1);
+    font-size: 22px;
+}
+
+.top-popular-bg {
+    background-color: rgba(87, 85, 85, 0.712);
+}
+
+.location-text {
+    border-bottom: 1px solid black;
+}
+
+@media (max-width: 767px) {
+    .location-text {
+        font-size: 12px;
+    }
 }

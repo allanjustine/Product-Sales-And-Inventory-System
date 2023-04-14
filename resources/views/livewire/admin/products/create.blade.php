@@ -124,9 +124,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" wire:click="addProduct()">
-                        <div wire:loading><svg class="loading"></svg></div>&nbsp; Add Product
+                        <div wire:loading><svg class="loading"></svg></div>&nbsp;<i class="fa-solid fa-plus"></i> Add Product
                     </button>
-                    <button class="btn btn-outline-warning" wire:click="resetInputs()">Reset Inputs</button>
+                    <button class="btn btn-outline-warning" wire:click="resetInputs()"><i class="fa-solid fa-rotate"></i> Reset Inputs</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>

@@ -43,10 +43,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" wire:click="addToCartNow()"><i
+                    <button type="button" class="btn btn-primary form-control" wire:click="addToCartNow()"><i
                             class="fa-solid fa-cart-plus"></i> Add to
                         Cart</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary form-control" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>

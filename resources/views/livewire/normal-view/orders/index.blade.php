@@ -31,10 +31,11 @@
                             @foreach ($pendings as $order)
                                 <div class="col-md-12">
                                     <div class="info-box elevation-3">
-                                        <span class="info-box-icon"><img
-                                                src="{{ Storage::url($order->product->product_image) }}"
-                                                alt="{{ $order->product->product_name }}"></span>
                                         <div class="info-box-content">
+                                            <span class="info-box-image"><img
+                                                    style="width: 90px; height: 80px; border-radius: 5px;"
+                                                    src="{{ Storage::url($order->product->product_image) }}"
+                                                    alt="{{ $order->product->product_name }}"></span>
                                             <strong class="info-box-text">{{ $order->product->product_name }}</strong>
                                             <span
                                                 class="info-box-text">&#8369;{{ number_format($order->product->product_price, 2, '.', ',') }}</span>
@@ -106,11 +107,13 @@
                             @foreach ($recents as $order)
                                 <div class="col-md-12">
                                     <div class="info-box elevation-3">
-                                        <span class="info-box-icon">
-                                            <img src="{{ Storage::url($order->product->product_image) }}"
-                                                alt="{{ $order->product->product_name }}">
-                                        </span>
                                         <div class="info-box-content">
+
+                                            <span class="info-box-image">
+                                                <img style="width: 90px; height: 80px; border-radius: 5px;"
+                                                    src="{{ Storage::url($order->product->product_image) }}"
+                                                    alt="{{ $order->product->product_name }}">
+                                            </span>
                                             <span
                                                 class="info-box-text"><strong>{{ $order->product->product_name }}</strong></span>
                                             <span
@@ -176,10 +179,11 @@
                             @foreach ($cancels as $order)
                                 <div class="col-md-12">
                                     <div class="info-box elevation-3">
-                                        <span class="info-box-icon"><img
-                                                src="{{ Storage::url($order->product->product_image) }}"
-                                                alt="{{ $order->product->product_name }}"></span>
                                         <div class="info-box-content">
+                                            <span class="info-box-image"><img
+                                                    style="width: 90px; height: 80px; border-radius: 5px;"
+                                                    src="{{ Storage::url($order->product->product_image) }}"
+                                                    alt="{{ $order->product->product_name }}"></span>
                                             <span
                                                 class="info-box-text"><strong>{{ $order->product->product_name }}</strong></span>
                                             <span

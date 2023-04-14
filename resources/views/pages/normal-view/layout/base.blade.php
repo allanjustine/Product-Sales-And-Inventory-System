@@ -39,6 +39,7 @@
 </head>
 
 <body style="overflow-x: hidden;">
+
     @yield('content')
 
     @include('sweetalert::alert')
@@ -99,7 +100,8 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <p style="font-size: 12px;" class="text-center mt-3">Current date and time: <span class="border-bottom"><span id="date"></span>
+                <p style="font-size: 12px;" class="text-center mt-3">Current date and time: <span
+                        class="border-bottom"><span id="date"></span>
                         <span id="time"></span></span></p>
                 <hr>
                 <p>&copy; 2023 <strong>AJM</strong>. All rights reserved.</p>

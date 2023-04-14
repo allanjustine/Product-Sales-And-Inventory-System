@@ -10,12 +10,12 @@
                 Click here to filter
             </summary>
             <p>
-            <div class="col-md-5 offset-md-4 mt-2">
+            <div class="col-md-5 col-sm-6 offset-md-4 offset-sm-3 mt-2">
                 <input type="search" class="form-control" placeholder="Search" wire:model="search"
                     style="border-radius: 30px; height: 50px;">
             </div>
-            <div class="row d-flex justify-content-center mt-5">
-                <div class="col-md-1 text-center">
+            <div class="row d-flex justify-content-center mt-5 pb-3">
+                <div class="col-md-1 col-sm-3 text-center">
                     <label>Show</label>
                     <select wire:model="perPage" class="perPageSelect form-select" id="select-cat">
                         <option>15</option>
@@ -27,7 +27,7 @@
                         <option>100</option>
                     </select>
                 </div>
-                <div class="col-md-3 text-center">
+                <div class="col-md-2 col-sm-4 text-center">
                     <label for="category">Categories</label>
                     <select name="category" id="select-cat" class="form-select" wire:model="category_name">
                         <option value="All">All</option>
@@ -36,14 +36,14 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-3 text-center">
+                <div class="col-md-2 col-sm-4 text-center">
                     <label for="sort">Sort By</label>
                     <select wire:model="sort" class="form-select" id="select-cat">
                         <option value="low_to_high">Price: Low to High</option>
                         <option value="high_to_low">Price: High to Low</option>
                     </select>
                 </div>
-                <div class="col-md-3 text-center">
+                <div class="col-md-2 col-sm-4 text-center">
                     <label for="sort">Ratings</label>
                     <select wire:model="product_rating" class="form-select" id="select-cat">
                         <option value="All">All</option>
@@ -94,15 +94,20 @@
                         </option>
                     </select>
                 </div>
+                <div class="col-md-3 col-sm-4 text-center">
+                    <label for="Clear Filters">Clear Filters</label>
+                    <button style="height: 40px;" wire:click="clearFilters" class="btn btn-secondary form-control"><i
+                            class="fa-solid fa-broom-wide"></i> Clear Filters</button>
+                </div>
             </div>
         </details>
     </div>
     @role('user')
         <div class="dropdown">
-            <a class="nav-link text-right mt-3 mr-4 cartdropdown" id="cart-dropdown" data-bs-toggle="dropdown"
+            <a class="float-right mt-4 mr-4 p-2 cartdropdown" id="cart-dropdown" data-bs-toggle="dropdown"
                 aria-expanded="false" href=""><i class="fa-regular fa-cart-shopping pt-3"></i>
                 <span class="badge badge-pill badge-danger" id="badge-cart"><span
-                        style="font-size: 19px;">{{ $cartItems->count() }}</span></span>
+                        style="font-size: 12px;">{{ $cartItems->count() }}</span></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end cartmenu" aria-labelledby="cart-dropdown">
                 <h4 class="pl-3"><strong><i class="fa-regular fa-cart-shopping"></i> My Cart</strong></h4>
@@ -154,11 +159,17 @@
         </div>
     @endrole
     <div class="container">
+        <br><br>
         <h3 class="mt-5"><i class="fa-light fa-box-open"></i> Products</h3>
+        @if ($products->count() === 0)
+            <h5>-</h5>
+        @else
+            <h5 class="text-danger">{{ $products->count() }} products found.</h5>
+        @endif
         <hr>
         <div class="row">
             @foreach ($products as $product)
-                <div class="col-md-3 col-sm-4">
+                <div class="col-md-3 mt-4 col-sm-4 col-6">
                     <div class="card shadow product show" id="product-card" style="min-width: 50px;">
                         <div class="px-2" style="position: relative;">
                             <div class="image-container">
@@ -230,11 +241,9 @@
                                 </strong>
                                 <span class="font-weight-medium pr-2" style="position: absolute; bottom:0; right: 0;">
                                     <i class="fa-solid fa-star"></i>
-                                    @if ($product->product_rating === 0)
-                                        No ratings yet
-                                    @else
-                                        {{ round($product->product_rating, 1) }}/5
-                                    @endif
+                                    <strong>
+                                        {{ $product->product_rating }}/5
+                                    </strong>
                                 </span>
                             </div>
                         </div>

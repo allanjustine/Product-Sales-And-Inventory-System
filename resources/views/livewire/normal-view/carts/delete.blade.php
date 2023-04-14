@@ -17,9 +17,9 @@
                     </div>
                 @endif
                 <div class="modal-footer">
-                    <button class="btn btn-danger" wire:click="removeItemToCart()">Yes, Remove
+                    <button class="btn btn-danger form-control" wire:click="removeItemToCart()"><i class="fa-solid fa-cart-xmark"></i> Yes, Remove
                     </button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary form-control" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>

@@ -16,7 +16,8 @@
                     </div>
                 @endif
                 <div class="modal-footer">
-                    <button class="btn btn-danger" wire:click="deleteUser()"><div wire:loading><svg class="loading"></svg></div>&nbsp;Yes, Remove</button>
+                    <button class="btn btn-danger" wire:click="deleteUser()"><div wire:loading><svg class="loading"></svg></div>&nbsp;<i
+                        class="fa-solid fa-trash"></i> Yes, Remove</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
