@@ -55,6 +55,7 @@ class Index extends Component
             ->whereNotIn('order_status', ['Pending'])
             ->whereNotIn('order_status', ['To Deliver'])
             ->whereNotIn('order_status', ['Delivered'])
+            ->whereNotIn('order_status', ['Cancelled'])
             ->sum('order_total_amount');
 
         $this->cancels = Order::where('order_status', 'Cancelled')
