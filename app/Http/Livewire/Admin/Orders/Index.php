@@ -13,11 +13,12 @@ class Index extends Component
     public function mount()
     {
         $this->orders = Order::where('order_status', 'Pending')
-        ->orWhere('order_status', 'To Deliver')
-        ->orWhere('order_status', 'Delivered')
-        ->orWhere('order_status', 'Complete')
-        ->get();
+            ->orWhere('order_status', 'To Deliver')
+            ->orWhere('order_status', 'Delivered')
+            ->orWhere('order_status', 'Complete')
+            ->get();
         $this->grandTotal = Order::whereNotIn('order_status', ['Paid'])
+            ->whereNotIn('order_status', ['Cancelled'])
             ->sum('order_total_amount');
     }
 

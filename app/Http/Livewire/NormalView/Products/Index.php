@@ -58,12 +58,16 @@ class Index extends Component
         }
 
         if ($this->product_rating != 'All') {
-            if ($this->product_rating == 4) {
-                $query->where('product_rating', '>=', 1)
-                    ->where('product_rating', '>=', 2)
-                    ->where('product_rating', '>=', 3)
-                    ->where('product_rating', '>=', 4)
-                    ->where('product_rating', '<', 5);
+            if ($this->product_rating == 1) {
+                $query->whereBetween('product_rating', [1.0, 1.9]);
+            } else
+            if ($this->product_rating == 2) {
+                $query->whereBetween('product_rating', [2.0, 2.9]);
+            } else
+            if ($this->product_rating == 3) {
+                $query->whereBetween('product_rating', [3.0, 3.9]);
+            } else if ($this->product_rating == 4) {
+                $query->whereBetween('product_rating', [4.0, 4.9]);
             } else {
                 $query->where('product_rating', $this->product_rating);
             }
@@ -222,6 +226,7 @@ class Index extends Component
 
             if ($existingOrder) {
                 $existingOrder->user_location = $this->user_location;
+                $existingOrder->created_at = now();
                 $existingOrder->order_quantity += $cartItem->quantity;
                 $existingOrder->order_total_amount += ($cartItem->quantity * $product->product_price);
                 $existingOrder->save();
@@ -301,6 +306,7 @@ class Index extends Component
 
             if ($existingOrder) {
                 $existingOrder->user_location = $this->user_location;
+                $existingOrder->created_at = now();
                 $existingOrder->order_quantity += $this->order_quantity;
                 $existingOrder->order_total_amount += ($this->order_quantity * $product->product_price);
                 $existingOrder->save();

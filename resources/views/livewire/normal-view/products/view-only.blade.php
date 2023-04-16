@@ -109,7 +109,7 @@
         <div class="row">
             @foreach ($products as $product)
                 <div class="col-md-3 mt-4 col-sm-4 col-6">
-                    <div class="card shadow product show" id="product-card" style="min-width: 50px;">
+                    <div class="card shadow product-card" style="min-width: 50px;">
                         <div class="p-2" style="position: relative;">
                             <div class="image-container">
                                 <img class="card-img-top mt-4" src="{{ Storage::url($product->product_image) }}"

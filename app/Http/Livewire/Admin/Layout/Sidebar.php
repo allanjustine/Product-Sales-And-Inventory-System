@@ -16,7 +16,11 @@ class Sidebar extends Component
         $usersCount = User::where('id', '<>', auth()->id())->count();
         $productsCount = Product::count();
         $categoriesCount = ProductCategory::count();
-        $ordersCount = Order::where('order_status', 'Pending')->count();
+        $ordersCount = Order::where('order_status', 'Pending')
+            ->orWhere('order_status', 'Complete')
+            ->orWhere('order_status', 'To Deliver')
+            ->orWhere('order_status', 'Delivered')
+            ->count();
         $productSalesCount = Order::where('order_status', 'Paid')->count();
 
         return compact('usersCount', 'productsCount', 'categoriesCount', 'ordersCount', 'productSalesCount');

@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-solid.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script nonce="920ac562-8f5f-46e3-9f66-38a6854d7802">
         (function(w, d) {
             ! function(bv, bw, bx, by) {

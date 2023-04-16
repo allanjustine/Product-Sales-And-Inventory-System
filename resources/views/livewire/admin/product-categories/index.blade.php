@@ -21,7 +21,7 @@
                     <i class="fa-solid fa-plus"></i> Add Category
                 </button>
                 <input type="search" class="form-control mb-3 mx-2 float-end" style="width: 198px;"
-                    placeholder="Search" wire:model="search">
+                    placeholder="Search" id="search" wire:model="search">
             </div>
             <table class="table table-hovered table-bordered">
                 <thead class="bg-dark">

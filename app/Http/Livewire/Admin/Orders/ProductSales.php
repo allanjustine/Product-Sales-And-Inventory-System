@@ -14,6 +14,10 @@ class ProductSales extends Component
     {
         $this->orders = Order::where('order_status', 'Paid')->get();
         $this->grandTotal = Order::whereNotIn('order_status', ['Pending'])
+            ->whereNotIn('order_status', ['Complete'])
+            ->whereNotIn('order_status', ['To Deliver'])
+            ->whereNotIn('order_status', ['Delivered'])
+            ->whereNotIn('order_status', ['Cancelled'])
             ->sum('order_total_amount');
     }
     public function render()

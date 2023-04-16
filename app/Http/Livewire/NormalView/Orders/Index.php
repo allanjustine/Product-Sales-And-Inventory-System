@@ -161,6 +161,7 @@ class Index extends Component
         }
 
         $order->order_status = 'Pending';
+        $order->created_at = now();
         $order->save();
 
         $product->product_stock -= $order->order_quantity;
