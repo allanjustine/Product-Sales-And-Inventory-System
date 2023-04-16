@@ -11,7 +11,7 @@
                     style="border-radius: 30px; height: 50px;">
             </div>
             <div class="row d-flex justify-content-center mt-5 pb-3">
-                <div class="col-md-1 col-sm-3 text-center">
+                <div class="col-md-1 col-sm-1 col-3 text-center">
                     <label>Show</label>
                     <select wire:model="perPage" class="perPageSelect form-select" id="select-cat">
                         <option>15</option>
@@ -23,7 +23,7 @@
                         <option>100</option>
                     </select>
                 </div>
-                <div class="col-md-2 col-sm-4 text-center">
+                <div class="col-md-2 col-sm-3 col-4 text-center">
                     <label for="category">Categories</label>
                     <select name="category" id="select-cat" class="form-select" wire:model="category_name">
                         <option value="All">All</option>
@@ -32,14 +32,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-2 col-sm-4 text-center">
-                    <label for="sort">Sort By</label>
-                    <select wire:model="sort" class="form-select" id="select-cat">
-                        <option value="low_to_high">Price: Low to High</option>
-                        <option value="high_to_low">Price: High to Low</option>
-                    </select>
-                </div>
-                <div class="col-md-2 col-sm-4 text-center">
+                <div class="col-md-2 col-sm-3 col-4 text-center">
                     <label for="sort">Ratings</label>
                     <select wire:model="product_rating" class="form-select" id="select-cat">
                         <option value="All">All</option>
@@ -90,7 +83,14 @@
                         </option>
                     </select>
                 </div>
-                <div class="col-md-3 col-sm-4 text-center">
+                <div class="col-md-2 col-sm-4 col-6 text-center">
+                    <label for="sort">Sort By</label>
+                    <select wire:model="sort" class="form-select" id="select-cat">
+                        <option value="low_to_high">Price: Low to High</option>
+                        <option value="high_to_low">Price: High to Low</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-sm-4 col-6 text-center">
                     <label for="Clear Filters">Clear Filters</label>
                     <button style="height: 40px;" wire:click="clearFilters" class="btn btn-secondary form-control"><i
                             class="fa-solid fa-broom-wide"></i> Clear Filters</button>

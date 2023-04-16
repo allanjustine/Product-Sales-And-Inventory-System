@@ -17,22 +17,35 @@
             <div class="card-body">
                 <div class="row">
                     <div>
-                        <form>
+                        <form wire:submit.prevent="submit">
                             @csrf
                             <label for="name">Name:</label>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name"
+                                    wire:model.defer="name">
                                 <label for="name">Name:</label>
                             </div>
+                            @error('name')
+                                <span class="text-danger">*{{ $message }}</span>
+                            @enderror
+                            <br>
                             <label for="email">Email address:</label>
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="email" placeholder="Enter email">
+                                <input type="email" class="form-control" id="email" placeholder="Enter email"
+                                    wire:model.defer="email">
                                 <label for="email">Email address:</label>
                             </div>
+                            @error('email')
+                                <span class="text-danger">*{{ $message }}</span>
+                            @enderror
+                            <br>
                             <div class="form-group mb-3">
                                 <label for="message">Message:</label>
-                                <textarea class="form-control" id="message" rows="5" placeholder="Message..."></textarea>
+                                <textarea class="form-control" id="message" rows="5" placeholder="Message..." wire:model.defer="message"></textarea>
                             </div>
+                            @error('message')
+                                <span class="text-danger">*{{ $message }}</span>
+                            @enderror
                             <button type="submit" class="btn btn-primary btn-block">Submit</button>
                         </form>
                     </div>

@@ -3,9 +3,9 @@
 @section('title', '| Contact')
 
 @section('content-header')
-    <h1>Contact</h1>
+    <h1>Feed Backs</h1>
 @endsection
 
 @section('content')
-    <livewire:admin.pages.contact />
+    <livewire:admin.pages.contact-us />
 @endsection

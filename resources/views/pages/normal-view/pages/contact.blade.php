@@ -4,6 +4,6 @@
 
 @section('content')
     <div class="container mt-3">
-        <livewire:normal-view.pages.contact />
+        <livewire:normal-view.pages.contact-us />
     </div>
 @endsection

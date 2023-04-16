@@ -213,6 +213,7 @@ button.close:hover {
 .product-card:hover {
     border: 1px solid rgb(143, 138, 138);
     margin-top: -10px;
+    transition: ease-in-out 0.3s all;
 }
 
 .carousel-caption {

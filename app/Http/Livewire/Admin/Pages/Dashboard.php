@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Pages;
 
+use App\Models\Contact;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -54,6 +55,7 @@ class Dashboard extends Component
     {
         $usersCount = User::role('user')->count();
         $adminsCount = User::role('admin')->count();
+        $feedbacks = Contact::count();
         $productsCount = Product::count();
         $categoriesCount = ProductCategory::count();
         $ordersCount = Order::where('order_status', 'Pending')->count();
@@ -75,7 +77,20 @@ class Dashboard extends Component
             ->sum('order_total_amount');
         $orderMonth = Order::whereMonth('created_at', now()->month)->get();
 
-        return compact('usersCount', 'adminsCount', 'productsCount', 'categoriesCount', 'ordersCount', 'productSalesCount', 'grandTotal', 'todaysTotal', 'monthlyTotal', 'yearlyTotal', 'orderMonth');
+        return compact(
+            'usersCount',
+            'adminsCount',
+            'productsCount',
+            'categoriesCount',
+            'ordersCount',
+            'productSalesCount',
+            'grandTotal',
+            'todaysTotal',
+            'monthlyTotal',
+            'yearlyTotal',
+            'orderMonth',
+            'feedbacks'
+        );
     }
     public function render()
     {

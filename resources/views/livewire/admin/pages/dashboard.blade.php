@@ -66,6 +66,17 @@
                     </div>
                 </a>
             </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                <a href="/admin/feedbacks" style="color: black">
+                    <div class="info-box dash elevation-3" style="height: 110px;">
+                        <div class="info-box-content">
+                            <span class="info-box-text" style="font-size: 11px;">FEED BACKS</span>
+                            <span class="info-box-number">{{ $feedbacks }}</span>
+                        </div>
+                        <span class="info-box-icon"><i class="fa-solid fa-comments" style="font-size: 43px;"></i></span>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
     <div class="container mt-5">

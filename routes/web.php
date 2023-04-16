@@ -37,8 +37,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin/dashboard', [AdminSiteController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/contact', [AdminSiteController::class, 'contact']);
-    Route::get('/admin/about', [AdminSiteController::class, 'about']);
+    Route::get('/admin/feedbacks', [AdminSiteController::class, 'contact']);
+    // Route::get('/admin/about', [AdminSiteController::class, 'about']);
     Route::get('/admin/profile', [AdminSiteController::class, 'profile']);
     Route::get('/admin/users', [AdminSiteController::class, 'user']);
     Route::get('/admin/products', [AdminSiteController::class, 'product']);

@@ -139,7 +139,7 @@
                             </ul>
                         </li>
                         <li class="nav-header">PAGE MANAGEMENT</li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="/admin/about"
                                 class="nav-link {{ 'admin/about' == request()->path() ? 'active2' : '' }}">
                                 <i class="nav-icon fa-solid fa-question"></i>
@@ -147,14 +147,15 @@
                                     About
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
-                            <a href="/admin/contact"
-                                class="nav-link {{ 'admin/contact' == request()->path() ? 'active2' : '' }}">
-                                <i class="nav-icon fa-solid fa-phone"></i>
+                            <a href="/admin/feedbacks"
+                                class="nav-link {{ 'admin/feedbacks' == request()->path() ? 'active2' : '' }}">
+                                <i class="nav-icon fa-solid fa-comments"></i>
                                 <p>
-                                    Contact
+                                    Feed Backs
                                 </p>
+                                <span class="right badge badge-info">{{ $feedbacks }}</span>
                             </a>
                         </li>
                         <li class="nav-item menu-close">
