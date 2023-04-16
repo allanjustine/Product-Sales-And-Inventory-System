@@ -135,6 +135,9 @@
                 <canvas id="product-sales-chart" style="width: 100%; height: 100%;"></canvas>
             </div>
         </div>
+        <div>
+            <canvas id="net-worth-chart1"></canvas>
+        </div>
 
     </div>
 </div>
@@ -156,30 +159,32 @@
 </style>
 
 <script>
+    var canvas = document.getElementById("net-worth-chart");
     var salesData = {!! json_encode($salesData) !!};
 
-    var ctx = document.getElementById('net-worth-chart').getContext('2d');
-    var chart = new Chart(ctx, {
-        type: 'line',
+    // Create the chart object
+    var chart = new Chart(canvas, {
+        type: "bar",
         data: {
             labels: salesData.map(data => `Month of ${data.month}`),
             datasets: [{
-                label: 'Monthly Sales',
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
+                label: "Net Worth",
                 data: salesData.map(data => data.sales),
-                fill: true
-            }]
+                backgroundColor: "#007bff",
+            }, ],
         },
         options: {
+            legend: {
+                display: false,
+            },
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
+                        beginAtZero: true,
+                    },
+                }, ],
+            },
+        },
     });
     var productSalesData = {!! json_encode($productSalesData) !!};
 
