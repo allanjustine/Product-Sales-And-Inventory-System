@@ -26,6 +26,13 @@ class Index extends Component
     {
         $order = Order::findOrFail($orderId);
 
+        if ($order->order_status == 'Cancelled') {
+
+            alert()->warning('Sorry', 'The order does not exist or been cancelled by the user');
+
+            return redirect('/admin/orders');
+        }
+
         $order->update([
             'order_status' => 'To Deliver'
         ]);
@@ -38,6 +45,13 @@ class Index extends Component
     public function markAsDelivered($orderId)
     {
         $order = Order::findOrFail($orderId);
+
+        if ($order->order_status == 'Cancelled') {
+
+            alert()->warning('Sorry', 'The order does not exist or been cancelled by the user');
+
+            return redirect('/admin/orders');
+        }
 
         $order->update([
             'order_status' => 'Delivered'
