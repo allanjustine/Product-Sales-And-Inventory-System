@@ -124,9 +124,9 @@
             </div>
         </div>
     </div>
-    <hr>
     <div class="container mt-5">
         <h4>Net Worth Management </h4>
+        <hr>
         <div class="row">
             <div class="col-md-6">
                 <canvas id="net-worth-chart" style="width: 100%; height: 100%;"></canvas>
