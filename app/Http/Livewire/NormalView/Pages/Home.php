@@ -14,8 +14,14 @@ class Home extends Component
 
     public function mount()
     {
-        $this->topDeals = Product::orderBy('product_sold', 'desc')->take(10)->get();
-        $this->popularityDeals = Product::orderBy('product_votes', 'desc')->take(10)->get();
+        $this->topDeals = Product::orderBy('product_sold', 'desc')
+            ->whereNotIn('product_sold', [0])
+            ->take(10)
+            ->get();
+        $this->popularityDeals = Product::orderBy('product_votes', 'desc')
+            ->whereNotIn('product_votes', [0])
+            ->take(10)
+            ->get();
     }
     public function view($id)
     {

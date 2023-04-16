@@ -145,12 +145,12 @@ class Index extends Component
 
         if (!$product) {
             alert()->error('Sorry', 'The product you trying to re-pruchase is does not exist');
-            return redirect('/products');
+            return redirect('/orders');
         }
 
         if ($product->product_status == 'Not Available') {
             alert()->error('Sorry', 'The product you trying to re-pruchase is Not Available');
-            return redirect('/products');
+            return redirect('/orders');
         }
 
         $availableStock = $product->product_stock;

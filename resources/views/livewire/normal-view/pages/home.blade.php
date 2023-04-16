@@ -123,6 +123,13 @@
                     </div>
                 @endforeach
             </div>
+            @if ($topDeals->count() === 0)
+                <p class="text-center">
+                    <i class="fa-regular fa-xmark-to-slot" style="font-size: 50px;"></i>
+                    <br>
+                    No Popular Products Yet.
+                </p>
+            @endif
         </div>
     </div>
 
@@ -186,13 +193,14 @@
                         </div>
                     </div>
                 @endforeach
-                @if ($topDeals->count() === 0)
-                    <p class="text-center">
-                        <i class="fa-regular fa-xmark-to-slot mt-5 " style="font-size: 50px;"></i>
-                    </p>
-                    <p class="text-center mb-5">No Top Products Yet.</p>
-                @endif
             </div>
+            @if ($popularityDeals->count() === 0)
+                <p class="text-center">
+                    <i class="fa-regular fa-xmark-to-slot" style="font-size: 50px;"></i>
+                    <br>
+                    No Popular Products Yet.
+                </p>
+            @endif
         </div>
     </div>
 
