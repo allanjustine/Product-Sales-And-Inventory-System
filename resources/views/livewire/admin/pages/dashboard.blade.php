@@ -1,7 +1,7 @@
 <div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+            <div class="col-lg-3 col-md-4">
                 <div class="info-box dash elevation-3" style="height: 110px;">
                     <div class="info-box-content">
                         <span class="info-box-text" style="font-size: 11px;">ADMINS</span>
@@ -10,7 +10,7 @@
                     <span class="info-box-icon"><i class="fa-solid fa-user-lock" style="font-size: 43px;"></i></span>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+            <div class="col-lg-3 col-md-4">
                 <a href="/admin/users" style="color: black">
                     <div class="info-box dash elevation-3" style="height: 110px;">
                         <div class="info-box-content">
@@ -21,7 +21,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+            <div class="col-lg-3 col-md-4">
                 <a href="/admin/products" style="color: black">
                     <div class="info-box dash elevation-3" style="height: 110px;">
                         <div class="info-box-content">
@@ -32,7 +32,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+            <div class="col-lg-3 col-md-4">
                 <a href="/admin/product-categories" style="color: black">
                     <div class="info-box dash elevation-3" style="height: 110px;">
                         <div class="info-box-content">
@@ -43,7 +43,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+            <div class="col-lg-3 col-md-4">
                 <a href="/admin/orders" style="color: black">
                     <div class="info-box dash elevation-3" style="height: 110px;">
                         <div class="info-box-content">
@@ -55,7 +55,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+            <div class="col-lg-3 col-md-4">
                 <a href="/admin/product-sales" style="color: black">
                     <div class="info-box dash elevation-3" style="height: 110px;">
                         <div class="info-box-content">
@@ -66,7 +66,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+            <div class="col-lg-3 col-md-4">
                 <a href="/admin/feedbacks" style="color: black">
                     <div class="info-box dash elevation-3" style="height: 110px;">
                         <div class="info-box-content">
@@ -83,7 +83,7 @@
         <h4>Revenue Sales Management </h4>
         <hr>
         <div class="row">
-            <div class="col-md-4 col-lg-3 col-sm-6 col-6">
+            <div class="col-md-4 col-lg-3">
                 <a href="#" style="color: black">
                     <div class="info-box dash elevation-3" style="height: 110px;">
                         <div class="info-box-content">
@@ -95,7 +95,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-4 col-lg-3 col-sm-6 col-6">
+            <div class="col-md-4 col-lg-3">
                 <a href="#" style="color: black">
                     <div class="info-box dash elevation-3" style="height: 110px;">
                         <div class="info-box-content">
@@ -107,7 +107,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-4 col-lg-3 col-sm-6 col-6">
+            <div class="col-md-4 col-lg-3">
                 <a href="#" style="color: black">
                     <div class="info-box dash elevation-3" style="height: 110px;">
                         <div class="info-box-content">
@@ -121,7 +121,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-4 col-lg-3 col-sm-6 col-6">
+            <div class="col-md-4 col-lg-3">
                 <a href="#" style="color: black">
                     <div class="info-box dash elevation-3" style="height: 110px;">
                         <div class="info-box-content">
@@ -139,10 +139,10 @@
         <h4>Net Worth Management </h4>
         <hr>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <canvas id="net-worth-chart" style="width: 100%; height: 100%;"></canvas>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <canvas id="product-sales-chart" style="width: 100%; height: 100%;"></canvas>
             </div>
         </div>

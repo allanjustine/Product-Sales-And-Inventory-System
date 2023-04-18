@@ -20,6 +20,11 @@
                                 <td>{{ $feedback->created_at->format('F j, Y g:i A') }}</td>
                             </tr>
                         @endforeach
+                        @if ($feedbacks->count() === 0)
+                            <tr>
+                                <td colspan="4" class="text-center">No feedbacks yet.</td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

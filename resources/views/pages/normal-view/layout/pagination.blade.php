@@ -11,19 +11,47 @@
             </li>
         @endif
 
-        @foreach ($elements as $element)
-            @if (is_array($element))
-                @foreach ($element as $page => $url)
-                    @if ($page == $paginator->currentPage())
-                        <li class="page-item active" aria-current="page"><span
-                                class="page-link">{{ $page }}</span></li>
-                    @else
-                        <li class="page-item"><button class="page-link"
-                                wire:click="gotoPage({{ $page }})">{{ $page }}</button></li>
-                    @endif
-                @endforeach
+        @php
+            $maxPages = 5;
+            $halfMaxPages = floor($maxPages / 2);
+            $startPage = $paginator->currentPage() - $halfMaxPages;
+            $endPage = $paginator->currentPage() + $halfMaxPages;
+
+            if ($startPage < 1) {
+                $endPage += abs($startPage) + 1;
+                $startPage = 1;
+            }
+
+            if ($endPage > $paginator->lastPage()) {
+                $startPage -= $endPage - $paginator->lastPage();
+                $endPage = $paginator->lastPage();
+            }
+        @endphp
+
+        @if ($startPage > 1)
+            <li class="page-item">
+                <button class="page-link" wire:click="gotoPage(1)">1</button>
+            </li>
+            <li class="page-item disabled" aria-disabled="true"><span class="page-link">...</span></li>
+        @endif
+
+        @for ($i = $startPage; $i <= $endPage; $i++)
+            @if ($i == $paginator->currentPage())
+                <li class="page-item active" aria-current="page"><span class="page-link">{{ $i }}</span></li>
+            @else
+                <li class="page-item"><button class="page-link"
+                        wire:click="gotoPage({{ $i }})">{{ $i }}</button></li>
             @endif
-        @endforeach
+        @endfor
+
+        @if ($endPage < $paginator->lastPage())
+            <li class="page-item disabled" aria-disabled="true"><span class="page-link">...</span></li>
+            <li class="page-item">
+                <button class="page-link"
+                    wire:click="gotoPage({{ $paginator->lastPage() }})">{{ $paginator->lastPage() }}</button>
+            </li>
+        @endif
+
         @if ($paginator->hasMorePages())
             <li class="page-item">
                 <button class="page-link" wire:click="nextPage" rel="next"

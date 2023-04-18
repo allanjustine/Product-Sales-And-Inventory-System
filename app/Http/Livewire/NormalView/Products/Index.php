@@ -41,6 +41,7 @@ class Index extends Component
     public $orderToBuy;
     public $orderPlaceOrder;
     public $order;
+    public $allDisplayProducts;
 
     public function displayProducts()
     {
@@ -120,6 +121,8 @@ class Index extends Component
         $this->cartItems = Cart::with('product')
             ->where('user_id', auth()->id())
             ->get();
+
+        $this->allDisplayProducts = Product::count();
     }
 
     public function getTotal()

@@ -103,7 +103,7 @@
         @if ($products->count() === 0)
             <h5>-</h5>
         @else
-            <h5 class="text-danger">{{ $products->count() }} products found.</h5>
+            <h5 class="text-danger">{{ $allDisplayProducts }} products found.</h5>
         @endif
         <hr>
         <div class="row">

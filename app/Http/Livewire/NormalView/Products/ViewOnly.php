@@ -20,6 +20,12 @@ class ViewOnly extends Component
     public $sort = 'low_to_high';
     public $product_rating = 'All';
     public $productView;
+    public $allDisplayProducts;
+
+    public function mount()
+    {
+        $this->allDisplayProducts = Product::count();
+    }
 
     public function displayProducts()
     {
