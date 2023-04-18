@@ -32,6 +32,7 @@
                                             <option value="Tea">Tea</option>
                                             <option value="Juice">Juice</option>
                                             <option value="Soda">Soda</option>
+                                            <option value="Alcohol">Alcohol</option>
                                         </optgroup>
                                         <optgroup label="Others">
                                             <option value="Others">Others</option>
