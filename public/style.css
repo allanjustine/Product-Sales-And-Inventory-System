@@ -352,6 +352,20 @@ button.close:hover {
     background-color: rgba(87, 85, 85, 0.712);
 }
 
+.latest {
+    color: white;
+    font-size: 18px;
+}
+
+.latest-icon {
+    color: white;
+    font-size: 22px;
+}
+
+.latest-bg {
+    background-color: #0A4D68;
+}
+
 .location-text {
     border-bottom: 1px solid black;
 }

@@ -11,6 +11,7 @@ class Home extends Component
     public $topDeals;
     public $popularityDeals;
     public $productView;
+    public $latestProducts;
 
     public function mount()
     {
@@ -20,6 +21,9 @@ class Home extends Component
             ->get();
         $this->popularityDeals = Product::orderBy('product_votes', 'desc')
             ->whereNotIn('product_votes', [0])
+            ->take(10)
+            ->get();
+        $this->latestProducts = Product::orderBy('created_at', 'desc')
             ->take(10)
             ->get();
     }

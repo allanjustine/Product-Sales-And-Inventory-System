@@ -17,9 +17,11 @@
                     @if ($page == $paginator->currentPage())
                         <li class="page-item active" aria-current="page"><span
                                 class="page-link">{{ $page }}</span></li>
-                    @else
+                    @elseif ($page <= $paginator->lastPage() && ($page <= 2 || $page >= $paginator->lastPage() - 1 || abs($paginator->currentPage() - $page) <= 1))
                         <li class="page-item"><button class="page-link"
                                 wire:click="gotoPage({{ $page }})">{{ $page }}</button></li>
+                    @elseif ($page == $paginator->lastPage())
+                        <li class="page-item disabled"><span class="page-link">...</span></li>
                     @endif
                 @endforeach
             @endif

@@ -179,6 +179,19 @@ class Index extends Component
 
         $product = Product::find($received->product_id);
 
+        if ($received->order_status === 'Paid') {
+            alert()->info('Sorry', 'The order was already been paid');
+            return redirect('/orders');
+        }
+
+        if ($received->order_status === 'Complete') {
+            alert()->warning('Sorry', 'You can submit a rating at once');
+            return redirect('/orders');
+        } else {
+            alert()->warning('Sorry', 'You can`t submit a rating on cancelled orders');
+            return redirect('/orders');
+        }
+
         $this->validate([
             'product_rating'        =>          'required|numeric|min:1|max:5'
         ]);
