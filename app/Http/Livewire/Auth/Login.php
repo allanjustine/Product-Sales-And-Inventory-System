@@ -43,7 +43,7 @@ class Login extends Component
 
         if (!$user || $user->email_verified_at == null) {
 
-            alert()->error('Error', 'The email is either not verified yet, does not exist, or the password is incorrect');
+            alert()->error('Error', 'The email is either not verified yet or does not exist');
 
             return redirect('/login');
         }
@@ -54,9 +54,13 @@ class Login extends Component
             } else {
                 return redirect()->intended('/');
             }
-        }
+        } else {
 
-        alert()->error('Error', 'The email is either not verified yet, does not exist, or the password is incorrect')->showConfirmButton('Okay');
+            if ($validatedData != $this->password) {
+                alert()->warning('Sorry', 'Password is incorrect');
+            }
+            return redirect('/login');
+        }
 
         return redirect('/login');
     }
@@ -76,7 +80,7 @@ class Login extends Component
             $user->password = Hash::make($newPassword);
             $user->save();
 
-            Mail::send('pages.auth.new-password', ['user' => $user ,'newPassword' => $newPassword], function ($message) use ($user) {
+            Mail::send('pages.auth.new-password', ['user' => $user, 'newPassword' => $newPassword], function ($message) use ($user) {
                 $message->to($user->email);
                 $message->subject('Your new password');
             });

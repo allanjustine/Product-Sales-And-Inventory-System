@@ -7,7 +7,7 @@
             </summary>
             <p>
             <div class="col-md-5 col-sm-6 offset-md-4 offset-sm-3 mt-2">
-                <input type="search" class="form-control" placeholder="Search" wire:model="search"
+                <input type="search" class="form-control" placeholder="Search" wire:model.lazy="search"
                     style="border-radius: 30px; height: 50px;">
             </div>
             <div class="row d-flex justify-content-center mt-5 pb-3">

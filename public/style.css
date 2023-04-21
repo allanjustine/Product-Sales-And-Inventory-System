@@ -361,3 +361,23 @@ button.close:hover {
         font-size: 12px;
     }
 }
+
+#facebook:hover {
+    color: #1877f2;
+}
+
+#twitter:hover {
+    color: #1DA1F2;
+}
+
+#youtube:hover {
+    color: #FF0000;
+}
+
+#gmail:hover {
+    color: #DB4437;
+}
+
+#instagram:hover {
+    color: #E4405F;
+}

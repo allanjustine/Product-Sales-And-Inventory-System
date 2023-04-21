@@ -11,7 +11,7 @@
             </summary>
             <p>
             <div class="col-md-5 col-sm-6 offset-md-4 offset-sm-3 mt-2">
-                <input type="search" class="form-control" placeholder="Search" wire:model="search"
+                <input type="search" class="form-control" placeholder="Search" wire:model.lazy="search"
                     style="border-radius: 30px; height: 50px;">
             </div>
             <div class="row d-flex justify-content-center mt-5 pb-3">
@@ -162,7 +162,9 @@
         <br><br>
         <h3 class="mt-5"><i class="fa-light fa-box-open"></i> Products</h3>
         @if ($products->count() === 0)
-            <h5>-</h5>
+            <h5 class="text-danger">No products found.</h5>
+        @elseif (!empty($search))
+            <h5 class="text-danger">{{ $products->total() }} products founded.</h5>
         @else
             <h5 class="text-danger">{{ $allDisplayProducts }} products found.</h5>
         @endif

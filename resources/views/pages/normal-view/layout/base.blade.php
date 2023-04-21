@@ -71,27 +71,27 @@
                 <h5>Follow Us</h5>
                 <ul class="list-inline social-icons">
                     <li class="list-inline-item">
-                        <a href="https://facebook.com/1down" target="_blank">
+                        <a href="https://facebook.com/1down" id="facebook" target="_blank">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="https://twitter.com" target="_blank">
+                        <a href="https://twitter.com" id="twitter" target="_blank">
                             <i class="fab fa-twitter"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="https://youtube.com" target="_blank">
+                        <a href="https://youtube.com" id="youtube" target="_blank">
                             <i class="fab fa-youtube"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="https://gmail.com" target="_blank">
+                        <a href="https://gmail.com" id="gmail" target="_blank">
                             <i class="fab fa-google"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="https://instagram.com" target="_blank">
+                        <a href="https://instagram.com" id="instagram" target="_blank">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </li>
