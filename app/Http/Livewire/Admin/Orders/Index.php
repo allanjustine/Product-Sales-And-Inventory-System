@@ -17,11 +17,11 @@ class Index extends Component
             ->orWhere('order_status', 'Delivered')
             ->orWhere('order_status', 'Complete')
             ->get();
+
         $this->grandTotal = Order::whereNotIn('order_status', ['Paid'])
             ->whereNotIn('order_status', ['Cancelled'])
             ->sum('order_total_amount');
     }
-
     public function markAsDeliver($orderId)
     {
         $order = Order::findOrFail($orderId);

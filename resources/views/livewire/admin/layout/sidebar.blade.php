@@ -158,7 +158,7 @@
                                 <span class="right badge badge-info">{{ $feedbacks }}</span>
                             </a>
                         </li>
-                        <li class="nav-item menu-close">
+                        {{-- <li class="nav-item menu-close">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa-solid fa-list"></i>
                                 <p>
@@ -174,7 +174,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="nav-header">SETTING MANAGEMENT</li>
                         <li class="nav-item menu-open">
                             <a href="#" class="nav-link">
@@ -236,7 +236,8 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-inline">
-                v3.1.0
+                <span id="date"></span>
+                <span id="time"></span></span>
             </div>
             <strong>Copyright &copy; 2023-2024 <a href="https://facebook.com/1down" target="_blank">Allan Justine
                     Mascariñas</a>.</strong> All rights
@@ -452,3 +453,22 @@
         color: transparent;
     }
 </style>
+
+<script>
+    function updateTime() {
+        var now = new Date();
+        var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var monthsOfYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September",
+            "October", "November", "December"
+        ];
+        var dayOfWeek = daysOfWeek[now.getDay()];
+        var month = monthsOfYear[now.getMonth()];
+        var dayOfMonth = now.getDate();
+        var year = now.getFullYear();
+        var dateString = dayOfWeek + " - " + month + " " + dayOfMonth + ", " + year;
+        var timeString = now.toLocaleTimeString();
+        document.getElementById("date").innerHTML = dateString;
+        document.getElementById("time").innerHTML = timeString;
+    }
+    setInterval(updateTime, 1000);
+</script>

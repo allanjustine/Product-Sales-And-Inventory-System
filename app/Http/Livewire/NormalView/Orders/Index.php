@@ -187,7 +187,9 @@ class Index extends Component
         if ($received->order_status === 'Complete') {
             alert()->warning('Sorry', 'You can submit a rating at once');
             return redirect('/orders');
-        } else {
+        }
+
+        if ($received->order_status === 'Cancelled') {
             alert()->warning('Sorry', 'You can`t submit a rating on cancelled orders');
             return redirect('/orders');
         }
