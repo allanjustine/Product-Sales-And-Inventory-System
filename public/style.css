@@ -395,3 +395,11 @@ button.close:hover {
 #instagram:hover {
     color: #E4405F;
 }
+
+details summary::after {
+    content: 'Open Filter';
+}
+
+details[open] summary::after {
+    content: 'Close Filter';
+}

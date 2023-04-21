@@ -3,7 +3,7 @@
     <div style="backdrop-filter: blur(15px);" class="bg-transparent sticky-top rounded" id="cats">
         <details>
             <summary class="bg-secondary p-3 text-center">
-                Click here to filter
+
             </summary>
             <p>
             <div class="col-md-5 col-sm-6 offset-md-4 offset-sm-3 mt-2">
