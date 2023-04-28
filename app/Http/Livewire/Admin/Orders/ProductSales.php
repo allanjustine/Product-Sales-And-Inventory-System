@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Orders;
 use App\Models\Order;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Dompdf\Dompdf;
 
 class ProductSales extends Component
 {
@@ -13,8 +14,29 @@ class ProductSales extends Component
     public $search;
     public $sortBy = 'transaction_code';
     public $sortDirection = 'asc';
+    public $pdf;
+    public $html;
 
     use WithPagination;
+
+    public function downloadPdf()
+    {
+        $orders = Order::where('order_status', 'Paid')->get();
+
+        $pdf = new Dompdf();
+        $pdf->loadHtml(view('pages.admin.orders.download-pdf', compact('orders'))->render());
+        $pdf->set_option('isHtml5ParserEnabled', true);
+        $pdf->set_option('defaultFont', 'Helvetica');
+        $pdf->set_option('isRemoteEnabled', true);
+        $pdf->set_option('chroot', '/');
+        $pdf->setPaper('A4', 'portrait');
+        $pdf->render();
+
+        $filename = 'product-sales-copy.pdf';
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->output();
+        }, $filename);
+    }
 
     public function sortBy($field)
     {

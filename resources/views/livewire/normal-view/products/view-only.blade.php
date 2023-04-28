@@ -164,6 +164,7 @@
                                     <strong>
                                         {{ $product->product_rating }}/5
                                     </strong>
+                                    <span class="text-danger">({{ $product->product_votes }})</span>
                                 </span>
                             </div>
                         </div>

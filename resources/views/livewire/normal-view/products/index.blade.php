@@ -126,11 +126,10 @@
                             </button>
                             <img style="width: 70px; height: 70px; border-radius:10%;"
                                 src="{{ Storage::url($item->product->product_image) }}"
-                                alt="">&nbsp;&nbsp;<strong>{{ $item->product->product_name }}</strong>
+                                alt="">&nbsp;&nbsp;<span><strong>{{ $item->product->product_name }}</strong></span>
                         </div>
                         <div class="cart-item-price mt-2">
                             &#8369;{{ number_format($item->product->product_price, 2, '.', ',') }}
-
                             <button class="btn btn-link text-danger" data-toggle="modal" data-target="#remove"
                                 wire:click="remove({{ $item->id }})">
                                 <i class="fas fa-trash-alt"></i>&nbsp;Delete
@@ -138,7 +137,8 @@
                             <button class="btn btn-link text-primary" data-toggle="modal" data-target="#checkOut"
                                 wire:click="checkOut({{ $item->id }})">
                                 <i class="fas fa-check"></i>&nbsp;Checkout
-                            </button>
+                            </button><br>
+                            <span>Total: &#8369;{{ number_format($this->getProductTotalAmount($item->product_id), 2, '.', ',') }}</span>
                         </div>
 
                     </li>
@@ -151,7 +151,7 @@
                         </p>
                         <p class="text-center mb-5">No Product Added Yet.</p>
                     @else
-                        <span class="px-3 py-2">Total:
+                        <span class="px-3 py-2">Sub total:
                             &#8369;{{ number_format($total, 2, '.', ',') }}</span>
                     @endif
                 </li>
@@ -171,7 +171,7 @@
         <hr>
         <div class="row">
             @foreach ($products as $product)
-                <div class="col-md-3 mt-4 col-sm-4 col-6">
+                <div class="col-md-3 mt-2 col-sm-4 col-6">
                     <div class="card shadow product-card" style="min-width: 50px;">
                         <div class="px-2" style="position: relative;">
                             <div class="image-container">
@@ -251,6 +251,7 @@
                                     <strong>
                                         {{ $product->product_rating }}/5
                                     </strong>
+                                    <span class="text-danger">({{ $product->product_votes }})</span>
                                 </span>
                             </div>
                         </div>

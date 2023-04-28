@@ -33,8 +33,15 @@ class ContactUs extends Component
         return redirect('/contact-us');
     }
 
+    public function displayFeedBacks()
+    {
+        $feedbacks = Contact::orderBy('created_at', 'desc')->get();
+
+        return compact('feedbacks');
+    }
+
     public function render()
     {
-        return view('livewire.normal-view.pages.contact-us');
+        return view('livewire.normal-view.pages.contact-us', $this->displayFeedBacks());
     }
 }

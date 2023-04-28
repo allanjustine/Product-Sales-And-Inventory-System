@@ -1,13 +1,15 @@
 <div>
-    <h3 class="mb-4 mt-3">Contact Us</h3>
-    <hr>
-    <h5 class="text-center">Welcome to our contact us page! We value your feedback, comments, and questions, and
-        we're committed
-        to providing you with the best possible customer service. Whether you have a question about our
-        products or services, want to report a problem, or just want to share your thoughts, we're here to
-        help. Please use the form below to get in touch with us, and we'll get back to you as soon as
-        possible. Thank you for your interest in our company, and we look forward to hearing from you!</h5>
-    <br>
+    <div class="container">
+        <h3 class="mb-4 mt-3">Contact Us</h3>
+        <hr>
+        <h5 class="text-center">Welcome to our contact us page! We value your feedback, comments, and questions, and
+            we're committed
+            to providing you with the best possible customer service. Whether you have a question about our
+            products or services, want to report a problem, or just want to share your thoughts, we're here to
+            help. Please use the form below to get in touch with us, and we'll get back to you as soon as
+            possible. Thank you for your interest in our company, and we look forward to hearing from you!</h5>
+        <br>
+    </div>
     <hr>
     <div class="container mt-4">
         <div class="card rounded elevation-3 col-md-6 offset-md-3">

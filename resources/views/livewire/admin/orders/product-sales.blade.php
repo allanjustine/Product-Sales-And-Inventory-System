@@ -146,7 +146,7 @@
                         <td>
                             &#8369;{{ number_format($grandTotal, 2, '.', ',') }}
                         </td>
-                        <td colspan="4"></td>
+                        <td colspan="4"><button class="btn btn-info float-end" wire:click="downloadPdf">Download PDF</button></td>
                     </tr>
                 </tfoot>
             </table>

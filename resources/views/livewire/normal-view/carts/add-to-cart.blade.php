@@ -5,7 +5,7 @@
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLongTitle">Add to Cart
+                    <h3 class="modal-title" id="exampleModalLongTitle">Add to Cart <i class="fa-solid fa-cart-plus"></i>
                     </h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="float-right" aria-hidden="true">&times;</span>
@@ -28,8 +28,9 @@
                                         <form>
                                             @csrf
                                             <p>
-                                                <strong>Quantity</strong><input class="form-control" type="number"
-                                                    placeholder="Enter Quantity" wire:model.defer="quantity">
+                                                <strong>Quantity</strong>
+                                                <input class="form-control" type="number" placeholder="Enter Quantity"
+                                                    wire:model.defer="quantity" min="1">
 
                                             </p>
                                         </form>

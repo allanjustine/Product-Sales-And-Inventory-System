@@ -5,7 +5,7 @@
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLongTitle">Buy Now
+                    <h3 class="modal-title" id="exampleModalLongTitle">Buy Now <i class="fa-solid fa-cart-shopping"></i>
                     </h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="float-right" aria-hidden="true">&times;</span>
@@ -28,9 +28,11 @@
                                         <form>
                                             @csrf
                                             <p>
-                                                <span><strong>Quantity</strong><input class="form-control" type="number"
-                                                        placeholder="Enter Quantity"
-                                                        wire:model.defer="order_quantity"><br>
+                                                <span><strong>Quantity</strong>
+                                                    <input class="form-control" type="number"
+                                                        placeholder="Enter Quantity" wire:model.defer="order_quantity"
+                                                        min="1">
+                                                    <br>
                                                     @error('order_quantity')
                                                         <span
                                                             class="text-center text-danger">*{{ $message }}</span><br>
@@ -74,7 +76,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary form-control" wire:click="orderPlaceOrder()"><i class="fa-solid fa-cart-circle-check"></i> Place Order</button>
+                    <button type="button" class="btn btn-primary form-control" wire:click="orderPlaceOrder()"><i
+                            class="fa-solid fa-cart-circle-check"></i> Place Order</button>
                     <button type="button" class="btn btn-secondary form-control" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

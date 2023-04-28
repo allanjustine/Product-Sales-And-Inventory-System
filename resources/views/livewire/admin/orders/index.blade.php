@@ -49,7 +49,7 @@
                         </tr>
                     @endforeach
                     @if ($orders->count() === 0)
-                        <td colspan="10" class="text-center">No product sales yet.</td>
+                        <td colspan="10" class="text-center">No orders yet.</td>
                         </td>
                     @endif
                 </tbody>

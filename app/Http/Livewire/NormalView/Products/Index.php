@@ -125,6 +125,19 @@ class Index extends Component
         $this->allDisplayProducts = Product::count();
     }
 
+    public function getProductTotalAmount($productId)
+    {
+        $totalAmount = 0;
+
+        foreach ($this->cartItems as $item) {
+            if ($item->product_id == $productId) {
+                $totalAmount += $item->product->product_price * $item->quantity;
+            }
+        }
+
+        return $totalAmount;
+    }
+
     public function getTotal()
     {
         $total = 0;

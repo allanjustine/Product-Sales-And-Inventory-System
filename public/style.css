@@ -12,6 +12,7 @@ html {
 body {
     background-color: rgb(230, 225, 225);
     height: 100vh;
+    padding-right: 0 !important;
 }
 #dropdown-setting {
     margin-top: 5px;
@@ -211,8 +212,7 @@ button.close:hover {
 }
 
 .product-card:hover {
-    border: 1px solid rgb(143, 138, 138);
-    margin-top: -10px;
+    margin-top: -7px;
     transition: ease-in-out 0.3s all;
 }
 
@@ -363,7 +363,7 @@ button.close:hover {
 }
 
 .latest-bg {
-    background-color: #0A4D68;
+    background-color: #0a4d68;
 }
 
 .location-text {
@@ -381,25 +381,29 @@ button.close:hover {
 }
 
 #twitter:hover {
-    color: #1DA1F2;
+    color: #1da1f2;
 }
 
 #youtube:hover {
-    color: #FF0000;
+    color: #ff0000;
 }
 
 #gmail:hover {
-    color: #DB4437;
+    color: #db4437;
 }
 
 #instagram:hover {
-    color: #E4405F;
+    color: #e4405f;
 }
 
 details summary::after {
-    content: 'Open Filter';
+    content: "Open Filter";
 }
 
 details[open] summary::after {
-    content: 'Close Filter';
+    content: "Close Filter";
+}
+
+textarea {
+    resize: none;
 }

@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script nonce="920ac562-8f5f-46e3-9f66-38a6854d7802">
         (function(w, d) {
             ! function(bv, bw, bx, by) {
@@ -126,28 +127,19 @@
     body {
         padding-right: 0 !important;
         font-size: 1rem;
-        /* set font size relative to the base size */
         line-height: 1.5;
-        /* set a comfortable line height */
     }
 
     html {
         font-size: 14px;
-        /* set a base font size */
     }
-
-    /* Target the scrollbar for all elements */
     ::-webkit-scrollbar {
         width: 8px;
     }
-
-    /* Target the scrollbar thumb (the draggable handle) */
     ::-webkit-scrollbar-thumb {
         background-color: #cac6c6;
         border-radius: 10px;
     }
-
-    /* Target the scrollbar track (the area behind the thumb) */
     ::-webkit-scrollbar-track {
         background-color: #f1f1f1;
         border-radius: 10px;
