@@ -23,8 +23,9 @@
                             @csrf
                             <label for="name">Name:</label>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="name" placeholder="Enter your name"
-                                    wire:model.defer="name">
+                                <input type="text" class="form-control"
+                                    @if (auth()->check()) readonly @endif id="name"
+                                    placeholder="Enter your name" wire:model.defer="name">
                                 <label for="name">Name:</label>
                             </div>
                             @error('name')
@@ -33,8 +34,9 @@
                             <br>
                             <label for="email">Email address:</label>
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="email" placeholder="Enter email"
-                                    wire:model.defer="email">
+                                <input type="email" class="form-control"
+                                    @if (auth()->check()) readonly @endif id="email"
+                                    placeholder="Enter email" wire:model.defer="email">
                                 <label for="email">Email address:</label>
                             </div>
                             @error('email')
@@ -48,7 +50,8 @@
                             @error('message')
                                 <span class="text-danger">*{{ $message }}</span>
                             @enderror
-                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                            <button type="submit" class="btn btn-primary btn-block"><i
+                                    class="fa-solid fa-paper-plane"></i> Submit</button>
                         </form>
                     </div>
                 </div>

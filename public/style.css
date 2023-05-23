@@ -312,6 +312,7 @@ button.close:hover {
 .rating input[type="radio"]:checked ~ label {
     color: #ffcc00;
     opacity: 1;
+    transform: scale(1.25);
 }
 
 .grid {

@@ -13,8 +13,9 @@
                         <th>Total</th>
                         <th>Payment Method</th>
                         <th>Location</th>
-                        <th>Date Order
-                        </th>
+                        <th>Date Order</th>
+                        <th>Buyer Rate</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -31,6 +32,20 @@
                             <td>{{ $order->order_payment_method }}</td>
                             <td>{{ $order->user_location }}</td>
                             <td>{{ date_format($order->created_at, 'F j, Y g:i A') }}</td>
+                            <td>{{ $order->user_rating }}</td>
+                            @if ($order->order_status === 'Pending')
+                                <td><span class="badge badge-warning">PENDING</span></td>
+                            @elseif ($order->order_status === 'Complete')
+                                <td><span class="badge badge-primary">COMPLETE</span>
+                                </td>
+                            @elseif ($order->order_status === 'To Deliver')
+                                <td><span class="badge badge-warning">TO
+                                        DELIVER</span>
+                                </td>
+                            @elseif ($order->order_status === 'Delivered')
+                                <td><span class="badge badge-info">DELIVERED</span>
+                                </td>
+                            @endif
                             <td>
                                 @if ($order->order_status === 'Pending')
                                     <button wire:click="markAsDeliver({{ $order->id }})" class="btn btn-primary"><i
@@ -49,7 +64,7 @@
                         </tr>
                     @endforeach
                     @if ($orders->count() === 0)
-                        <td colspan="10" class="text-center">No orders yet.</td>
+                        <td colspan="12" class="text-center">No orders yet.</td>
                         </td>
                     @endif
                 </tbody>
@@ -61,7 +76,7 @@
                         <td>
                             &#8369;{{ number_format($grandTotal, 2, '.', ',') }}
                         </td>
-                        <td colspan="5"></td>
+                        <td colspan="7"></td>
                     </tr>
                 </tfoot>
             </table>

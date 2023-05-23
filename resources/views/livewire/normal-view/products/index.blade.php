@@ -110,7 +110,7 @@
                         style="font-size: 12px;">{{ $cartItems->count() }}</span></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end cartmenu" aria-labelledby="cart-dropdown">
-                <h4 class="pl-3"><strong><i class="fa-regular fa-cart-shopping"></i> My Cart</strong></h4>
+                <h4 class="pl-3"><strong><i class="fa-regular fa-cart-shopping"></i> My Cart ({{ $cartItems->count() }})</strong></h4>
                 <hr>
                 @foreach ($cartItems as $item)
                     <li class="cart-item px-3 py-2">
@@ -138,7 +138,7 @@
                                 wire:click="checkOut({{ $item->id }})">
                                 <i class="fas fa-check"></i>&nbsp;Checkout
                             </button><br>
-                            <span>Total: &#8369;{{ number_format($this->getProductTotalAmount($item->product_id), 2, '.', ',') }}</span>
+                            <span><strong>Total: &#8369;{{ number_format($this->getProductTotalAmount($item->product_id), 2, '.', ',') }}</strong></span>
                         </div>
 
                     </li>
@@ -151,8 +151,8 @@
                         </p>
                         <p class="text-center mb-5">No Product Added Yet.</p>
                     @else
-                        <span class="px-3 py-2">Sub total:
-                            &#8369;{{ number_format($total, 2, '.', ',') }}</span>
+                        <span class="px-3 py-2"><strong>Sub Total:
+                            &#8369;{{ number_format($total, 2, '.', ',') }}</strong></span>
                     @endif
                 </li>
             </ul>

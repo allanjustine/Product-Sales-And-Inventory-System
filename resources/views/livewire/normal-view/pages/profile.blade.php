@@ -87,6 +87,17 @@
 
                                 <p class="text-muted">{{ $user->phone_number }}</p>
 
+                                <strong>
+                                    @if ($user->gender === 'Male')
+                                        <i class="fas fa-mars mr-1"></i>
+                                    @else
+                                        <i class="fas fa-venus mr-1"></i>
+                                    @endif
+                                    Gender
+                                </strong>
+
+                                <p class="text-muted">{{ $user->gender }}</p>
+
                             </div>
 
                             <a href="#" id="logout-btn" class="btn btn-primary btn-block" data-toggle="modal"
@@ -115,11 +126,15 @@
                         </div>
                         <div class="card-body">
                             <form class="form-horizontal" id="info-form">
+                                @csrf
                                 <div class="form-group row">
                                     <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="inputName" name="name"
                                             placeholder="Name" wire:model.defer="name" required>
+                                        @error('name')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -127,6 +142,9 @@
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="inputAddress" name="address"
                                             placeholder="Address" wire:model.defer="address" required>
+                                        @error('address')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -134,6 +152,9 @@
                                     <div class="col-sm-10">
                                         <input type="number" class="form-control" name="phone" id="inputPhone"
                                             placeholder="Phone" wire:model.defer="phone_number" required>
+                                        @error('phone_number')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -141,6 +162,22 @@
                                     <div class="col-sm-10">
                                         <input type="email" class="form-control" name="email" id="inputEmail"
                                             placeholder="Email" wire:model.defer="email" required>
+                                        @error('email')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputGender" class="col-sm-2 col-form-label">Gender</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select" name="gender" id="inputGender"
+                                            wire:model.defer="gender" required>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                        @error('gender')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </form>
@@ -211,7 +248,8 @@
                 After you logout you will redirect to login page.
             </div>
             <div class="modal-footer">
-                <a href="/logout" class="btn btn-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i>Yes, Logout</a>
+                <a href="/logout" class="btn btn-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i>Yes,
+                    Logout</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>

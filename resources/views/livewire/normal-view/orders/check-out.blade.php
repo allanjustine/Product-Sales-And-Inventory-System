@@ -58,7 +58,7 @@
                         <br>
                         <label class="mt-3" for="user_location">Your delivery address</label>
                         <textarea name="" class="form-control {{ $errors->has('user_location') ? 'border-danger' : '' }}" id=""
-                            cols="20" rows="5" placeholder="Enter specific location for the delivery"
+                            cols="20" rows="5" placeholder="Enter specific location for the delivery address"
                             wire:model.defer="user_location"></textarea>
                         @if ($errors->has('user_location'))
                             <span class="text-danger">*Please your enter delivery address first.</span>

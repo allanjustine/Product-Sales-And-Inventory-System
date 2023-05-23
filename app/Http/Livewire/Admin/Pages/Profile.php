@@ -15,6 +15,7 @@ class Profile extends Component
     public $profile_image;
     public $user;
     public $name;
+    public $gender;
     public $address;
     public $phone_number;
     public $email;
@@ -26,6 +27,7 @@ class Profile extends Component
     {
         $this->user = auth()->user();
         $this->name = $this->user->name;
+        $this->gender = $this->user->gender;
         $this->address = $this->user->address;
         $this->phone_number = $this->user->phone_number;
         $this->email = $this->user->email;
@@ -60,12 +62,14 @@ class Profile extends Component
     {
         $this->validate([
             'name' => 'required',
+            'gender' => 'required',
             'address' => 'required',
             'phone_number' => 'required|numeric',
             'email' => 'required|email|unique:users,email,' . $this->user->id,
         ]);
 
         $this->user->name = $this->name;
+        $this->user->gender = $this->gender;
         $this->user->address = $this->address;
         $this->user->phone_number = $this->phone_number;
         $this->user->email = $this->email;

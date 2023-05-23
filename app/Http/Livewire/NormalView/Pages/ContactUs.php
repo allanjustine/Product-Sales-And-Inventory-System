@@ -8,6 +8,7 @@ use Livewire\Component;
 class ContactUs extends Component
 {
 
+    public $user;
     public $name;
     public $email;
     public $message;
@@ -31,6 +32,15 @@ class ContactUs extends Component
         alert()->success('Submitted', 'Thank you for submitting feedbacks we appreciated it. Have a nice day.');
 
         return redirect('/contact-us');
+    }
+
+    public function mount()
+    {
+        if (auth()->check()) {
+            $this->user = auth()->user();
+            $this->name = $this->user->name;
+            $this->email = $this->user->email;
+        }
     }
 
     public function displayFeedBacks()

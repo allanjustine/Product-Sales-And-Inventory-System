@@ -24,6 +24,7 @@ class Index extends Component
     public $product;
     public $orders;
     public $order_quantity;
+    public $user_rating;
 
     protected $listeners = ['resetInputs'];
 
@@ -202,6 +203,7 @@ class Index extends Component
         $product->product_votes += 1;
         $product->save();
 
+        $received->user_rating = $this->product_rating;
         $received->order_status = 'Complete';
         $received->save();
 
