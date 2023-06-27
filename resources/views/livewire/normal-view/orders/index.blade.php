@@ -46,9 +46,12 @@
                                             @if ($order->order_status === 'Paid')
                                                 <span class="info-box-text badge badge-success align-self-start"><i
                                                         class="fa fa-solid fa-check"></i> PAID</span>
+                                            @elseif ($order->order_status === 'Processing Order')
+                                                <span
+                                                    class="info-box-text badge badge-success align-self-start">PREPARING</span>
                                             @elseif ($order->order_status === 'To Deliver')
-                                                <span class="info-box-text badge badge-primary align-self-start">TO
-                                                    DELIVER</span>
+                                                <span class="info-box-text badge badge-primary align-self-start">OUT FOR
+                                                    DELIVERY</span>
                                             @elseif ($order->order_status === 'Delivered')
                                                 <span
                                                     class="info-box-text badge badge-info align-self-start">DELIVERED</span>
@@ -70,6 +73,16 @@
                                                     data-target="#cancel" wire:click="toCancel({{ $order->id }})">
                                                     <i class="fa-solid fa-xmark"></i>
                                                     Cancel Order
+                                                </a>
+                                            @elseif ($order->order_status === 'Processing Order')
+                                                <a href="#" class="btn btn-success">
+                                                    <i class="fa-sharp fa-solid fa-cart-circle-arrow-up"></i>
+                                                    Preparing
+                                                </a>
+                                            @elseif ($order->order_status === 'To Deliver')
+                                                <a href="#" class="btn btn-primary">
+                                                    <i class="fa-solid fa-car-side"></i>
+                                                    Out for Delivery
                                                 </a>
                                             @elseif ($order->order_status === 'To Deliver')
                                                 <a href="#" class="btn btn-primary">
@@ -125,9 +138,13 @@
                                             @if ($order->order_status === 'Paid')
                                                 <span class="info-box-text badge badge-success align-self-start"><i
                                                         class="fa fa-solid fa-check"></i> PAID</span>
+                                            @elseif ($order->order_status === 'Processing Order')
+                                                <span
+                                                    class="info-box-text badge badge-success align-self-start">PREPARING</span>
                                             @elseif ($order->order_status === 'To Deliver')
-                                                <span class="info-box-text badge badge-primary align-self-start">TO
-                                                    DELIVER</span>
+                                                <span class="info-box-text badge badge-primary align-self-start">OUT
+                                                    FOR
+                                                    DELIVERY</span>
                                             @elseif ($order->order_status === 'Delivered')
                                                 <span
                                                     class="info-box-text badge badge-info align-self-start">DELIVERED</span>
@@ -136,7 +153,8 @@
                                                     class="info-box-text badge badge-primary align-self-start">COMPLETE</span>
                                             @else
                                                 <span
-                                                    class="info-box-text badge badge-warning align-self-start">PENDING</span>
+                                                    class="info-box-text badge badge-warning align-self-start">PAYMENT
+                                                    SETTLEMENT</span>
                                             @endif
                                             <span
                                                 class="info-box-text"><strong>{{ $order->transaction_code }}</strong></span>
@@ -152,7 +170,7 @@
                                                 </a>
                                             @elseif ($order->order_status === 'Complete')
                                                 <a href="#" class="btn btn-outline-primary">
-                                                    Please Wait...
+                                                    <i class="fa-solid fa-sack-dollar"></i> Payment Settlement
                                                 </a>
                                             @else
                                                 <a href="#" class="btn btn-outline-success">
@@ -245,6 +263,7 @@
                                         No cancelled order.</h5>
                                 </span>
                             @endif
+                            <strong>Grand Total: &#8369;{{ number_format($grandTotalCancelled, 2, '.', ',') }}</strong>
                         </div>
                     </div>
                 </div>

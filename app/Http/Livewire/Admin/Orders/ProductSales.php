@@ -21,7 +21,7 @@ class ProductSales extends Component
 
     public function downloadPdf()
     {
-        $orders = Order::where('order_status', 'Paid')->get();
+        $orders = Order::orderBy('created_at', 'desc')->where('order_status', 'Paid')->get();
 
         $pdf = new Dompdf();
         $pdf->loadHtml(view('pages.admin.orders.download-pdf', compact('orders'))->render());
@@ -50,7 +50,7 @@ class ProductSales extends Component
 
     public function displaySales()
     {
-        $orders = Order::join('users', 'orders.user_id', '=', 'users.id')
+        $orders = Order::orderBy('created_at', 'desc')->join('users', 'orders.user_id', '=', 'users.id')
             ->select('orders.*', 'users.name', 'products.product_name')
             ->leftJoin('products', 'orders.product_id', '=', 'products.id')
             ->where(function ($query) {
@@ -64,6 +64,7 @@ class ProductSales extends Component
             ->whereNotIn('order_status', ['Pending'])
             ->whereNotIn('order_status', ['Complete'])
             ->whereNotIn('order_status', ['To Deliver'])
+            ->whereNotIn('order_status', ['Processing Order'])
             ->whereNotIn('order_status', ['Delivered'])
             ->whereNotIn('order_status', ['Cancelled'])
             ->paginate($this->perPage);
@@ -77,6 +78,7 @@ class ProductSales extends Component
             ->whereNotIn('order_status', ['Complete'])
             ->whereNotIn('order_status', ['To Deliver'])
             ->whereNotIn('order_status', ['Delivered'])
+            ->whereNotIn('order_status', ['Processing Order'])
             ->whereNotIn('order_status', ['Cancelled'])
             ->sum('order_total_amount');
     }

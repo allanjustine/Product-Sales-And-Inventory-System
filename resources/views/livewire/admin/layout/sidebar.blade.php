@@ -70,8 +70,9 @@
                                 <i class="nav-icon fa-solid fa-users"></i>
                                 <p>
                                     Users
-                                    <span class="right badge badge-info">{{ $usersCount }}</span>
                                 </p>
+
+                                <span class="right badge badge-info">{{ $usersCount }}</span>
                             </a>
                         </li>
                         <li class="nav-header">ORDERS MANAGEMENT</li>
@@ -80,7 +81,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa-solid fa-hand-pointer"></i>
                                 <p>
-                                    Select Category
+                                    Order Management
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -92,8 +93,8 @@
                                         <p>
                                             Users Order
                                             <span class="right badge badge-info"></span>
-                                            <span class="right badge badge-info">{{ $ordersCount }}</span>
                                         </p>
+                                        <span class="right badge badge-info">{{ $ordersCount }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -103,8 +104,8 @@
                                         <p>
                                             Product Sales
                                             <span class="right badge badge-info"></span>
-                                            <span class="right badge badge-info">{{ $productSalesCount }}</span>
                                         </p>
+                                        <span class="right badge badge-info">{{ $productSalesCount }}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -115,7 +116,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa-solid fa-hand-pointer"></i>
                                 <p>
-                                    Select Category
+                                    Product Management
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>

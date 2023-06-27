@@ -25,7 +25,7 @@
                         <div class="form-floating mt-3">
                             <input type="email" id="email" wire:model.defer="email" class="form-control"
                                 placeholder="Email">
-                            <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+                            <label for="email"><i class="fas fa-envelope"></i> Email</label>
                         </div>
 
                         @error('email')
@@ -34,7 +34,7 @@
                         <div class="form-floating mt-3">
                             <input type="password" id="password" wire:model.defer="password" class="form-control"
                                 placeholder="Password">
-                            <label for="password"><i class="fas fa-key"></i> Password:</label>
+                            <label for="password"><i class="fas fa-key"></i> Password</label>
                             <button type="button" class="position-absolute no-focus top-50 end-0 mr-2 translate-middle-y"
                                 onclick="togglePasswordVisibility()">
                                 <i id="password-toggle-icon" class="fas fa-eye-slash"></i>

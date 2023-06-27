@@ -21,6 +21,7 @@ class DownloadPdf extends Component
             ->whereNotIn('order_status', ['Complete'])
             ->whereNotIn('order_status', ['To Deliver'])
             ->whereNotIn('order_status', ['Delivered'])
+            ->whereNotIn('order_status', ['Processing Order'])
             ->whereNotIn('order_status', ['Cancelled'])
             ->sum('order_total_amount');
     }

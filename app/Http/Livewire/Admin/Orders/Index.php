@@ -12,7 +12,8 @@ class Index extends Component
 
     public function mount()
     {
-        $this->orders = Order::where('order_status', 'Pending')
+        $this->orders = Order::orderBy('created_at', 'desc')->where('order_status', 'Pending')
+            ->orWhere('order_status', 'Processing Order')
             ->orWhere('order_status', 'To Deliver')
             ->orWhere('order_status', 'Delivered')
             ->orWhere('order_status', 'Complete')
@@ -21,6 +22,26 @@ class Index extends Component
         $this->grandTotal = Order::whereNotIn('order_status', ['Paid'])
             ->whereNotIn('order_status', ['Cancelled'])
             ->sum('order_total_amount');
+    }
+
+    public function processOrder($orderId)
+    {
+        $order = Order::findOrFail($orderId);
+        if ($order->order_status == 'Cancelled') {
+
+            alert()->warning('Sorry', 'The order does not exist or been cancelled by the user');
+
+            return redirect('/admin/orders');
+        }
+
+        $order->update([
+            'order_status' => 'Processing Order'
+        ]);
+
+        alert()->success('Congrats', 'The order is now processing');
+
+        return redirect('/admin/orders');
+
     }
     public function markAsDeliver($orderId)
     {

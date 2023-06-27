@@ -34,7 +34,7 @@
                         <div class="form-floating mt-3">
                             <input type="text" id="name" wire:model.defer="name" class="form-control"
                                 placeholder="Name" required>
-                            <label for="name">Name:</label>
+                            <label for="name">Name</label>
                         </div>
                         @error('name')
                             <span class="text-danger">{{ $message }}</span>
@@ -42,7 +42,7 @@
                         <div class="form-floating mt-3">
                             <input type="text" id="address" wire:model.defer="address" class="form-control"
                                 placeholder="Address" required>
-                            <label for="address">Address:</label>
+                            <label for="address">Address</label>
                         </div>
                         @error('name')
                             <span class="text-danger">{{ $message }}</span>
@@ -50,7 +50,7 @@
                         <div class="form-floating mt-3">
                             <input type="email" id="email" wire:model="email" class="form-control"
                                 placeholder="Email" required>
-                            <label for="email">Email:</label>
+                            <label for="email">Email</label>
                         </div>
                         @error('email')
                             <span class="text-danger">{{ $message }}</span>
@@ -63,7 +63,7 @@
                                 onclick="togglePasswordVisibility()">
                                 <i id="password-toggle-icon" class="fas fa-eye-slash"></i>
                             </button>
-                            <label for="password">Password:</label>
+                            <label for="password">Password</label>
                         </div>
                         @error('password')
                             <span class="text-danger">{{ $message }}</span>
@@ -76,20 +76,20 @@
                                 onclick="toggleConfirmPasswordVisibility()">
                                 <i id="password_confirmation-toggle-icon" class="fas fa-eye-slash"></i>
                             </button>
-                            <label for="password_confirmation">Confirm Password:</label>
+                            <label for="password_confirmation">Confirm Password</label>
                         </div>
                         @error('password')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                         <div class="form-floating mt-3">
-                            <select name="gender" id="" class="form-control" wire:model.defer="gender"
+                            <select name="gender" id="" class="form-select" wire:model.defer="gender"
                                 required>
                                 <option hidden="true">Select Gender</option>
                                 <option selected disabled>Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
-                            <label for="password_confirmation">Select Gender:</label>
+                            <label for="password_confirmation">Select Gender</label>
                             @error('gender')
                                 <p class="text-danger" id="messagee">{{ $message }}</p>
                             @enderror

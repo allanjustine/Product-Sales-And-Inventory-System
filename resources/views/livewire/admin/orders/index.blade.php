@@ -32,11 +32,20 @@
                             <td>{{ $order->order_payment_method }}</td>
                             <td>{{ $order->user_location }}</td>
                             <td>{{ date_format($order->created_at, 'F j, Y g:i A') }}</td>
-                            <td>{{ $order->user_rating }}</td>
+                            <td class="text-center">
+                                @if ($order->user_rating === null)
+                                <span>Not yet rated</span>
+                                @else
+                                    {{ $order->user_rating }}
+                                @endif
+                            </td>
                             @if ($order->order_status === 'Pending')
                                 <td><span class="badge badge-warning">PENDING</span></td>
                             @elseif ($order->order_status === 'Complete')
                                 <td><span class="badge badge-primary">COMPLETE</span>
+                                </td>
+                            @elseif ($order->order_status === 'Processing Order')
+                                <td><span class="badge badge-warning">PROCESSING</span>
                                 </td>
                             @elseif ($order->order_status === 'To Deliver')
                                 <td><span class="badge badge-warning">TO
@@ -48,6 +57,10 @@
                             @endif
                             <td>
                                 @if ($order->order_status === 'Pending')
+                                    <button wire:click="processOrder({{ $order->id }})" class="btn btn-primary"><i
+                                            class="fa-sharp fa-solid fa-cart-circle-arrow-up"></i> Process
+                                        Order</button>
+                                @elseif ($order->order_status === 'Processing Order')
                                     <button wire:click="markAsDeliver({{ $order->id }})" class="btn btn-primary"><i
                                             class="fa-regular fa-truck-container"></i> Deliver</button>
                                 @elseif ($order->order_status === 'To Deliver')
@@ -55,7 +68,7 @@
                                             class="fa-solid fa-truck"></i> Delivered</button>
                                 @elseif ($order->order_status === 'Complete')
                                     <button wire:click="markAsPaid({{ $order->id }})" class="btn btn-success"><i
-                                            class="fa fa-solid fa-check"></i> Paid Complete</button>
+                                            class="fa fa-solid fa-check"></i> Paid Settlement</button>
                                 @else
                                     <button wire:click="markAsPaid({{ $order->id }})" class="btn btn-success"><i
                                             class="fa fa-solid fa-check"></i> Paid Order</button>

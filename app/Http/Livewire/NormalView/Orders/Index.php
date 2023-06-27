@@ -13,6 +13,7 @@ class Index extends Component
     public $pendings;
     public $grandTotalPending;
     public $grandTotalRecent;
+    public $grandTotalCancelled;
     public $cancel;
     public $cancels;
     public $toRemoved;
@@ -33,8 +34,9 @@ class Index extends Component
 
         $userId = auth()->id();
 
-        $this->pendings = Order::where(function ($query) use ($userId) {
+        $this->pendings = Order::orderBy('created_at', 'desc')->where(function ($query) use ($userId) {
             $query->where('order_status', 'To Deliver')
+                ->orWhere('order_status', 'Processing Order')
                 ->orWhere('order_status', 'Pending')
                 ->orWhere('order_status', 'Delivered');
         })
@@ -46,7 +48,7 @@ class Index extends Component
             ->whereNotIn('order_status', ['Cancelled'])
             ->sum('order_total_amount');
 
-        $this->recents = Order::where(function ($query) use ($userId) {
+        $this->recents = Order::orderBy('created_at', 'desc')->where(function ($query) use ($userId) {
             $query->where('order_status', 'Paid')
                 ->orWhere('order_status', 'Complete');
         })
@@ -55,14 +57,24 @@ class Index extends Component
 
         $this->grandTotalRecent = Order::where('user_id', auth()->id())
             ->whereNotIn('order_status', ['Pending'])
+            ->whereNotIn('order_status', ['Processing Order'])
             ->whereNotIn('order_status', ['To Deliver'])
             ->whereNotIn('order_status', ['Delivered'])
             ->whereNotIn('order_status', ['Cancelled'])
             ->sum('order_total_amount');
 
-        $this->cancels = Order::where('order_status', 'Cancelled')
+        $this->cancels = Order::orderBy('created_at', 'desc')->where('order_status', 'Cancelled')
             ->where('user_id', auth()->id())
             ->get();
+
+        $this->grandTotalCancelled = Order::where('user_id', auth()->id())
+            ->whereNotIn('order_status', ['Pending'])
+            ->whereNotIn('order_status', ['Processing Order'])
+            ->whereNotIn('order_status', ['To Deliver'])
+            ->whereNotIn('order_status', ['Delivered'])
+            ->whereNotIn('order_status', ['Complete'])
+            ->whereNotIn('order_status', ['Paid'])
+            ->sum('order_total_amount');
     }
 
     // public function toRemove($orderId)
