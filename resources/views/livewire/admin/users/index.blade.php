@@ -81,6 +81,9 @@
                             Role
                         </th>
                         <th>
+                            Account Created
+                        </th>
+                        <th>
                             Action
                         </th>
                     </tr>
@@ -113,6 +116,9 @@
                             @else
                                 <td><span class="badge badge-warning">USER</span></td>
                             @endif
+                            <td>
+                                {{ $user->created_at->diffForHumans() }}
+                            </td>
                             <td>
                                 <div class="dropdown dropup">
                                     <span class="badge badge-pill badge-primary py-2" id="dropdownMenuButton"
