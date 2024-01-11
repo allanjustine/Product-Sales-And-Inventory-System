@@ -53,9 +53,9 @@ class Index extends Component
             });
         }
         if ($this->sort === 'low_to_high') {
-            $query->orderBy('product_price', 'desc');
-        } else {
             $query->orderBy('product_price', 'asc');
+        } else {
+            $query->orderBy('product_price', 'desc');
         }
 
         if ($this->product_rating != 'All') {

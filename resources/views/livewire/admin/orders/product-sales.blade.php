@@ -133,7 +133,6 @@
                     @if (!empty($search) && $orders->count() === 0)
                         <td colspan="9" class="text-center">"{{ $search }}" not found.</td>
                     @elseif($orders->count() === 0)
-                        <td colspan="9" class="text-center">
                         <td colspan="9" class="text-center">No product sales yet.</td>
                         </td>
                     @endif

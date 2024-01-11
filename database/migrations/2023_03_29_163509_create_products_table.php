@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_category_id')->nullable();
+            $table->foreignId('product_category_id')->nullable();
             $table->longText('product_image')->nullable();
             $table->string('product_name');
             $table->text('product_description');
             $table->string('product_status');
             $table->string('product_stock');
-            $table->string('product_price');
+            $table->decimal('product_price', 10, 2);
             $table->decimal('product_rating', 3, 1)->default(0);
             $table->string('product_code');
             $table->unsignedInteger('product_sold')->default(0);
