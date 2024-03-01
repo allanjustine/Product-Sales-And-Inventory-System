@@ -1,4 +1,12 @@
 <div>
+    @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <h6 class="text-center">
+                <strong>Success!</strong> {{ session('success') }}
+            </h6>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="table-responsive card card-primary card-outline card-outline-tabs" id="product-table"
         style="height: 500px;">
         <div class="card-body">
@@ -34,7 +42,7 @@
                             <td>{{ date_format($order->created_at, 'F j, Y g:i A') }}</td>
                             <td class="text-center">
                                 @if ($order->user_rating === null)
-                                <span>Not yet rated</span>
+                                    <span>Not yet rated</span>
                                 @else
                                     {{ $order->user_rating }}
                                 @endif

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\NormalView\Pages;
 
 use App\Models\Product;
+use App\Models\User;
 use Livewire\Component;
 
 class Home extends Component
@@ -12,6 +13,7 @@ class Home extends Component
     public $popularityDeals;
     public $productView;
     public $latestProducts;
+    public $allLocations;
 
     public function mount()
     {
@@ -26,6 +28,8 @@ class Home extends Component
         $this->latestProducts = Product::orderBy('created_at', 'desc')
             ->take(10)
             ->get();
+
+        $this->allLocations = User::all();
     }
     public function view($id)
     {

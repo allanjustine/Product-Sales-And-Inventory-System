@@ -1,4 +1,5 @@
 <div>
+
     <div class="container">
         <h3 class="mb-4 mt-3">Contact Us</h3>
         <hr>
@@ -14,7 +15,7 @@
     <div class="container mt-4">
         <div class="card rounded elevation-3 col-md-6 offset-md-3">
             <div class="card-header">
-                <h5 class="text-center mt-3 mb-3">Please fill out the form below to get in touch with us.</h5>
+                <h5 class="text-center mt-3 mb-3"> Please fill out the form below to get in touch with us.</h5>
             </div>
             <div class="card-body">
                 <div class="row">

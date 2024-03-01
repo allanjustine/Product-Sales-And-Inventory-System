@@ -80,7 +80,7 @@
         </div>
     </div>
     <div class="container mt-5">
-        <h4>Revenue Sales Management </h4>
+        <h4>Revenue Sales Record </h4>
         <hr>
         <div class="row">
             <div class="col-md-4 col-lg-3">

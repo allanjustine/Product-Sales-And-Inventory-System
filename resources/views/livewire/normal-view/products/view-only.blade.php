@@ -112,8 +112,13 @@
                     <div class="card shadow product-card" style="min-width: 50px;">
                         <div class="p-2" style="position: relative;">
                             <div class="image-container">
-                                <img class="card-img-top mt-4" src="{{ Storage::url($product->product_image) }}"
-                                    alt="{{ $product->product_name }}">
+                                @if (Storage::exists($product->product_image))
+                                    <img class="card-img-top mt-4" src="{{ Storage::url($product->product_image) }}"
+                                        alt="{{ $product->product_name }}">
+                                @else
+                                    <img class="card-img-top mt-4" src="{{ url($product->product_image) }}"
+                                        alt="{{ $product->product_name }}">
+                                @endif
                             </div>
 
                             <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
@@ -133,7 +138,7 @@
                             <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
                                 {{ $product->product_category->category_name }}</h6>
                             <h3 class="font-size-1 font-weight-normal">
-                                <h5>{{ $product->product_name }}</h5>
+                                <h5 id="product_name">{{ $product->product_name }}</h5>
                             </h3>
                             <div class="d-block font-size-1 mb-2">
                                 <span class="font-weight-medium"><i
@@ -189,3 +194,9 @@
             {{ $products->links('pages.normal-view.layout.pagination') }}</span>
     </div>
 </div>
+
+<style>
+    #product_name {
+        text-transform: capitalize;
+    }
+</style>

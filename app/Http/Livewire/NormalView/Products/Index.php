@@ -267,12 +267,12 @@ class Index extends Component
             $cartItem->delete();
 
             if ($existingOrder) {
-                alert()->success('Congrats', 'The product is added/changed');
+                alert()->html('Congrats', 'The product is added/changed' . '<br><br><a class="btn btn-primary" href="/orders">Go to Orders</a>', 'success');
             } else {
-                alert()->success('Congrats', 'The product ordered successfully. Your transaction code is "' . $order->transaction_code . '"');
+                alert()->html('Congrats', 'The product ordered successfully. Your transaction code is "' . $order->transaction_code . '"' . '<br><br><a class="btn btn-primary" href="/orders">Go to Orders</a>', 'success');
             }
 
-            return redirect('/orders');
+            return redirect('/products');
         } else {
 
             if ($productStatus == 'Not Available') {
@@ -348,12 +348,13 @@ class Index extends Component
 
 
             if ($existingOrder) {
-                alert()->success('Congrats', 'The product is added/changed');
+                // alert()->success('Congrats', 'The product is added/changed to your existing order.');
+                alert()->html('Congrats', 'The product is added/changed to your existing order.' . '<br><br><a class="btn btn-primary" href="/orders">Go to Orders</a>', 'success');
             } else {
-                alert()->success('Congrats', 'The product ordered successfully. Your transaction code is "' . $order->transaction_code . '"');
+                alert()->html('Congrats', 'The product ordered successfully. Your transaction code is "' . $order->transaction_code . '"' . '<br><br><a class="btn btn-primary" href="/orders">Go to Orders</a>', 'success');
             }
 
-            return redirect('/orders');
+            return redirect('/products');
         } else {
 
             if ($productStatus == 'Not Available') {

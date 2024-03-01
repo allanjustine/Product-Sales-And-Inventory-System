@@ -139,9 +139,15 @@
                         <tr>
                             <td>{{ $product->product_code }}</td>
                             <td>
-                                <img src="{{ Storage::url($product->product_image) }}"
-                                    style="height: 50px; width: 60px; border-radius: 5px;"
-                                    alt="{{ $product->product_name }}">
+                                @if (Storage::exists($product->product_image))
+                                    <img src="{{ Storage::url($product->product_image) }}"
+                                        style="height: 50px; width: 60px; border-radius: 5px;"
+                                        alt="{{ $product->product_name }}">
+                                @else
+                                    <img src="{{ url($product->product_image) }}"
+                                        style="height: 50px; width: 60px; border-radius: 5px;"
+                                        alt="{{ $product->product_name }}">
+                                @endif
                             </td>
                             <td>{{ $product->product_name }}</td>
                             @if ($product->product_stock)

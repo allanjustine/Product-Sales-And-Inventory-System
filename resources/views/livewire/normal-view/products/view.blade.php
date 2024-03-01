@@ -17,11 +17,18 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <img src="{{ Storage::url($productView->product_image) }}"
-                                                alt="{{ $productView->product_name }}" class="img-fluid"><br>
+                                            @if (Storage::exists($productView->product_image))
+                                                <img src="{{ Storage::url($productView->product_image) }}"
+                                                    alt="{{ $productView->product_name }}" class="img-fluid">
+                                            @else
+                                                <img src="{{ url($productView->product_image) }}"
+                                                    alt="{{ $productView->product_name }}" class="img-fluid">
+                                            @endif
+                                            <br>
                                         </div>
                                         <div class="col-md-6">
-                                            <h4 class="text-center border-bottom border-secondary py-2 border-1">
+                                            <h4 id="product_name"
+                                                class="text-center border-bottom border-secondary py-2 border-1">
                                                 {{ $productView->product_name }}</h4>
                                             <p class="d-flex justify-content-between"><strong>Category:</strong>
                                                 {{ $productView->product_category->category_name }}</p>
@@ -72,10 +79,18 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary form-control" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary form-control"
+                            data-dismiss="modal">Close</button>
                     </div>
                 @endif
             </div>
         </div>
     </div>
 </div>
+
+
+<style>
+    #product_name {
+        text-transform: capitalize;
+    }
+</style>

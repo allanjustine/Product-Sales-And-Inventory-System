@@ -1,10 +1,10 @@
 <div>
     <div class="wrapper">
-        <div class="preloader flex-column justify-content-center align-items-center">
+        {{-- <div class="preloader flex-column justify-content-center align-items-center">
             <div class="ring">Loading
                 <span class="ring2"></span>
             </div>
-        </div>
+        </div> --}}
         <nav class="main-header navbar navbar-expand navbar-light">
             <ul class="navbar-nav">
                 <li class="nav-item">

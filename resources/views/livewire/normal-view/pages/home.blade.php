@@ -73,8 +73,13 @@
                         <div class="card shadow product show" id="product-card" style="min-width: 50px;">
                             <div class="px-2" style="position: relative;">
                                 <div class="image-container">
-                                    <img class="card-img-top mt-4" src="{{ Storage::url($product->product_image) }}"
-                                        alt="{{ $product->product_name }}">
+                                    @if (Storage::exists($product->product_image))
+                                        <img class="card-img-top mt-4" src="{{ Storage::url($product->product_image) }}"
+                                            alt="{{ $product->product_name }}">
+                                    @else
+                                        <img class="card-img-top mt-4" src="{{ $product->product_image }}"
+                                            alt="{{ $product->product_name }}">
+                                    @endif
                                 </div>
 
                                 <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
@@ -152,8 +157,14 @@
                         <div class="card shadow product show" id="product-card" style="min-width: 50px;">
                             <div class="px-2" style="position: relative;">
                                 <div class="image-container">
-                                    <img class="card-img-top mt-4" src="{{ Storage::url($product->product_image) }}"
-                                        alt="{{ $product->product_name }}">
+                                    @if (Storage::exists($product->product_image))
+                                        <img class="card-img-top mt-4"
+                                            src="{{ Storage::url($product->product_image) }}"
+                                            alt="{{ $product->product_name }}">
+                                    @else
+                                        <img class="card-img-top mt-4" src="{{ $product->product_image }}"
+                                            alt="{{ $product->product_name }}">
+                                    @endif
                                 </div>
 
                                 <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
@@ -230,8 +241,14 @@
                         <div class="card shadow product show" id="product-card" style="min-width: 50px;">
                             <div class="px-2" style="position: relative;">
                                 <div class="image-container">
-                                    <img class="card-img-top mt-4" src="{{ Storage::url($product->product_image) }}"
-                                        alt="{{ $product->product_name }}">
+                                    @if (Storage::exists($product->product_image))
+                                        <img class="card-img-top mt-4"
+                                            src="{{ Storage::url($product->product_image) }}"
+                                            alt="{{ $product->product_name }}">
+                                    @else
+                                        <img class="card-img-top mt-4" src="{{ $product->product_image }}"
+                                            alt="{{ $product->product_name }}">
+                                    @endif
                                 </div>
 
                                 <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">

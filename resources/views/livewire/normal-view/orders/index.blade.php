@@ -32,10 +32,18 @@
                                 <div class="col-md-12">
                                     <div class="info-box elevation-3">
                                         <div class="info-box-content">
-                                            <span class="info-box-image"><img
-                                                    style="width: 90px; height: 80px; border-radius: 5px;"
-                                                    src="{{ Storage::url($order->product->product_image) }}"
-                                                    alt="{{ $order->product->product_name }}"></span>
+                                            <span class="info-box-image">
+
+                                                @if (Storage::exists($order->product->product_image))
+                                                    <img style="width: 90px; height: 80px; border-radius: 5px;"
+                                                        src="{{ Storage::url($order->product->product_image) }}"
+                                                        alt="{{ $order->product->product_name }}">
+                                                @else
+                                                    <img style="width: 90px; height: 80px; border-radius: 5px;"
+                                                        src="{{ $order->product->product_image }}"
+                                                        alt="{{ $order->product->product_name }}">
+                                                @endif
+                                            </span>
                                             <strong class="info-box-text">{{ $order->product->product_name }}</strong>
                                             <span
                                                 class="info-box-text">&#8369;{{ number_format($order->product->product_price, 2, '.', ',') }}</span>
@@ -123,9 +131,15 @@
                                         <div class="info-box-content">
 
                                             <span class="info-box-image">
-                                                <img style="width: 90px; height: 80px; border-radius: 5px;"
-                                                    src="{{ Storage::url($order->product->product_image) }}"
-                                                    alt="{{ $order->product->product_name }}">
+                                                @if (Storage::exists($order->product->product_image))
+                                                    <img style="width: 90px; height: 80px; border-radius: 5px;"
+                                                        src="{{ Storage::url($order->product->product_image) }}"
+                                                        alt="{{ $order->product->product_name }}">
+                                                @else
+                                                    <img style="width: 90px; height: 80px; border-radius: 5px;"
+                                                        src="{{ $order->product->product_image }}"
+                                                        alt="{{ $order->product->product_name }}">
+                                                @endif
                                             </span>
                                             <span
                                                 class="info-box-text"><strong>{{ $order->product->product_name }}</strong></span>
@@ -198,10 +212,17 @@
                                 <div class="col-md-12">
                                     <div class="info-box elevation-3">
                                         <div class="info-box-content">
-                                            <span class="info-box-image"><img
-                                                    style="width: 90px; height: 80px; border-radius: 5px;"
-                                                    src="{{ Storage::url($order->product->product_image) }}"
-                                                    alt="{{ $order->product->product_name }}"></span>
+                                            <span class="info-box-image">
+                                                @if (Storage::exists($order->product->product_image))
+                                                    <img style="width: 90px; height: 80px; border-radius: 5px;"
+                                                        src="{{ Storage::url($order->product->product_image) }}"
+                                                        alt="{{ $order->product->product_name }}">
+                                                @else
+                                                    <img style="width: 90px; height: 80px; border-radius: 5px;"
+                                                        src="{{ $order->product->product_image }}"
+                                                        alt="{{ $order->product->product_name }}">
+                                                @endif
+                                            </span>
                                             <span
                                                 class="info-box-text"><strong>{{ $order->product->product_name }}</strong></span>
                                             <span

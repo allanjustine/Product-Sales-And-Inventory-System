@@ -110,7 +110,8 @@
                         style="font-size: 12px;">{{ $cartItems->count() }}</span></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end cartmenu" aria-labelledby="cart-dropdown">
-                <h4 class="pl-3"><strong><i class="fa-regular fa-cart-shopping"></i> My Cart ({{ $cartItems->count() }})</strong></h4>
+                <h4 class="pl-3"><strong><i class="fa-regular fa-cart-shopping"></i> My Cart
+                        ({{ $cartItems->count() }})</strong></h4>
                 <hr>
                 @foreach ($cartItems as $item)
                     <li class="cart-item px-3 py-2">
@@ -124,9 +125,14 @@
                                 wire:click.prevent="updateCartItem({{ $item->id }})">
                                 <i class="fas fa-plus text-black"></i>
                             </button>
-                            <img style="width: 70px; height: 70px; border-radius:10%;"
-                                src="{{ Storage::url($item->product->product_image) }}"
-                                alt="">&nbsp;&nbsp;<span><strong>{{ $item->product->product_name }}</strong></span>
+                            @if (Storage::exists($item->product->product_image))
+                                <img style="width: 70px; height: 70px; border-radius:10%;"
+                                    src="{{ Storage::url($item->product->product_image) }}" alt="">
+                            @else
+                                <img style="width: 70px; height: 70px; border-radius:10%;"
+                                    src="{{ url($item->product->product_image) }}" alt="">
+                            @endif
+                            &nbsp;&nbsp;<span><strong>{{ $item->product->product_name }}</strong></span>
                         </div>
                         <div class="cart-item-price mt-2">
                             &#8369;{{ number_format($item->product->product_price, 2, '.', ',') }}
@@ -138,7 +144,8 @@
                                 wire:click="checkOut({{ $item->id }})">
                                 <i class="fas fa-check"></i>&nbsp;Checkout
                             </button><br>
-                            <span><strong>Total: &#8369;{{ number_format($this->getProductTotalAmount($item->product_id), 2, '.', ',') }}</strong></span>
+                            <span><strong>Total:
+                                    &#8369;{{ number_format($this->getProductTotalAmount($item->product_id), 2, '.', ',') }}</strong></span>
                         </div>
 
                     </li>
@@ -152,7 +159,7 @@
                         <p class="text-center mb-5">No Product Added Yet.</p>
                     @else
                         <span class="px-3 py-2"><strong>Sub Total:
-                            &#8369;{{ number_format($total, 2, '.', ',') }}</strong></span>
+                                &#8369;{{ number_format($total, 2, '.', ',') }}</strong></span>
                     @endif
                 </li>
             </ul>
@@ -175,8 +182,13 @@
                     <div class="card shadow product-card" style="min-width: 50px;">
                         <div class="px-2" style="position: relative;">
                             <div class="image-container">
-                                <img class="card-img-top mt-4" src="{{ Storage::url($product->product_image) }}"
-                                    alt="{{ $product->product_name }}">
+                                @if (Storage::exists($product->product_image))
+                                    <img class="card-img-top mt-4" src="{{ Storage::url($product->product_image) }}"
+                                        alt="{{ $product->product_name }}">
+                                @else
+                                    <img class="card-img-top mt-4" src="{{ url($product->product_image) }}"
+                                        alt="{{ $product->product_name }}">
+                                @endif
                             </div>
 
                             <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
@@ -196,7 +208,7 @@
                             <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
                                 {{ $product->product_category->category_name }}</h6>
                             <h3 class="font-size-1 font-weight-normal">
-                                <h5>{{ $product->product_name }}</h5>
+                                <h5 id="product_name">{{ $product->product_name }}</h5>
                             </h3>
                             <div class="d-block font-size-1 mb-2">
                                 <span class="font-weight-medium"><i
@@ -246,6 +258,14 @@
 
                                     {{ $product->product_sold }}
                                 </strong>
+                                {{-- <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">
+                                    Sold:
+                                    @if ($product->product_sold >= 1000)
+                                        {{ number_format($product->product_sold / 1000, 1) }}k
+                                    @else
+                                        {{ $product->product_sold }}
+                                    @endif
+                                </strong> --}}
                                 <span class="font-weight-medium pr-2" style="position: absolute; bottom:0; right: 0;">
                                     <i class="fa-solid fa-star"></i>
                                     <strong>
@@ -276,3 +296,10 @@
             {{ $products->links('pages.normal-view.layout.pagination') }}</span>
     </div>
 </div>
+
+<style>
+    #product_name {
+
+        text-transform: capitalize;
+    }
+</style>
