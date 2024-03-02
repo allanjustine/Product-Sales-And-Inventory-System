@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -60,12 +61,12 @@ class Index extends Component
 
     public function addUser()
     {
-        $validatedData = $this->validate([
+        $this->validate([
             'name'              =>          'required|string|max:255',
             'address'           =>          'required|string|max:255',
             'email'             =>          'required|string|email|max:255|unique:users',
             'password'          =>          'required|string|min:4|confirmed',
-            'gender'            =>          'required|string',
+            'gender'            =>          ['required', 'string', Rule::in('Male', 'Female')],
             'phone_number'      =>          'required|string|numeric|regex:/(0)[0-9]/|digits:11',
             'profile_image'     =>          'required|image|max:10000'
         ]);
@@ -74,12 +75,12 @@ class Index extends Component
         $path = $this->profile_image->store('public/profile/images');
 
         $user = User::create([
-            'name'              => $validatedData['name'],
-            'address'           => $validatedData['address'],
-            'email'             => $validatedData['email'],
-            'password'          => Hash::make($validatedData['password']),
-            'gender'            => $validatedData['gender'],
-            'phone_number'      => $validatedData['phone_number'],
+            'name'              => $this->name,
+            'address'           => $this->address,
+            'email'             => $this->email,
+            'password'          => Hash::make($this->password),
+            'gender'            => $this->gender,
+            'phone_number'      => $this->phone_number,
             'remember_token'    => $token,
             'profile_image'     => $path
         ]);
@@ -137,6 +138,7 @@ class Index extends Component
             'email'             =>      ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $this->userEdit->id],
             'profile_image'     =>      $this->profile_image ? ['image', 'max:10000'] : '',
             'phone_number'      =>      'required|string|numeric|regex:/(0)[0-9]/|digits:11',
+            'gender'            =>      ['required', 'string', Rule::in('Male', 'Female')],
         ]);
 
         if ($this->profile_image && is_string($this->userEdit->profile_image)) {

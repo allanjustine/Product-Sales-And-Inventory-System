@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Pages;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -62,7 +63,7 @@ class Profile extends Component
     {
         $this->validate([
             'name' => 'required',
-            'gender' => 'required',
+            'gender' => ['required', 'string', Rule::in('Male', 'Female')],
             'address' => 'required',
             'phone_number' => 'required|numeric',
             'email' => 'required|email|unique:users,email,' . $this->user->id,

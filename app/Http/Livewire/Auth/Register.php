@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -22,7 +23,7 @@ class Register extends Component
             'address'           =>          'required|string|max:255',
             'email'             =>          'required|string|email|max:255|unique:users',
             'password'          =>          'required|string|min:4|confirmed',
-            'gender'            =>          'required|string',
+            'gender'            =>          ['required', 'string', Rule::in('Male', 'Female')],
             'phone_number'      =>          'required|numeric|regex:/(0)[0-9]/|digits:11',
             'profile_image'     =>          'required|image|max:10000|mimes:jpeg,png,gif,webp,svg|not_in:ico'
         ]);
