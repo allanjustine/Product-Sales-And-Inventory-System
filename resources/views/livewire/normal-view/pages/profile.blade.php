@@ -148,6 +148,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="inputUser_location" class="col-sm-2 col-form-label">Your delivery address</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputUser_location" name="user_location"
+                                            placeholder="Your delivery address" wire:model.defer="user_location" required>
+                                        @error('user_location')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
                                     <div class="col-sm-10">
                                         <input type="number" class="form-control" name="phone" id="inputPhone"

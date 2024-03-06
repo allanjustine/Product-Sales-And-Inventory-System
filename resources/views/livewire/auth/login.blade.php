@@ -4,7 +4,7 @@
         <div class="col-md-6 offset-md-3 mt-5">
             <div class="card-img-top d-flex justify-content-center align-items-center mb-3">
                 <div class="overflow-hidden" style="width: 150px; height: 150px;">
-                    <img src="images/logo.png" class="w-100 h-100" alt="Login Image">
+                    <img src="images/mylogo.jpg" class="w-100 h-100" alt="Login Image">
                 </div>
             </div>
             <div class="card shadow">

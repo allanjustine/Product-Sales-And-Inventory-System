@@ -36,7 +36,7 @@
         </nav>
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="/admin/dashboard" class="brand-link">
-                <img src="/images/logo.png" alt="AJM logo" class="brand-image img-circle elevation-0"
+                <img src="/images/mylogo.jpg" alt="AJM logo" class="brand-image img-circle elevation-0"
                     style="opacity: .8; border-radius: 50%;">
                 <span class="brand-text"><strong id="branding-ajm">AJM</strong></span>
             </a>

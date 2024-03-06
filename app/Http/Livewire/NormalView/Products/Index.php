@@ -225,7 +225,7 @@ class Index extends Component
     public function checkOut($itemId)
     {
         $this->cartItemToCheckOut = Cart::find($itemId);
-
+        $this->user_location = $this->cartItemToCheckOut->user->user_location;
         $this->itemPlaceOrder = $itemId;
     }
 
@@ -250,7 +250,10 @@ class Index extends Component
             ])->first();
 
             if ($existingOrder) {
-                $existingOrder->user_location = $this->user_location;
+                // $existingOrder->user_location = $this->user_location;
+                $cartItem->user->update([
+                    'user_location' => $this->user_location
+                ]);
                 $existingOrder->created_at = now();
                 $existingOrder->order_quantity += $cartItem->quantity;
                 $existingOrder->order_total_amount += ($cartItem->quantity * $product->product_price);
@@ -261,13 +264,18 @@ class Index extends Component
                 $order->user_id = auth()->id();
                 $order->product_id = $product->id;
                 $order->order_quantity = $cartItem->quantity;
-                $order->user_location = $this->user_location;
+                // $order->user_location = $this->user_location;
                 $order->order_price = $product->product_price;
                 $order->order_total_amount = $cartItem->quantity * $product->product_price;
                 $order->order_payment_method = $this->order_payment_method;
                 $order->order_status = 'Pending';
                 $order->transaction_code = $transactionCode;
                 $order->save();
+
+                $cartItem->user->update([
+                    'user_location' => $this->user_location
+                ]);
+
             }
 
             $product->product_stock -= $cartItem->quantity;
@@ -305,6 +313,11 @@ class Index extends Component
 
         $this->orderToBuy = Product::findOrFail($productId);
 
+        if(auth()->check())
+        {
+            $this->user_location = auth()->user()->user_location;
+        }
+
         $this->orderPlaceOrder = $productId;
     }
 
@@ -330,7 +343,9 @@ class Index extends Component
             ])->first();
 
             if ($existingOrder) {
-                $existingOrder->user_location = $this->user_location;
+                auth()->user()->update([
+                    'user_location' => $this->user_location
+                ]);
                 $existingOrder->created_at = now();
                 $existingOrder->order_quantity += $this->order_quantity;
                 $existingOrder->order_total_amount += ($this->order_quantity * $product->product_price);
@@ -342,13 +357,16 @@ class Index extends Component
                 $order->user_id = auth()->id();
                 $order->product_id = $product->id;
                 $order->order_quantity = $this->order_quantity;
-                $order->user_location = $this->user_location;
                 $order->order_price = $product->product_price;
                 $order->order_total_amount = $this->order_quantity * $product->product_price;
                 $order->order_payment_method = $this->order_payment_method;
                 $order->order_status = 'Pending';
                 $order->transaction_code = $transactionCode;
                 $order->save();
+
+                auth()->user()->update([
+                    'user_location' => $this->user_location
+                ]);
             }
 
             $product->product_stock -= $this->order_quantity;

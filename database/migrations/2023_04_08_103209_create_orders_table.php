@@ -19,7 +19,6 @@ return new class extends Migration
             $table->decimal('order_price', 10, 2);
             $table->decimal('order_total_amount', 10, 2);
             $table->string('order_payment_method');
-            $table->string('user_location');
             $table->string('user_rating')->default(0);
             $table->string('transaction_code');
             $table->string('order_status')->default('Pending');

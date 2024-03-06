@@ -109,7 +109,7 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <link rel="icon" href="{{ url('images/logo.png') }}">
+    <link rel="icon" href="{{ url('images/mylogo.jpg') }}">
     <title>Admin @yield('title')</title>
     @livewireStyles
 

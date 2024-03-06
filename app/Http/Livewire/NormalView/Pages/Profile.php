@@ -17,6 +17,7 @@ class Profile extends Component
     public $user;
     public $name;
     public $address;
+    public $user_location;
     public $phone_number;
     public $email;
     public $gender;
@@ -30,6 +31,7 @@ class Profile extends Component
         $this->name = $this->user->name;
         $this->gender = $this->user->gender;
         $this->address = $this->user->address;
+        $this->user_location = $this->user->user_location;
         $this->phone_number = $this->user->phone_number;
         $this->email = $this->user->email;
     }
@@ -73,6 +75,7 @@ class Profile extends Component
         $this->user->name = $this->name;
         $this->user->gender = $this->gender;
         $this->user->address = $this->address;
+        $this->user->user_location = $this->user_location;
         $this->user->phone_number = $this->phone_number;
         $this->user->email = $this->email;
         $this->user->save();

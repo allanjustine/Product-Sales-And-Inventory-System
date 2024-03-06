@@ -2,6 +2,38 @@
     @include('livewire.normal-view.orders.cancel-order')
     @include('livewire.normal-view.orders.order-received')
     <div class="container">
+        <div class="accordion" id="accordionExample">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link btn-block text-left text-center" type="button" data-toggle="collapse"
+                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Show delivery address
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+
+                <div class="d-flex justify-content-center">
+                    <div class="alert mt-2 col-md-8 text-primary" role="alert" style="background: #74bef7a1">
+                        <a href="/profile" class="float-end text-primary" style="text-decoration: none;"><i
+                                class="far fa-pen"></i>
+                            Edit</a>
+                        <div class="d-flex align-items-center">
+                            <img src="images/mylogo.jpg" alt="Info Logo" class="me-2" style="width: 120px;">
+                            <div>
+                                <h4 class="alert-heading"><strong>Your delivery address</strong></h4>
+                                <p>{{ auth()->user()->user_location }}</p>
+                                <hr>
+                                <p class="mb-0"><strong>Phone number:</strong> {{ auth()->user()->phone_number }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h3 class="mt-4"><i class="fa-light fa-bag-shopping"></i> My Orders</h3>
         <hr>
         <div class="col-md-12">
