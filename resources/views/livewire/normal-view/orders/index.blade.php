@@ -7,6 +7,8 @@
                 <h2 class="mb-0">
                     <button class="btn btn-link btn-block text-left text-center" type="button" data-toggle="collapse"
                         data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <i
+                            class="far {{ auth()->user()->user_location ? 'fa-check text-success' : 'fa-circle-exclamation text-danger' }}"></i>
                         Show delivery address
                     </button>
                 </h2>
@@ -23,7 +25,10 @@
                             <img src="images/mylogo.jpg" alt="Info Logo" class="me-2" style="width: 120px;">
                             <div>
                                 <h4 class="alert-heading"><strong>Your delivery address</strong></h4>
-                                <p>{{ auth()->user()->user_location }}</p>
+                                <p class="{{ auth()->user()->user_location ? 'text-primary' : 'text-danger' }}"><i
+                                        {{ auth()->user()->user_location ? 'hidden' : '' }}
+                                        class="far fa-circle-exclamation mr-2"></i>{{ auth()->user()->user_location ?? 'Set up your delivery address to make sure your order will arrive at your address location.' }}
+                                </p>
                                 <hr>
                                 <p class="mb-0"><strong>Phone number:</strong> {{ auth()->user()->phone_number }}
                                 </p>
@@ -36,7 +41,7 @@
 
         <h3 class="mt-4"><i class="fa-light fa-bag-shopping"></i> My Orders</h3>
         <hr>
-        <div class="col-md-12">
+        <div class="col-md-12 p-0">
 
             <div class="card card-primary card-outline card-outline-tabs" style="height: 100%">
                 <div class="card-header p-0 border-bottom-0">
@@ -56,12 +61,12 @@
                         </li>
                     </ul>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-0">
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="pending" role="tabpanel"
                             aria-labelledby="custom-tabs-four-home-tab">
                             @foreach ($pendings as $order)
-                                <div class="col-md-12">
+                                <div class="col-md-12 p-0">
                                     <div class="info-box elevation-3">
                                         <div class="info-box-content">
                                             <span class="info-box-image">
@@ -153,12 +158,15 @@
                                             here to order</a></h5>
                                 </span>
                             @endif
-                            <strong>Grand Total: &#8369;{{ number_format($grandTotalPending, 2, '.', ',') }}</strong>
+                            <span class="ml-3">
+                                <strong>Grand Total:
+                                    &#8369;{{ number_format($grandTotalCancelled, 2, '.', ',') }}</strong>
+                            </span>
                         </div>
                         <div class="tab-pane fade" id="recent" role="tabpanel"
                             aria-labelledby="custom-tabs-four-home-tab">
                             @foreach ($recents as $order)
-                                <div class="col-md-12">
+                                <div class="col-md-12 p-0">
                                     <div class="info-box elevation-3">
                                         <div class="info-box-content">
 
@@ -235,13 +243,16 @@
                                             here to order</a></h5>
                                 </span>
                             @endif
-                            <strong>Grand Total: &#8369;{{ number_format($grandTotalRecent, 2, '.', ',') }}</strong>
+                            <span class="ml-3">
+                                <strong>Grand Total:
+                                    &#8369;{{ number_format($grandTotalCancelled, 2, '.', ',') }}</strong>
+                            </span>
                         </div>
 
                         <div class="tab-pane fade" id="cancelled" role="tabpanel"
                             aria-labelledby="custom-tabs-four-home-tab">
                             @foreach ($cancels as $order)
-                                <div class="col-md-12">
+                                <div class="col-md-12 p-0">
                                     <div class="info-box elevation-3">
                                         <div class="info-box-content">
                                             <span class="info-box-image">
@@ -316,7 +327,10 @@
                                         No cancelled order.</h5>
                                 </span>
                             @endif
-                            <strong>Grand Total: &#8369;{{ number_format($grandTotalCancelled, 2, '.', ',') }}</strong>
+                            <span class="ml-3">
+                                <strong>Grand Total:
+                                    &#8369;{{ number_format($grandTotalCancelled, 2, '.', ',') }}</strong>
+                            </span>
                         </div>
                     </div>
                 </div>
