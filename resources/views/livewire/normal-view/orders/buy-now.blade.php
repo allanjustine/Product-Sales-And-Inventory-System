@@ -18,6 +18,14 @@
                                 <h5>Are you sure you want to buy this product and place it to order?</h5>
 
                                 @if ($orderToBuy)
+
+                                    <div wire:loading>
+                                        <div class="loading-overlay">
+                                            <div class="loading-message card p-3 bg-dark">
+                                                <span class="spinner-border"></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="text-center">
                                         <img src="{{ Storage::url($orderToBuy->product_image) }}"
                                             alt="{{ $orderToBuy->product_name }}" class="img-fluid"
@@ -78,6 +86,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary form-control" wire:click="orderPlaceOrder()"><i
                             class="fa-solid fa-cart-circle-check"></i> Place Order</button>
+
                     <button type="button" class="btn btn-secondary form-control" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

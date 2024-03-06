@@ -55,12 +55,22 @@
                 </div>
                 @if ($productToBeCart)
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary form-control" wire:click="addToCartNow()"><i
-                                class="fa-solid fa-cart-plus"></i> <span wire:loading>Adding to cart...</span> <span
-                                wire:loading.remove>Add to
-                                Cart</span></button>
+                        <button type="button" wire:loading.attr="disabled" class="btn btn-primary form-control"
+                            wire:click="addToCartNow()">
+                            <span>
+                                <i class="fa-solid fa-cart-plus"></i> Add toCart
+                            </span>
+                        </button>
                         <button type="button" class="btn btn-secondary form-control"
                             data-dismiss="modal">Cancel</button>
+
+                        <div wire:loading>
+                            <div class="loading-overlay">
+                                <div class="loading-message card p-3 bg-dark">
+                                    <span class="spinner-border"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 @endif
             </div>
