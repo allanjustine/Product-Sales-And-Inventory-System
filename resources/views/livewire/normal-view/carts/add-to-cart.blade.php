@@ -15,7 +15,17 @@
                     <div class="row justify-content-center">
                         <div class="card w-100 shadow-none">
                             <div class="card-body">
-                                <h5>Are you sure you want to add this product to your cart?</h5>
+                                <h5>
+                                    @if (!$productToBeCart)
+                                        <span class="text-success"><i class="far fa-check-double"></i> Succes! added to
+                                            cart successfully you can now close the menu</span>
+
+                                        <button type="button" class="btn btn-primary form-control mt-5"
+                                            data-dismiss="modal">Close</button>
+                                    @else
+                                        Are you sure you want to add this product to your cart?
+                                    @endif
+                                </h5>
 
                                 @if ($productToBeCart)
                                     <div class="text-center">
@@ -43,12 +53,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary form-control" wire:click="addToCartNow()"><i
-                            class="fa-solid fa-cart-plus"></i> Add to
-                        Cart</button>
-                    <button type="button" class="btn btn-secondary form-control" data-dismiss="modal">Cancel</button>
-                </div>
+                @if ($productToBeCart)
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary form-control" wire:click="addToCartNow()"><i
+                                class="fa-solid fa-cart-plus"></i> <span wire:loading>Adding to cart...</span> <span
+                                wire:loading.remove>Add to
+                                Cart</span></button>
+                        <button type="button" class="btn btn-secondary form-control"
+                            data-dismiss="modal">Cancel</button>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

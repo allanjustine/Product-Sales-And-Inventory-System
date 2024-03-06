@@ -41,7 +41,6 @@ class Index extends Component
     public $orderToBuy;
     public $orderPlaceOrder;
     public $order;
-    public $allDisplayProducts;
 
     public function displayProducts()
     {
@@ -78,9 +77,11 @@ class Index extends Component
         ->where('user_id', auth()->id())
         ->get();
 
+        $allDisplayProducts = Product::count();
+
         $products = $query->paginate($this->perPage);
 
-        return compact('products', 'carts');
+        return compact('products', 'carts', 'allDisplayProducts');
     }
 
     public function view($id)
@@ -116,6 +117,7 @@ class Index extends Component
         }
 
         $this->dispatchBrowserEvent('success', ['message' => 'Product added to cart successfully.']);
+        $this->reset();
 
         // alert()->success('Success', 'Product added to cart successfully.');
 

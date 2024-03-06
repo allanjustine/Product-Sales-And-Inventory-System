@@ -336,15 +336,3 @@
         toastr.success("{{ session('message') }}");
     </script>
 @endif --}}
-
-<script>
-    function closeDropdown() {
-        var dropdownMenu = document.getElementById("myDropdown");
-        dropdownMenu.classList.remove("show"); // Remove the "show" class to hide the dropdown
-    }
-
-    // Prevent dropdown from closing when clicking inside
-    document.getElementById("myDropdown").addEventListener("click", function(event) {
-        event.stopPropagation(); // Prevent event propagation to parent elements
-    });
-</script>
