@@ -71,6 +71,7 @@
                 @foreach ($topDeals as $product)
                     <div class="grid-item col-md-3 col-sm-4 col-6">
                         <div class="card shadow product show" id="product-card" style="min-width: 50px;">
+
                             <div class="px-2" style="position: relative;">
                                 <div class="image-container">
                                     @if (Storage::exists($product->product_image))
@@ -122,6 +123,8 @@
                                     <strong>
                                         {{ $product->product_rating }}/5
                                     </strong>
+
+                                    <span class="text-danger">({{ $product->product_votes }})</span>
                                 </span>
                             </div>
                         </div>
@@ -207,6 +210,8 @@
                                     <strong>
                                         {{ $product->product_rating }}/5
                                     </strong>
+
+                                    <span class="text-danger">({{ $product->product_votes }})</span>
                                 </span>
                             </div>
                         </div>
@@ -284,6 +289,8 @@
                                     <strong>
                                         {{ $product->product_rating }}/5
                                     </strong>
+
+                                    <span class="text-danger">({{ $product->product_votes }})</span>
                                 </span>
                             </div>
                         </div>

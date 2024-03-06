@@ -74,9 +74,13 @@ class Index extends Component
             }
         }
 
+        $carts = Cart::with('product')
+        ->where('user_id', auth()->id())
+        ->get();
+
         $products = $query->paginate($this->perPage);
 
-        return compact('products');
+        return compact('products', 'carts');
     }
 
     public function view($id)
@@ -111,25 +115,23 @@ class Index extends Component
             ]);
         }
 
-        alert()->success('Success', 'Product added to cart successfully.');
+        $this->dispatchBrowserEvent('success', ['message' => 'Product added to cart successfully.']);
 
-        return redirect('/products');
+        // alert()->success('Success', 'Product added to cart successfully.');
+
+        // return redirect('/products');
     }
 
-    public function mount()
-    {
-        $this->cartItems = Cart::with('product')
-            ->where('user_id', auth()->id())
-            ->get();
-
-        $this->allDisplayProducts = Product::count();
-    }
 
     public function getProductTotalAmount($productId)
     {
         $totalAmount = 0;
 
-        foreach ($this->cartItems as $item) {
+        $cartItems = Cart::with('product')
+        ->where('user_id', auth()->id())
+        ->get();
+
+        foreach ($cartItems as $item) {
             if ($item->product_id == $productId) {
                 $totalAmount += $item->product->product_price * $item->quantity;
             }
@@ -142,7 +144,11 @@ class Index extends Component
     {
         $total = 0;
 
-        foreach ($this->cartItems as $item) {
+        $cartItems = Cart::with('product')
+        ->where('user_id', auth()->id())
+        ->get();
+
+        foreach ($cartItems as $item) {
             $total += $item->product->product_price * $item->quantity;
         }
 
@@ -163,10 +169,10 @@ class Index extends Component
                 'quantity' => $cart->quantity + $this->quantity,
             ]);
         }
+        $this->dispatchBrowserEvent('success', ['message' => 'Quantity updated']);
+        // alert()->toast('Updated cart quantity successfully', 'success');
 
-        alert()->toast('Updated cart quantity successfully', 'success');
-
-        return redirect('/products');
+        // return redirect('/products');
     }
 
     public function decreaseQuantity($itemId)
@@ -183,14 +189,14 @@ class Index extends Component
                     'quantity' => $updatedQuantity,
                 ]);
 
-                alert()->toast('Updated cart quantity successfully', 'success');
-                return redirect('/products');
+                // alert()->toast('Updated cart quantity successfully', 'success');
+                // return redirect('/products');
+                $this->dispatchBrowserEvent('success', ['message' => 'Quantity updated']);
             } else {
                 $cart->delete();
 
-                alert()->toast('The item was removed', 'success');
+                $this->dispatchBrowserEvent('success', ['message' => 'Cart item deleted']);
 
-                return redirect('/products');
             }
         }
     }
@@ -212,6 +218,7 @@ class Index extends Component
 
         return redirect('/products');
     }
+
 
     public function checkOut($itemId)
     {

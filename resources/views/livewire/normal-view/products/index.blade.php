@@ -103,26 +103,31 @@
         </details>
     </div>
     @role('user')
-        <div class="dropdown">
+        <div class="dropdown" wire:ignore.self>
             <a class="float-right mt-4 mr-4 p-2 cartdropdown" id="cart-dropdown" data-bs-toggle="dropdown"
                 aria-expanded="false" href=""><i class="fa-regular fa-cart-shopping pt-3"></i>
                 <span class="badge badge-pill badge-danger" id="badge-cart"><span
-                        style="font-size: 12px;">{{ $cartItems->count() }}</span></span>
+                        style="font-size: 12px;">{{ $carts->count() }}</span></span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end cartmenu" aria-labelledby="cart-dropdown">
+            <ul id="myDiv" class="dropdown-menu dropdown-menu-end cartmenu" aria-labelledby="cart-dropdown"
+                wire:ignore.self>
+                <a class="btn btn-link float-end" href="/products">Close</a>
                 <h4 class="pl-3"><strong><i class="fa-regular fa-cart-shopping"></i> My Cart
-                        ({{ $cartItems->count() }})</strong></h4>
+                        ({{ $carts->count() }})</strong>
+                </h4>
                 <hr>
-                @foreach ($cartItems as $item)
+                @foreach ($carts as $item)
                     <li class="cart-item px-3 py-2">
                         <div class="cart-item-image">
                             <button class="btn btn-link text-primary"
-                                wire:click.prevent="decreaseQuantity({{ $item->id }})">
+                                wire:click.prevent="decreaseQuantity({{ $item->id }})"
+                                onclick="handleButtonClick(event, {{ $item->id }})">
                                 <i class="fas fa-minus text-black"></i>
                             </button>
                             x{{ number_format($item->quantity) }}
                             <button class="btn btn-link text-primary"
-                                wire:click.prevent="updateCartItem({{ $item->id }})">
+                                wire:click.prevent="updateCartItem({{ $item->id }})"
+                                onclick="handleButtonClick(event, {{ $item->id }})">
                                 <i class="fas fa-plus text-black"></i>
                             </button>
                             @if (Storage::exists($item->product->product_image))
@@ -152,7 +157,7 @@
                     <li class="dropdown-divider"></li>
                 @endforeach
                 <li>
-                    @if ($cartItems->count() === 0)
+                    @if ($carts->count() === 0)
                         <p class="text-center">
                             <i class="fa-regular fa-xmark-to-slot mt-5" style="font-size: 50px;"></i>
                         </p>
@@ -303,3 +308,43 @@
         text-transform: capitalize;
     }
 </style>
+
+<script>
+    $(document).ready(function() {
+        toastr.options = {
+            "progressBar": true,
+            "closeButton": true,
+        }
+    });
+
+    window.addEventListener('success', event => {
+        toastr.success(event.detail.message);
+    });
+</script>
+<script>
+    function handleButtonClick(event, itemId) {
+        // Prevent event propagation to the dropdown container
+        event.stopPropagation();
+    }
+</script>
+{{-- @if (session('message'))
+    <script>
+        toastr.options = {
+            "progressBar": true,
+            "closeButton": true,
+        }
+        toastr.success("{{ session('message') }}");
+    </script>
+@endif --}}
+
+<script>
+    function closeDropdown() {
+        var dropdownMenu = document.getElementById("myDropdown");
+        dropdownMenu.classList.remove("show"); // Remove the "show" class to hide the dropdown
+    }
+
+    // Prevent dropdown from closing when clicking inside
+    document.getElementById("myDropdown").addEventListener("click", function(event) {
+        event.stopPropagation(); // Prevent event propagation to parent elements
+    });
+</script>

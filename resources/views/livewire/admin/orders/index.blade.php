@@ -25,6 +25,7 @@
                         <th>Buyer Rate</th>
                         <th>Status</th>
                         <th>Actions</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -101,6 +102,28 @@
                     </tr>
                 </tfoot>
             </table>
+            {{-- @if (session('message'))
+                <script>
+                    toastr.options = {
+                        "progressBar": true,
+                        "closeButton": true,
+                    }
+                    toastr.success("{{ session('message') }}");
+                </script>
+            @endif --}}
+            <script>
+                $(document).ready(function() {
+                    toastr.options = {
+                        "progressBar": true,
+                        "closeButton": true,
+                    }
+                });
+
+                window.addEventListener('success', event => {
+                    toastr.success(event.detail.message);
+                });
+            </script>
         </div>
     </div>
+
 </div>
