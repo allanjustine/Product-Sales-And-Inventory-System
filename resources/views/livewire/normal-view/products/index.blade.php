@@ -109,7 +109,7 @@
                 <span class="badge badge-pill badge-danger" id="badge-cart"><span
                         style="font-size: 12px;">{{ $carts->count() }}</span></span>
             </a>
-            <ul id="myDiv" class="dropdown-menu dropdown-menu-end cartmenu" aria-labelledby="cart-dropdown"
+            <ul id="myDiv" class="dropdown-menu dropdown-menu-end cartmenu" style="z-index: 1049;" aria-labelledby="cart-dropdown"
                 wire:ignore.self>
                 <a class="btn btn-link float-end" href="/products">Close</a>
                 <h4 class="pl-3"><strong><i class="fa-regular fa-cart-shopping"></i> My Cart
