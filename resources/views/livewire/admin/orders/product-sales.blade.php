@@ -16,6 +16,18 @@
                 <label>Entries</label>
                 <input type="search" class="form-control mb-3 mx-2 float-end" style="width: 198px;" placeholder="Search"
                     wire:model="search">
+                <select name="product_category" id="product_category" class="form-select mb-3 float-end"
+                    style="width: 180px;" wire:model="date_filter">
+                    <option value="All">(Filter date) All</option>
+                    <option value="Today">Today</option>
+                    <option value="Yesterday">Yesterday</option>
+                    <option value="This week">This week</option>
+                    <option value="Last week">Last week</option>
+                    <option value="This month">This month</option>
+                    <option value="Last month">Last month</option>
+                    <option value="This year">This year</option>
+                    <option value="Last year">Last year</option>
+                </select>
             </div>
             <table class="table table-bordered">
                 <thead class="bg-dark">
@@ -145,7 +157,8 @@
                         <td>
                             &#8369;{{ number_format($grandTotal, 2, '.', ',') }}
                         </td>
-                        <td colspan="4"><button class="btn btn-info float-end" wire:click="downloadPdf">Download PDF</button></td>
+                        <td colspan="4"><button class="btn btn-info float-end" wire:click="downloadPdf">Download
+                                PDF</button></td>
                     </tr>
                 </tfoot>
             </table>

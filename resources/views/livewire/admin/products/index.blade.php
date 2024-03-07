@@ -25,7 +25,7 @@
                     placeholder="Search" wire:model="search">
                 <select name="product_category" id="product_category" class="form-select mb-3 float-end"
                     style="width: 180px;" wire:model="category_name">
-                    <option value="All">All</option>
+                    <option value="All">(Filter category) All</option>
                     @foreach ($product_categories as $category)
                         <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
                     @endforeach

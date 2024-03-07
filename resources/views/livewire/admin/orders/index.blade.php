@@ -39,7 +39,7 @@
                             <td>&#8369;{{ number_format($order->order_price * $order->order_quantity, 2, '.', ',') }}
                             </td>
                             <td>{{ $order->order_payment_method }}</td>
-                            <td>{{ $order->user_location }}</td>
+                            <td>{{ $order->user->user_location }}</td>
                             <td>{{ date_format($order->created_at, 'F j, Y g:i A') }}</td>
                             <td class="text-center">
                                 @if ($order->user_rating === null)

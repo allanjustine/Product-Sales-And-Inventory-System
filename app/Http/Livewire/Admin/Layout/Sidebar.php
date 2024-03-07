@@ -18,10 +18,8 @@ class Sidebar extends Component
         $productsCount = Product::count();
         $feedbacks = Contact::count();
         $categoriesCount = ProductCategory::count();
-        $ordersCount = Order::where('order_status', 'Pending')
-            ->orWhere('order_status', 'Complete')
-            ->orWhere('order_status', 'To Deliver')
-            ->orWhere('order_status', 'Delivered')
+        $ordersCount = Order::where('order_status', '!=', 'Paid')
+            ->where('order_status', '!=', 'Cancelled')
             ->count();
         $productSalesCount = Order::where('order_status', 'Paid')->count();
 
