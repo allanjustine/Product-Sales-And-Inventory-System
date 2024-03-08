@@ -19,12 +19,15 @@
                     <div class="dropdown-menu w-100 {{ $searchLogs->isEmpty() ? 'd-none' : '' }}"
                         aria-labelledby="searchInput">
                         @foreach ($searchLogs as $log)
-                            <div class="d-flex">
-                                <button class="dropdown-item p-3" type="button"
-                                    wire:click.prevent="searchLog({{ $log->id }})">{{ $log->log_entry }}</button>
-                                <button style="position: absolute; right: 0;" id="search-delete" class="mr-2 mt-3"
-                                    wire:click.prevent="searchDelete({{ $log->id }})"><i
-                                        class="far fa-times"></i></button>
+                            <div class="d-flex align-items-center">
+                                <button class="dropdown-item p-3 flex-grow-1 text-truncate" type="button"
+                                    wire:click.prevent="searchLog({{ $log->id }})">
+                                    {{ $log->log_entry }}
+                                </button>
+                                <button class="mr-2" style="background-color: transparent; border: none;"
+                                    wire:click.prevent="searchDelete({{ $log->id }})">
+                                    <i class="far fa-times"></i>
+                                </button>
                             </div>
                         @endforeach
                         <div>
@@ -192,6 +195,7 @@
         </div>
     @endrole
     <div class="container">
+
         <br><br>
         <h3 class="mt-5"><i class="fa-light fa-box-open"></i> Products</h3>
         @if ($products->count() === 0)
@@ -308,7 +312,7 @@
             @if (!empty($search) && $products->count() === 0)
                 <span class="text-center">
                     <i class="fa-regular fa-face-thinking mb-3 mt-5" style="font-size: 100px;"></i>
-                    <h4>"{{ $search }}" product not found.</h4>
+                    <h4 class="text-break">"{{ $search }}" product not found.</h4>
                 </span>
             @elseif($products->count() === 0)
                 <span class="text-center">
@@ -392,10 +396,5 @@
     .dropdown-menu .dropdown-item:focus {
         background-color: transparent !important;
         color: black !important;
-    }
-
-    #search-delete {
-        border: none;
-        background: transparent;
     }
 </style>

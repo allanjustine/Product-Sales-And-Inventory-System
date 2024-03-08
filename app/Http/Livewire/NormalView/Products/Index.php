@@ -98,7 +98,7 @@ class Index extends Component
 
     public function searchDelete($id)
     {
-        SearchLog::findOrFail($id)->delete();
+        SearchLog::find($id)->delete();
         $this->reset();
     }
 
