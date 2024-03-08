@@ -108,6 +108,7 @@ class Index extends Component
 
         foreach ($logs as $log) {
             $log->where('user_id', auth()->user()->id)->delete();
+            $this->reset();
         }
     }
 
