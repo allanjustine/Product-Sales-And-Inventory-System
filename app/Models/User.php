@@ -47,7 +47,7 @@ class User extends Authenticatable
 
     public function getIsAdminAttribute()
     {
-        return $this->roles()->where('id', 2)->exists();
+        return $this->roles()->where('id', 1)->exists();
     }
 
     public function carts()
@@ -63,5 +63,10 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function logs()
+    {
+        return $this->hasMany(SearchLog::class);
     }
 }

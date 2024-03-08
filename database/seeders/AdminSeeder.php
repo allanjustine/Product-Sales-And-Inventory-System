@@ -40,19 +40,6 @@ class AdminSeeder extends Seeder
 
         // create demo users
 
-        $user = User::factory()->create([
-            'profile_image' => null,
-            'name' => 'Juan Dela Cruz',
-            'address' => 'Cebu City',
-            'email' => 'user@gmail.com',
-            'gender' => 'Male',
-            'phone_number' => '09092002123',
-            'email_verified_at' => now(),
-            'password' => bcrypt('password'),
-            'remember_token' => Str::random(10),
-        ]);
-        $user->assignRole($role1);
-
 
         $user = User::factory()->create([
             'profile_image' => null,
@@ -66,5 +53,18 @@ class AdminSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
         $user->assignRole($role2);
+
+        $user = User::factory()->create([
+            'profile_image' => null,
+            'name' => 'Juan Dela Cruz',
+            'address' => 'Cebu City',
+            'email' => 'user@gmail.com',
+            'gender' => 'Male',
+            'phone_number' => '09092002123',
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'),
+            'remember_token' => Str::random(10),
+        ]);
+        $user->assignRole($role1);
     }
 }

@@ -27,24 +27,38 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <img src="{{ Storage::url($orderToBuy->product_image) }}"
-                                            alt="{{ $orderToBuy->product_name }}" class="img-fluid"
-                                            style="width: 150px; height: 150px;">
+                                        @if (Storage::exists($orderToBuy->product_image))
+                                            <img src="{{ Storage::url($orderToBuy->product_image) }}"
+                                                alt="{{ $orderToBuy->product_name }}" class="img-fluid"
+                                                style="width: 150px; height: 150px;">
+                                        @else
+                                            <img src="{{ $orderToBuy->product_image }}"
+                                                alt="{{ $orderToBuy->product_name }}" class="img-fluid"
+                                                style="width: 150px; height: 150px;">
+                                        @endif
                                         <h6 class="mt-5"><strong>{{ $orderToBuy->product_name }}</strong></h6>
                                         <p><strong>&#8369;{{ number_format($orderToBuy->product_price, 2, '.', ',') }}</strong>
+                                        </p>
+                                        <p><strong>Stock: x{{ number_format($orderToBuy->product_stock) }}
+                                                PC(s)</strong>
                                         </p>
                                         <form>
                                             @csrf
                                             <p>
                                                 <span><strong>Quantity</strong>
-                                                    <input class="form-control" type="number"
-                                                        placeholder="Enter Quantity" wire:model.defer="order_quantity"
-                                                        min="1">
+                                                    <input
+                                                        class="form-control {{ $errors->has('order_quantity') ? 'border-danger' : '' }} {{ $order_quantity > $orderToBuy->product_stock ? 'border-danger' : '' }}"
+                                                        type="number" placeholder="Enter Quantity"
+                                                        wire:model.defer="order_quantity" min="1">
                                                     <br>
                                                     @error('order_quantity')
                                                         <span
                                                             class="text-center text-danger">*{{ $message }}</span><br>
                                                     @enderror
+                                                    @if ($order_quantity > $orderToBuy->product_stock)
+                                                        <span class="text-center text-danger">The product stock is
+                                                            insufficient please reduce your cart quantity</span><br>
+                                                    @endif
                                                 </span>
 
                                                 <span>

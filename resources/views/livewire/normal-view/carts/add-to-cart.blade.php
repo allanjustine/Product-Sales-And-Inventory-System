@@ -29,11 +29,19 @@
 
                                 @if ($productToBeCart)
                                     <div class="text-center">
-                                        <img src="{{ Storage::url($productToBeCart->product_image) }}"
-                                            alt="{{ $productToBeCart->product_name }}" class="img-fluid"
-                                            style="width: 150px; height: 150px;">
+                                        @if (Storage::exists($productToBeCart->product_image))
+                                            <img src="{{ Storage::url($productToBeCart->product_image) }}"
+                                                alt="{{ $productToBeCart->product_name }}" class="img-fluid"
+                                                style="width: 150px; height: 150px;">
+                                        @else
+                                            <img src="{{ $productToBeCart->product_image }}"
+                                                alt="{{ $productToBeCart->product_name }}" class="img-fluid"
+                                                style="width: 150px; height: 150px;">
+                                        @endif
                                         <h6 class="mt-5"><strong>{{ $productToBeCart->product_name }}</strong></h6>
                                         <p><strong>&#8369;{{ number_format($productToBeCart->product_price, 2, '.', ',') }}</strong>
+                                        </p>
+                                        <p><strong>Stock: {{ number_format($productToBeCart->product_price) }} PC(s)</strong>
                                         </p>
                                         <form>
                                             @csrf

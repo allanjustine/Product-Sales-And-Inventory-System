@@ -2,10 +2,13 @@
 
 namespace App\Http\Livewire\NormalView\Products;
 
+use App\Events\UserSearchLog;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\SearchLog;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -74,14 +77,45 @@ class Index extends Component
         }
 
         $carts = Cart::with('product')
-        ->where('user_id', auth()->id())
-        ->get();
+            ->where('user_id', auth()->id())
+            ->get();
 
         $allDisplayProducts = Product::count();
 
         $products = $query->paginate($this->perPage);
 
-        return compact('products', 'carts', 'allDisplayProducts');
+
+        if ($this->search) {
+            SearchLog::where('log_entry', $this->search)->delete();
+            $log_entry = $this->search;
+            event(new UserSearchLog($log_entry));
+        }
+
+        $searchLogs = SearchLog::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(5);
+
+        return compact('products', 'carts', 'allDisplayProducts', 'searchLogs');
+    }
+
+    public function searchDelete($id)
+    {
+        SearchLog::findOrFail($id)->delete();
+        $this->reset();
+    }
+
+    public function clearAllLogs()
+    {
+        $logs = SearchLog::all();
+
+        foreach ($logs as $log) {
+            $log->where('user_id', auth()->user()->id)->delete();
+        }
+    }
+
+    public function searchLog($id)
+    {
+        $search_log = SearchLog::findOrFail($id);
+
+        $this->search = $search_log->log_entry;
     }
 
     public function view($id)
@@ -130,8 +164,8 @@ class Index extends Component
         $totalAmount = 0;
 
         $cartItems = Cart::with('product')
-        ->where('user_id', auth()->id())
-        ->get();
+            ->where('user_id', auth()->id())
+            ->get();
 
         foreach ($cartItems as $item) {
             if ($item->product_id == $productId) {
@@ -147,8 +181,8 @@ class Index extends Component
         $total = 0;
 
         $cartItems = Cart::with('product')
-        ->where('user_id', auth()->id())
-        ->get();
+            ->where('user_id', auth()->id())
+            ->get();
 
         foreach ($cartItems as $item) {
             $total += $item->product->product_price * $item->quantity;
@@ -198,7 +232,6 @@ class Index extends Component
                 $cart->delete();
 
                 $this->dispatchBrowserEvent('success', ['message' => 'Cart item deleted']);
-
             }
         }
     }
@@ -229,13 +262,38 @@ class Index extends Component
         $this->itemPlaceOrder = $itemId;
     }
 
+    // public function checkOutAll()
+    // {
+    //     $allCart = Cart::all();
+
+    //     foreach ($allCart as $all) {
+    //         $transactionCode = 'AJM-' . Str::random(10);
+    //         $product = Order::create([
+    //             'user_id' => auth()->id(),
+    //             'product_id' => $all->product->id,
+    //             'order_quantity' => $all->quantity,
+    //             'order_price' => $all->product->product_price,
+    //             'order_total_amount' => $all->quantity * $all->product->product_price,
+    //             'order_payment_method' => 'Cash on delivery',
+    //             'order_status' => 'Pending',
+    //             'transaction_code' => $transactionCode,
+    //         ]);
+    //         $all->user->update([
+    //             'user_location' => $this->user_location
+    //         ]);
+
+    //         $product->save();
+    //         $all->delete();
+    //     }
+    // }
+
     public function placeOrder()
     {
         $cartItem = Cart::find($this->itemPlaceOrder);
 
         $this->validate([
             'order_payment_method'  =>      'required',
-            'user_location'         =>      'required|max:255'
+            'user_location'         =>      'required|max:255',
         ]);
 
         $product = $cartItem->product;
@@ -275,7 +333,6 @@ class Index extends Component
                 $cartItem->user->update([
                     'user_location' => $this->user_location
                 ]);
-
             }
 
             $product->product_stock -= $cartItem->quantity;
@@ -293,17 +350,21 @@ class Index extends Component
         } else {
 
             if ($productStatus == 'Not Available') {
-                alert()->error('Sorry', 'The product is Not Available');
+                // alert()->error('Sorry', 'The product is Not Available');
 
-                return redirect('/products');
+                // return redirect('/products');
+
+                $this->dispatchBrowserEvent('error', ['message' => 'The product is Not Available']);
             } elseif ($product->product_stock == 0) {
-                alert()->error('Sorry', 'The product is out of stock');
+                // alert()->error('Sorry', 'The product is out of stock');
 
-                return redirect('/products');
+                // return redirect('/products');
+                $this->dispatchBrowserEvent('warning', ['message' => 'The product is out of stock']);
             } else {
-                alert()->error('Sorry', 'The product stock is insufficient please reduce your cart quantity');
+                // alert()->error('Sorry', 'The product stock is insufficient please reduce your cart quantity');
 
-                return redirect('/products');
+                // return redirect('/products');
+                $this->dispatchBrowserEvent('info', ['message' => 'The product stock is insufficient please reduce your cart quantity']);
             }
         }
     }
@@ -313,8 +374,7 @@ class Index extends Component
 
         $this->orderToBuy = Product::findOrFail($productId);
 
-        if(auth()->check())
-        {
+        if (auth()->check()) {
             $this->user_location = auth()->user()->user_location;
         }
 
@@ -329,7 +389,7 @@ class Index extends Component
         $this->validate([
             'order_payment_method'  =>      'required',
             'user_location'         =>      'required|max:255',
-            'order_quantity'        =>      'required|numeric|min:1'
+            'order_quantity'        =>      ['required', 'numeric', 'min:1'],
         ]);
 
         $productQuantity = $product->product_stock;
@@ -343,7 +403,9 @@ class Index extends Component
             ])->first();
 
             if ($existingOrder) {
-                auth()->user()->update([
+                $user = User::where('id', auth()->user()->id);
+
+                $user->update([
                     'user_location' => $this->user_location
                 ]);
                 $existingOrder->created_at = now();
@@ -364,7 +426,9 @@ class Index extends Component
                 $order->transaction_code = $transactionCode;
                 $order->save();
 
-                auth()->user()->update([
+                $user = User::where('id', auth()->user()->id);
+
+                $user->update([
                     'user_location' => $this->user_location
                 ]);
             }
@@ -385,17 +449,21 @@ class Index extends Component
         } else {
 
             if ($productStatus == 'Not Available') {
-                alert()->error('Sorry', 'The product is Not Available');
+                // alert()->error('Sorry', 'The product is Not Available');
 
-                return redirect('/products');
+                // return redirect('/products');
+
+                $this->dispatchBrowserEvent('error', ['message' => 'The product is Not Available']);
             } elseif ($product->product_stock == 0) {
-                alert()->error('Sorry', 'The product is out of stock');
+                // alert()->error('Sorry', 'The product is out of stock');
 
-                return redirect('/products');
+                // return redirect('/products');
+                $this->dispatchBrowserEvent('warning', ['message' => 'The product is out of stock']);
             } else {
-                alert()->error('Sorry', 'The product stock is insufficient please reduce entering order quantity');
+                // alert()->error('Sorry', 'The product stock is insufficient please reduce your cart quantity');
 
-                return redirect('/products');
+                // return redirect('/products');
+                $this->dispatchBrowserEvent('info', ['message' => 'The product stock is insufficient please reduce your cart quantity']);
             }
         }
     }
@@ -429,7 +497,7 @@ class Index extends Component
             [
                 'product_categories' => $product_categories,
                 'cartItems' => $this->cartItems,
-                'total' => $this->getTotal()
+                'total' => $this->getTotal(),
             ]
         );
     }

@@ -13,10 +13,23 @@
                 <div class="modal-body">
                     <div>
                         @if ($cartItemToCheckOut)
+                            <div wire:loading>
+                                <div class="loading-overlay">
+                                    <div class="loading-message card p-3 bg-dark">
+                                        <span class="spinner-border"></span>
+                                    </div>
+                                </div>
+                            </div>
                             <p class="text-center">
-                                <img style="width: 90px; height: 90px; border-radius: 10%;"
-                                    src="{{ Storage::url($cartItemToCheckOut->product->product_image) }}"
-                                    alt="{{ $cartItemToCheckOut->product->product_name }}">
+                                @if (Storage::exists($cartItemToCheckOut->product->product_image))
+                                    <img src="{{ Storage::url($cartItemToCheckOut->product->product_image) }}"
+                                        alt="{{ $cartItemToCheckOut->product->product_name }}" class="img-fluid"
+                                        style="width: 150px; height: 150px;">
+                                @else
+                                    <img src="{{ $cartItemToCheckOut->product->product_image }}"
+                                        alt="{{ $cartItemToCheckOut->product->product_name }}" class="img-fluid"
+                                        style="width: 150px; height: 150px;">
+                                @endif
                             </p>
                             <p class="text-center">
                                 <strong>
@@ -25,7 +38,7 @@
                             </p>
                             <p class="text-center">
                                 <strong>
-                                    {{ number_format($cartItemToCheckOut->quantity) }} PC(s)
+                                    x{{ number_format($cartItemToCheckOut->quantity) }} PC(s)
                                 </strong>
                             </p>
                             <p class="text-center">
@@ -39,6 +52,13 @@
                                     &#8369;{{ number_format($cartItemToCheckOut->product->product_price * $cartItemToCheckOut->quantity, 2, '.', ',') }}
                                 </strong>
                             </p>
+                            @if ($cartItemToCheckOut->quantity > $cartItemToCheckOut->product->product_stock)
+                                <span class="text-center text-danger">The product stock is
+                                    insufficient please reduce your cart quantity. <strong>Stock:
+                                        x{{ number_format($cartItemToCheckOut->product->product_stock) }}
+                                        PC(s)</strong>
+                                </span><br>
+                            @endif
                         @endif
                     </div>
                     <hr>
@@ -47,7 +67,7 @@
                         @csrf
                         <label for="order_payment_method">Payment Method</label>
                         <select id="select-cat" class="form-select" style="" name="order_payment_method"
-                            id="order_payment_method" wire:model.defer="order_payment_method" required>
+                            id="order_payment_method" wire:model="order_payment_method" required>
                             <option selected hidden="true">Select a Payment Method</option>
                             <option disabled>Select a Payment Method</option>
                             <option value="Cash On Delivery">Cash On Delivery</option>

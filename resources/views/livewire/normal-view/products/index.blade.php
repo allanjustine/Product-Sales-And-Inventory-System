@@ -11,8 +11,28 @@
             </summary>
             <p>
             <div class="col-md-5 col-sm-6 offset-md-4 offset-sm-3 mt-2">
-                <input type="search" class="form-control" placeholder="Search" wire:model.lazy="search"
-                    style="border-radius: 30px; height: 50px;">
+                <div class="dropdown">
+                    <input type="search" class="form-control dropdown-toggle" id="searchInput" data-toggle="dropdown"
+                        placeholder="Search" wire:model.lazy="search" style="border-radius: 30px; height: 50px;"
+                        aria-haspopup="true" aria-expanded="false">
+
+                    <div class="dropdown-menu w-100 {{ $searchLogs->isEmpty() ? 'd-none' : '' }}"
+                        aria-labelledby="searchInput">
+                        @foreach ($searchLogs as $log)
+                            <div class="d-flex">
+                                <button class="dropdown-item p-3" type="button"
+                                    wire:click.prevent="searchLog({{ $log->id }})">{{ $log->log_entry }}</button>
+                                <button style="position: absolute; right: 0;" id="search-delete" class="mr-2 mt-3"
+                                    wire:click.prevent="searchDelete({{ $log->id }})"><i
+                                        class="far fa-times"></i></button>
+                            </div>
+                        @endforeach
+                        <div>
+                            <a href="#" class="float-end px-3"
+                                wire:click.prevent="clearAllLogs({{ auth()->user()->id }})">Clear all</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row d-flex justify-content-center mt-5 pb-3">
                 <div class="col-md-1 col-sm-1 col-3 text-center">
@@ -109,8 +129,8 @@
                 <span class="badge badge-pill badge-danger" id="badge-cart"><span
                         style="font-size: 12px;">{{ $carts->count() }}</span></span>
             </a>
-            <ul id="myDiv" class="dropdown-menu dropdown-menu-end cartmenu" style="z-index: 1049;" aria-labelledby="cart-dropdown"
-                wire:ignore.self>
+            <ul id="myDiv" class="dropdown-menu dropdown-menu-end cartmenu" style="z-index: 1049;"
+                aria-labelledby="cart-dropdown" wire:ignore.self>
                 <a class="btn btn-link float-end" href="/products">Close</a>
                 <h4 class="pl-3"><strong><i class="fa-regular fa-cart-shopping"></i> My Cart
                         ({{ $carts->count() }})</strong>
@@ -157,6 +177,7 @@
                     <li class="dropdown-divider"></li>
                 @endforeach
                 <li>
+                    {{-- <button wire:click.prevent="checkOutAll()">Checkout all</button> --}}
                     @if ($carts->count() === 0)
                         <p class="text-center">
                             <i class="fa-regular fa-xmark-to-slot mt-5" style="font-size: 50px;"></i>
@@ -182,6 +203,7 @@
         @endif
         <hr>
         <div class="row">
+
             @foreach ($products as $product)
                 <div class="col-md-3 mt-2 col-sm-4 col-6">
                     <div class="card shadow product-card" style="min-width: 50px;">
@@ -320,6 +342,15 @@
     window.addEventListener('success', event => {
         toastr.success(event.detail.message);
     });
+    window.addEventListener('error', event => {
+        toastr.error(event.detail.message);
+    });
+    window.addEventListener('warning', event => {
+        toastr.warning(event.detail.message);
+    });
+    window.addEventListener('info', event => {
+        toastr.info(event.detail.message);
+    });
 </script>
 <script>
     function handleButtonClick(event, itemId) {
@@ -327,6 +358,8 @@
         event.stopPropagation();
     }
 </script>
+
+
 {{-- @if (session('message'))
     <script>
         toastr.options = {
@@ -354,5 +387,15 @@
         margin-top: 20px;
         font-size: 18px;
         color: #333;
+    }
+
+    .dropdown-menu .dropdown-item:focus {
+        background-color: transparent !important;
+        color: black !important;
+    }
+
+    #search-delete {
+        border: none;
+        background: transparent;
     }
 </style>
