@@ -112,6 +112,11 @@ class Index extends Component
         }
     }
 
+    public function notAvailable()
+    {
+        $this->dispatchBrowserEvent('error', ['message' => 'This product is not available.']);
+    }
+
     public function searchLog($id)
     {
         $search_log = SearchLog::findOrFail($id);

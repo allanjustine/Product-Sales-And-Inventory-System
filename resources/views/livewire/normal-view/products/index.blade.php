@@ -259,12 +259,12 @@
                                     data-toggle="modal" data-target="#viewProduct"
                                     wire:click="view({{ $product->id }})"><i class="fa-solid fa-eye"></i> View</a>
                                 @if ($product->product_status === 'Not Available')
-                                    <a href=""
-                                        class="btn btn-warning mt-1 form-control disabled cursor-not-allowed"><i
+                                    <a wire:click="notAvailable()"
+                                        class="btn btn-warning mt-1 form-control"><i
                                             class="fa-solid fa-cart-plus"></i>
                                         Add to Cart</a>
-                                    <a href=""
-                                        class="btn btn-primary mt-1 form-control disabled cursor-not-allowed"><i
+                                    <a wire:click="notAvailable()"
+                                        class="btn btn-primary mt-1 form-control"><i
                                             class="fa-solid fa-cart-shopping"></i>
                                         Buy Now</a>
                                 @else
