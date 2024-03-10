@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="row d-flex justify-content-center mt-5 pb-3">
-                <div class="col-md-1 col-sm-1 col-3 text-center">
+                {{-- <div class="col-md-1 col-sm-1 col-3 text-center">
                     <label>Show</label>
                     <select wire:model="perPage" class="perPageSelect form-select" id="select-cat">
                         <option>15</option>
@@ -49,8 +49,8 @@
                         <option>50</option>
                         <option>100</option>
                     </select>
-                </div>
-                <div class="col-md-2 col-sm-3 col-4 text-center">
+                </div> --}}
+                <div class="col-md-2 col-sm-3 col-6 text-center">
                     <label for="category">Categories</label>
                     <select name="category" id="select-cat" class="form-select" wire:model="category_name">
                         <option value="All">All</option>
@@ -59,7 +59,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-2 col-sm-3 col-4 text-center">
+                <div class="col-md-2 col-sm-3 col-6 text-center">
                     <label for="sort">Ratings</label>
                     <select wire:model="product_rating" class="form-select" id="select-cat">
                         <option value="All">All</option>
@@ -224,9 +224,13 @@
                                             alt="{{ $product->product_name }}">
                                     @endif
                                 </div>
-                                <a href="#" title="@if ($product->favorites->contains('user_id', auth()->user()->id)) {{ $product->favorites->count() }} people added this to favorites @else Add to favorites @endif" class="btn btn-link position-absolute top-0 start-0"
+                                <a href="#"
+                                    title="@if ($product->favorites->contains('user_id', auth()->user()->id)) {{ $product->favorites->count() }} people added this to favorites @else Add to favorites @endif"
+                                    class="btn btn-link position-absolute top-0 start-0"
                                     wire:click.prevent="addToFavorite({{ $product->id }})">
-                                    <h2 class="text-danger"><i class="{{ $product->favorites->contains('user_id', auth()->user()->id) ? 'fas' : 'far' }} fa-heart"></i></h2>
+                                    <h2 class="text-danger"><i
+                                            class="{{ $product->favorites->contains('user_id', auth()->user()->id) ? 'fas' : 'far' }} fa-heart"></i>
+                                    </h2>
                                 </a>
 
                                 <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
@@ -270,15 +274,14 @@
                                                 class="fa-solid fa-cart-shopping"></i>
                                             Buy Now</a>
                                     @else
-                                        <a href="" class="btn btn-warning mt-1 form-control" data-toggle="modal"
+                                        <a class="btn btn-warning mt-1 form-control" data-toggle="modal"
                                             data-target="#addToCart"
                                             wire:click.prevent="addToCart({{ $product->id }})"><i
                                                 class="fa-solid fa-cart-plus"></i>
                                             Add to Cart</a>
 
-                                        <a href="" class="btn btn-primary mt-1 form-control btn-block"
-                                            data-toggle="modal" data-target="#toBuyNow"
-                                            wire:click.prevent="toBuyNow({{ $product->id }})"><i
+                                        <a class="btn btn-primary mt-1 form-control btn-block" data-toggle="modal"
+                                            data-target="#toBuyNow" wire:click.prevent="toBuyNow({{ $product->id }})"><i
                                                 class="fa-solid fa-cart-shopping"></i> Buy Now</a>
                                     @endif
                                 @endrole
@@ -327,9 +330,13 @@
             @endif
         </div>
     </div>
-    <div class="d-flex align-items-center overflow-auto">
+    {{-- <div class="d-flex align-items-center overflow-auto">
         <span class="mx-auto pt-3" id="paginate">
-            {{ $products->links() }}</span>
+            {{ $products->links('pagination::bootstrap-4') }}</span>
+    </div> --}}
+    <div class="d-flex mb-2 align-items-center overflow-auto">
+        <a wire:click.prevent="loadMore()" class="mx-auto btn btn-link" {{ $products->count() >= $allDisplayProducts ? 'hidden' : '' }} id="paginate">
+            Load more...</a>
     </div>
 </div>
 

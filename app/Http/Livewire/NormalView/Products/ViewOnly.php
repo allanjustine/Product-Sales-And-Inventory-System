@@ -15,12 +15,19 @@ class ViewOnly extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $search;
-    public $perPage = 15;
+    // public $perPage = 15;
     public $category_name = 'All';
     public $sort = 'low_to_high';
     public $product_rating = 'All';
     public $productView;
     public $allDisplayProducts;
+
+    public $loadMore = 20;
+
+    public function loadMore()
+    {
+        $this->loadMore += $this->loadMore;
+    }
 
     public function mount()
     {
@@ -60,7 +67,7 @@ class ViewOnly extends Component
         }
 
 
-        $products = $query->paginate($this->perPage);
+        $products = $query->paginate($this->loadMore);
 
         return compact('products');
     }
@@ -73,7 +80,7 @@ class ViewOnly extends Component
     public function clearFilters()
     {
         $this->search = '';
-        $this->perPage = 15;
+        // $this->perPage = 15;
         $this->category_name = 'All';
         $this->sort = 'low_to_high';
         $this->product_rating = 'All';

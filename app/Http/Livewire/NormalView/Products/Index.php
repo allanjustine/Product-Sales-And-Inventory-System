@@ -24,7 +24,7 @@ class Index extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $search;
-    public $perPage = 15;
+    // public $perPage = 15;
     public $category_name = 'All';
     public $sort = 'low_to_high';
     public $product_rating = 'All';
@@ -45,6 +45,12 @@ class Index extends Component
     public $orderToBuy;
     public $orderPlaceOrder;
     public $order;
+    public $loadMore = 20;
+
+    public function loadMore()
+    {
+        $this->loadMore += $this->loadMore;
+    }
 
     public function displayProducts()
     {
@@ -83,7 +89,7 @@ class Index extends Component
 
         $allDisplayProducts = Product::count();
 
-        $products = $query->paginate($this->perPage);
+        $products = $query->take($this->loadMore)->latest()->get();
 
         $searchLogs = SearchLog::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->take(5)->get();
 
@@ -498,7 +504,7 @@ class Index extends Component
     public function clearFilters()
     {
         $this->search = '';
-        $this->perPage = 15;
+        // $this->perPage = 15;
         $this->category_name = 'All';
         $this->sort = 'low_to_high';
         $this->product_rating = 'All';
