@@ -85,14 +85,14 @@ class Index extends Component
 
         $products = $query->paginate($this->perPage);
 
+        $searchLogs = SearchLog::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->take(5)->get();
+
         if ($this->search) {
             SearchLog::where('log_entry', $this->search)->delete();
             $log_entry = $this->search;
             event(new UserSearchLog($log_entry));
         }
 
-
-        $searchLogs = SearchLog::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(5);
 
         return compact('products', 'carts', 'allDisplayProducts', 'searchLogs');
     }

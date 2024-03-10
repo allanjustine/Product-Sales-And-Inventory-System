@@ -327,9 +327,9 @@
             @endif
         </div>
     </div>
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center overflow-auto">
         <span class="mx-auto pt-3" id="paginate">
-            {{ $products->links('pages.normal-view.layout.pagination') }}</span>
+            {{ $products->links('pagination::bootstrap-4') }}</span>
     </div>
 </div>
 
