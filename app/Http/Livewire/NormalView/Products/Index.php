@@ -4,6 +4,7 @@ namespace App\Http\Livewire\NormalView\Products;
 
 use App\Events\UserSearchLog;
 use App\Models\Cart;
+use App\Models\Favorite;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -47,7 +48,7 @@ class Index extends Component
 
     public function displayProducts()
     {
-        $query = Product::search($this->search);
+        $query = Product::search($this->search)->with('favorites');
 
         if ($this->category_name != 'All') {
             $query->whereHas('product_category', function ($q) {
@@ -84,12 +85,12 @@ class Index extends Component
 
         $products = $query->paginate($this->perPage);
 
-
         if ($this->search) {
             SearchLog::where('log_entry', $this->search)->delete();
             $log_entry = $this->search;
             event(new UserSearchLog($log_entry));
         }
+
 
         $searchLogs = SearchLog::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(5);
 
@@ -115,6 +116,26 @@ class Index extends Component
     public function notAvailable()
     {
         $this->dispatchBrowserEvent('error', ['message' => 'This product is not available.']);
+    }
+
+    public function addToFavorite($id)
+    {
+        $productFav = Product::findOrFail($id);
+
+        $added = Favorite::where(['user_id' => auth()->user()->id, 'product_id' => $productFav->id, 'status' => true])->first();
+
+        if ($added) {
+            $added->delete();
+            $this->dispatchBrowserEvent('success', ['message' => 'Removed from favorites']);
+        } else {
+            Favorite::create([
+                'user_id'           =>      auth()->user()->id,
+                'product_id'        =>      $productFav->id,
+                'status'            =>      true
+            ]);
+
+            $this->dispatchBrowserEvent('success', ['message' => 'Added to favorites']);
+        }
     }
 
     public function searchLog($id)

@@ -31,6 +31,13 @@ class Product extends Model
         return $this->hasMany(Order::class);
     }
 
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+
+
     public function scopeSearch($query, $terms)
     {
         collect(explode(" ", $terms))

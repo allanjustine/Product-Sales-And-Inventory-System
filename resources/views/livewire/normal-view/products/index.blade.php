@@ -209,87 +209,90 @@
         <div class="row">
 
             @foreach ($products as $product)
-                <div class="col-md-3 mt-2 col-sm-4 col-6">
-                    <div class="card shadow product-card" style="min-width: 50px;">
-                        <div class="px-2" style="position: relative;">
-                            <div class="image-container">
-                                @if (Storage::exists($product->product_image))
-                                    <img class="card-img-top mt-4" src="{{ Storage::url($product->product_image) }}"
-                                        alt="{{ $product->product_name }}">
-                                @else
-                                    <img class="card-img-top mt-4" src="{{ url($product->product_image) }}"
-                                        alt="{{ $product->product_name }}">
-                                @endif
-                            </div>
+                <div class="col-md-3 mt-2 col-sm-4 col-6 p-1">
 
-                            <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
-                                @if ($product->product_stock >= 20)
-                                    <span
-                                        class="badge badge-success badge-pill">{{ number_format($product->product_stock) }}</span>
-                                @elseif ($product->product_stock)
-                                    <span
-                                        class="badge badge-warning badge-pill">{{ number_format($product->product_stock) }}</span>
-                                @else
-                                    <span class="badge badge-danger badge-pill">OUT OF STOCK</span>
-                                @endif
-                            </div>
-
-                        </div>
-                        <div class="card-footer text-center py-4 mt-auto">
-                            <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
-                                {{ $product->product_category->category_name }}</h6>
-                            <h3 class="font-size-1 font-weight-normal">
-                                <h5 id="product_name">{{ $product->product_name }}</h5>
-                            </h3>
-                            <div class="d-block font-size-1 mb-2">
-                                <span class="font-weight-medium"><i
-                                        class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
-                            </div>
-                            <div class="d-block font-size-1 mb-2">
-                                <span class="font-weight-medium">
-                                    @if ($product->product_status === 'Available')
-                                        <td><span class="badge badge-success">AVAILABLE</span></td>
+                    <a href="#" class="text-black" data-toggle="modal" data-target="#viewProduct"
+                        wire:click="view({{ $product->id }})">
+                        <div class="card shadow product-card" style="min-width: 50px;">
+                            <div style="position: relative;">
+                                <div class="image-container">
+                                    @if (Storage::exists($product->product_image))
+                                        <img class="card-img-top" src="{{ Storage::url($product->product_image) }}"
+                                            alt="{{ $product->product_name }}">
                                     @else
-                                        <td><span class="badge badge-danger">NOT AVAILABLE</span></td>
+                                        <img class="card-img-top" src="{{ url($product->product_image) }}"
+                                            alt="{{ $product->product_name }}">
                                     @endif
-                                </span>
+                                </div>
+                                <a href="#" title="@if ($product->favorites->contains('user_id', auth()->user()->id)) {{ $product->favorites->count() }} people added this to favorites @else Add to favorites @endif" class="btn btn-link position-absolute top-0 start-0"
+                                    wire:click.prevent="addToFavorite({{ $product->id }})">
+                                    <h2 class="text-danger"><i class="{{ $product->favorites->contains('user_id', auth()->user()->id) ? 'fas' : 'far' }} fa-heart"></i></h2>
+                                </a>
+
+                                <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
+                                    @if ($product->product_stock >= 20)
+                                        <span
+                                            class="badge badge-success badge-pill">{{ number_format($product->product_stock) }}</span>
+                                    @elseif ($product->product_stock)
+                                        <span
+                                            class="badge badge-warning badge-pill">{{ number_format($product->product_stock) }}</span>
+                                    @else
+                                        <span class="badge badge-danger badge-pill">OUT OF STOCK</span>
+                                    @endif
+                                </div>
+
                             </div>
-                            @role('user')
-                                <a href="" class="btn btn-outline-info mt-1 form-control btn-block"
-                                    data-toggle="modal" data-target="#viewProduct"
-                                    wire:click="view({{ $product->id }})"><i class="fa-solid fa-eye"></i> View</a>
-                                @if ($product->product_status === 'Not Available')
-                                    <a wire:click="notAvailable()"
-                                        class="btn btn-warning mt-1 form-control"><i
-                                            class="fa-solid fa-cart-plus"></i>
-                                        Add to Cart</a>
-                                    <a wire:click="notAvailable()"
-                                        class="btn btn-primary mt-1 form-control"><i
-                                            class="fa-solid fa-cart-shopping"></i>
-                                        Buy Now</a>
-                                @else
-                                    <a href="" class="btn btn-warning mt-1 form-control" data-toggle="modal"
-                                        data-target="#addToCart" wire:click.prevent="addToCart({{ $product->id }})"><i
-                                            class="fa-solid fa-cart-plus"></i>
-                                        Add to Cart</a>
+                            <div class="card-footer text-center mt-auto">
+                                <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
+                                    {{ $product->product_category->category_name }}</h6>
+                                <h3 class="font-size-1 font-weight-normal">
+                                    <h5 id="product_name">{{ $product->product_name }}</h5>
+                                </h3>
+                                <div class="d-block font-size-1 mb-2">
+                                    <span class="font-weight-medium"><i
+                                            class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
+                                </div>
+                                <div class="d-block font-size-1 mb-2">
+                                    <span class="font-weight-medium">
+                                        @if ($product->product_status === 'Available')
+                                            <td><span class="badge badge-success">AVAILABLE</span></td>
+                                        @else
+                                            <td><span class="badge badge-danger">NOT AVAILABLE</span></td>
+                                        @endif
+                                    </span>
+                                </div>
+                                @role('user')
+                                    @if ($product->product_status === 'Not Available')
+                                        <a wire:click="notAvailable()" class="btn btn-warning mt-1 form-control"><i
+                                                class="fa-solid fa-cart-plus"></i>
+                                            Add to Cart</a>
+                                        <a wire:click="notAvailable()" class="btn btn-primary mt-1 form-control"><i
+                                                class="fa-solid fa-cart-shopping"></i>
+                                            Buy Now</a>
+                                    @else
+                                        <a href="" class="btn btn-warning mt-1 form-control" data-toggle="modal"
+                                            data-target="#addToCart"
+                                            wire:click.prevent="addToCart({{ $product->id }})"><i
+                                                class="fa-solid fa-cart-plus"></i>
+                                            Add to Cart</a>
 
-                                    <a href="" class="btn btn-primary mt-1 form-control btn-block"
-                                        data-toggle="modal" data-target="#toBuyNow"
-                                        wire:click.prevent="toBuyNow({{ $product->id }})"><i
-                                            class="fa-solid fa-cart-shopping"></i> Buy Now</a>
-                                @endif
-                            @endrole
-                            @role('admin')
-                                <a href="/admin/products" class="btn btn-primary mt-1 form-control btn-block"><i
-                                        class="fa-light fa-pen-to-square"></i> Update</a>
-                            @endrole
+                                        <a href="" class="btn btn-primary mt-1 form-control btn-block"
+                                            data-toggle="modal" data-target="#toBuyNow"
+                                            wire:click.prevent="toBuyNow({{ $product->id }})"><i
+                                                class="fa-solid fa-cart-shopping"></i> Buy Now</a>
+                                    @endif
+                                @endrole
+                                @role('admin')
+                                    <a href="/admin/products" class="btn btn-primary mt-1 form-control btn-block"><i
+                                            class="fa-light fa-pen-to-square"></i> Update</a>
+                                @endrole
 
-                            <div class="d-flex font-size-1 mb-2">
-                                <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">Sold:
+                                <div class="d-flex font-size-1 mb-2">
+                                    <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">Sold:
 
-                                    {{ $product->product_sold }}
-                                </strong>
-                                {{-- <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">
+                                        {{ $product->product_sold }}
+                                    </strong>
+                                    {{-- <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">
                                     Sold:
                                     @if ($product->product_sold >= 1000)
                                         {{ number_format($product->product_sold / 1000, 1) }}k
@@ -297,16 +300,18 @@
                                         {{ $product->product_sold }}
                                     @endif
                                 </strong> --}}
-                                <span class="font-weight-medium pr-2" style="position: absolute; bottom:0; right: 0;">
-                                    <i class="fa-solid fa-star"></i>
-                                    <strong>
-                                        {{ $product->product_rating }}/5
-                                    </strong>
-                                    <span class="text-danger">({{ $product->product_votes }})</span>
-                                </span>
+                                    <span class="font-weight-medium pr-2"
+                                        style="position: absolute; bottom:0; right: 0;">
+                                        <i class="fa-solid fa-star"></i>
+                                        <strong>
+                                            {{ $product->product_rating }}/5
+                                        </strong>
+                                        <span class="text-danger">({{ $product->product_votes }})</span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @endforeach
             @if (!empty($search) && $products->count() === 0)

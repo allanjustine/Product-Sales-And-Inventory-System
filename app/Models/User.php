@@ -69,4 +69,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(SearchLog::class);
     }
+
+    public function users()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }
