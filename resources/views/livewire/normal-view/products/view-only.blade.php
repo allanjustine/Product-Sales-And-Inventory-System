@@ -109,71 +109,72 @@
         <div class="row">
             @foreach ($products as $product)
                 <div class="col-md-3 mt-2 col-sm-4 col-6">
-                    <div class="card shadow product-card" style="min-width: 50px;">
-                        <div class="p-2" style="position: relative;">
-                            <div class="image-container">
-                                @if (Storage::exists($product->product_image))
-                                    <img class="card-img-top mt-4" src="{{ Storage::url($product->product_image) }}"
-                                        alt="{{ $product->product_name }}">
-                                @else
-                                    <img class="card-img-top mt-4" src="{{ url($product->product_image) }}"
-                                        alt="{{ $product->product_name }}">
-                                @endif
-                            </div>
-
-                            <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
-                                @if ($product->product_stock >= 20)
-                                    <span
-                                        class="badge badge-success badge-pill">{{ number_format($product->product_stock) }}</span>
-                                @elseif ($product->product_stock)
-                                    <span
-                                        class="badge badge-warning badge-pill">{{ number_format($product->product_stock) }}</span>
-                                @else
-                                    <span class="badge badge-danger badge-pill">OUT OF STOCK</span>
-                                @endif
-                            </div>
-
-                        </div>
-                        <div class="card-footer text-center py-4 mt-auto">
-                            <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
-                                {{ $product->product_category->category_name }}</h6>
-                            <h3 class="font-size-1 font-weight-normal">
-                                <h5 id="product_name">{{ $product->product_name }}</h5>
-                            </h3>
-                            <div class="d-block font-size-1 mb-2">
-                                <span class="font-weight-medium"><i
-                                        class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
-                            </div>
-                            <div class="d-block font-size-1 mb-2">
-                                <span class="font-weight-medium">
-                                    @if ($product->product_status === 'Available')
-                                        <td><span class="badge badge-success">AVAILABLE</span></td>
+                    <a href="#" class="text-black" data-toggle="modal" data-target="#viewProduct"
+                        wire:click="view({{ $product->id }})">
+                        <div class="card shadow product-card" style="min-width: 50px;">
+                            <div style="position: relative;">
+                                <div class="image-container">
+                                    @if (Storage::exists($product->product_image))
+                                        <img class="card-img-top" src="{{ Storage::url($product->product_image) }}"
+                                            alt="{{ $product->product_name }}">
                                     @else
-                                        <td><span class="badge badge-danger">NOT AVAILABLE</span></td>
+                                        <img class="card-img-top" src="{{ url($product->product_image) }}"
+                                            alt="{{ $product->product_name }}">
                                     @endif
-                                </span>
+                                </div>
+
+                                <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
+                                    @if ($product->product_stock >= 20)
+                                        <span
+                                            class="badge badge-success badge-pill">{{ number_format($product->product_stock) }}</span>
+                                    @elseif ($product->product_stock)
+                                        <span
+                                            class="badge badge-warning badge-pill">{{ number_format($product->product_stock) }}</span>
+                                    @else
+                                        <span class="badge badge-danger badge-pill">OUT OF STOCK</span>
+                                    @endif
+                                </div>
+
                             </div>
-                            <a href="" class="btn btn-outline-info mt-1 form-control" data-toggle="modal"
-                                data-target="#viewProduct" wire:click="view({{ $product->id }})"><i
-                                    class="fa-solid fa-eye"></i> View</a>
-                            <a href="/login" class="btn btn-primary mt-1 form-control"><i
-                                    class="fa-solid fa-cart-shopping"></i> Buy Now</a>
+                            <div class="card-footer text-center mb-3 mt-auto">
+                                <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
+                                    {{ $product->product_category->category_name }}</h6>
+                                <h3 class="font-size-1 font-weight-normal">
+                                    <h5 id="product_name">{{ $product->product_name }}</h5>
+                                </h3>
+                                <div class="d-block font-size-1 mb-2">
+                                    <span class="font-weight-medium"><i
+                                            class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
+                                </div>
+                                <div class="d-block font-size-1 mb-2">
+                                    <span class="font-weight-medium">
+                                        @if ($product->product_status === 'Available')
+                                            <td><span class="badge badge-success">AVAILABLE</span></td>
+                                        @else
+                                            <td><span class="badge badge-danger">NOT AVAILABLE</span></td>
+                                        @endif
+                                    </span>
+                                </div>
+                                <a href="/login" class="btn btn-primary mt-1 form-control"><i
+                                        class="fa-solid fa-cart-shopping"></i> Buy Now</a>
 
-                            <div class="d-flex font-size-1 mb-2">
-                                <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">Sold:
+                                <div class="d-flex font-size-1 mb-2">
+                                    <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">Sold:
 
-                                    {{ $product->product_sold }}
-                                </strong>
-                                <span class="font-weight-medium pr-2" style="position: absolute; bottom:0; right: 0;">
-                                    <i class="fa-solid fa-star"></i>
-                                    <strong>
-                                        {{ $product->product_rating }}/5
+                                        {{ $product->product_sold }}
                                     </strong>
-                                    <span class="text-danger">({{ $product->product_votes }})</span>
-                                </span>
+                                    <span class="font-weight-medium pr-2"
+                                        style="position: absolute; bottom:0; right: 0;">
+                                        <i class="fa-solid fa-star"></i>
+                                        <strong>
+                                            {{ $product->product_rating }}/5
+                                        </strong>
+                                        <span class="text-danger">({{ $product->product_votes }})</span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @endforeach
             @if (!empty($search) && $products->count() === 0)

@@ -48,7 +48,7 @@ class Index extends Component
 
     public function displayProducts()
     {
-        $query = Product::search($this->search)->with('favorites');
+        $query = Product::search($this->search);
 
         if ($this->category_name != 'All') {
             $query->whereHas('product_category', function ($q) {

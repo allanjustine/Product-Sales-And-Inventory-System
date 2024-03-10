@@ -242,7 +242,7 @@
                                 </div>
 
                             </div>
-                            <div class="card-footer text-center mt-auto">
+                            <div class="card-footer text-center mb-3 mt-auto">
                                 <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
                                     {{ $product->product_category->category_name }}</h6>
                                 <h3 class="font-size-1 font-weight-normal">

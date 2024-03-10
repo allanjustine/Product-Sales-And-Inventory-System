@@ -70,64 +70,65 @@
             <div class="grid">
                 @foreach ($topDeals as $product)
                     <div class="grid-item col-md-3 col-sm-4 col-6">
-                        <div class="card shadow product show" id="product-card" style="min-width: 50px;">
+                        <a href="#" class="text-black" data-toggle="modal" data-target="#viewProduct"
+                            wire:click="view({{ $product->id }})">
+                            <div class="card shadow product show" id="product-card" style="min-width: 50px;">
 
-                            <div class="px-2" style="position: relative;">
-                                <div class="image-container">
-                                    @if (Storage::exists($product->product_image))
-                                        <img class="card-img-top mt-4" src="{{ Storage::url($product->product_image) }}"
-                                            alt="{{ $product->product_name }}">
-                                    @else
-                                        <img class="card-img-top mt-4" src="{{ $product->product_image }}"
-                                            alt="{{ $product->product_name }}">
-                                    @endif
+                                <div style="position: relative;">
+                                    <div class="image-container">
+                                        @if (Storage::exists($product->product_image))
+                                            <img class="card-img-top" src="{{ Storage::url($product->product_image) }}"
+                                                alt="{{ $product->product_name }}">
+                                        @else
+                                            <img class="card-img-top" src="{{ $product->product_image }}"
+                                                alt="{{ $product->product_name }}">
+                                        @endif
+                                    </div>
+
+                                    <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
+                                        @if ($loop->index == 0)
+                                            <span class="px-2 pt-2 pb-1 rounded top-deals-bg">
+                                                <i class="fa-solid fa-medal fa-flip top-deals-icon"></i>
+                                                <span class="top-deals"><strong>Top 1</strong></span>
+                                            </span>
+                                        @else
+                                            <span class="px-2 pt-2 pb-1 rounded top-deals-bg">
+                                                <i class="fa-solid fa-medal fa-flip top-deals-icon"></i>
+                                                <span class="top-deals"><strong>Top
+                                                        {{ $loop->index + 1 }}</strong></span>
+                                            </span>
+                                        @endif
+                                    </div>
+
                                 </div>
-
-                                <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
-                                    @if ($loop->index == 0)
-                                        <span class="px-2 pt-2 pb-1 rounded top-deals-bg">
-                                            <i class="fa-solid fa-medal fa-flip top-deals-icon"></i>
-                                            <span class="top-deals"><strong>Top 1</strong></span>
-                                        </span>
-                                    @else
-                                        <span class="px-2 pt-2 pb-1 rounded top-deals-bg">
-                                            <i class="fa-solid fa-medal fa-flip top-deals-icon"></i>
-                                            <span class="top-deals"><strong>Top
-                                                    {{ $loop->index + 1 }}</strong></span>
-                                        </span>
-                                    @endif
+                                <div class="card-footer text-center mb-3 mt-auto">
+                                    <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
+                                        {{ $product->product_category->category_name }}</h6>
+                                    <h3 class="font-size-1 font-weight-normal">
+                                        <h5>{{ $product->product_name }}</h5>
+                                    </h3>
+                                    <div class="d-block font-size-1">
+                                        <span class="font-weight-medium"><i
+                                                class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
+                                    </div>
                                 </div>
+                                <div class="d-flex font-size-1 mb-2">
+                                    <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">Sold:
 
-                            </div>
-                            <div class="card-footer text-center py-4 mt-auto">
-                                <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
-                                    {{ $product->product_category->category_name }}</h6>
-                                <h3 class="font-size-1 font-weight-normal">
-                                    <h5>{{ $product->product_name }}</h5>
-                                </h3>
-                                <div class="d-block font-size-1">
-                                    <span class="font-weight-medium"><i
-                                            class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
-                                </div>
-                                <a href="" class="btn btn-outline-info mt-1 form-control" data-toggle="modal"
-                                    data-target="#viewProduct" wire:click="view({{ $product->id }})"><i
-                                        class="fa-solid fa-eye"></i> View</a>
-                            </div>
-                            <div class="d-flex font-size-1 mb-2">
-                                <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">Sold:
-
-                                    {{ $product->product_sold }}
-                                </strong>
-                                <span class="font-weight-medium pr-2" style="position: absolute; bottom:0; right: 0;">
-                                    <i class="fa-solid fa-star"></i>
-                                    <strong>
-                                        {{ $product->product_rating }}/5
+                                        {{ $product->product_sold }}
                                     </strong>
+                                    <span class="font-weight-medium pr-2"
+                                        style="position: absolute; bottom:0; right: 0;">
+                                        <i class="fa-solid fa-star"></i>
+                                        <strong>
+                                            {{ $product->product_rating }}/5
+                                        </strong>
 
-                                    <span class="text-danger">({{ $product->product_votes }})</span>
-                                </span>
+                                        <span class="text-danger">({{ $product->product_votes }})</span>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
@@ -157,64 +158,65 @@
             <div class="grid">
                 @foreach ($popularityDeals as $product)
                     <div class="grid-item col-md-3 col-sm-4 col-6">
-                        <div class="card shadow product show" id="product-card" style="min-width: 50px;">
-                            <div class="px-2" style="position: relative;">
-                                <div class="image-container">
-                                    @if (Storage::exists($product->product_image))
-                                        <img class="card-img-top mt-4"
-                                            src="{{ Storage::url($product->product_image) }}"
-                                            alt="{{ $product->product_name }}">
-                                    @else
-                                        <img class="card-img-top mt-4" src="{{ $product->product_image }}"
-                                            alt="{{ $product->product_name }}">
-                                    @endif
-                                </div>
+                        <a href="#" class="text-black" data-toggle="modal" data-target="#viewProduct"
+                            wire:click="view({{ $product->id }})">
+                            <div class="card shadow product show" id="product-card" style="min-width: 50px;">
+                                <div style="position: relative;">
+                                    <div class="image-container">
+                                        @if (Storage::exists($product->product_image))
+                                            <img class="card-img-top"
+                                                src="{{ Storage::url($product->product_image) }}"
+                                                alt="{{ $product->product_name }}">
+                                        @else
+                                            <img class="card-img-top" src="{{ $product->product_image }}"
+                                                alt="{{ $product->product_name }}">
+                                        @endif
+                                    </div>
 
-                                <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
-                                    @if ($loop->index == 0)
-                                        <span class="px-2 pt-2 pb-1 rounded top-popular-bg">
-                                            <i class="fa-solid fa-fire-flame-curved fa-beat top-popular-icon"></i>
-                                            <span class="top-popular"><strong>Top 1</strong></span>
-                                        </span>
-                                    @else
-                                        <span class="px-2 pt-2 pb-1 rounded top-popular-bg">
-                                            <i class="fa-solid fa-fire-flame-curved fa-beat top-popular-icon"></i>
-                                            <span class="top-popular"><strong>Top
-                                                    {{ $loop->index + 1 }}</strong></span>
-                                        </span>
-                                    @endif
-                                </div>
+                                    <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
+                                        @if ($loop->index == 0)
+                                            <span class="px-2 pt-2 pb-1 rounded top-popular-bg">
+                                                <i class="fa-solid fa-fire-flame-curved fa-beat top-popular-icon"></i>
+                                                <span class="top-popular"><strong>Top 1</strong></span>
+                                            </span>
+                                        @else
+                                            <span class="px-2 pt-2 pb-1 rounded top-popular-bg">
+                                                <i class="fa-solid fa-fire-flame-curved fa-beat top-popular-icon"></i>
+                                                <span class="top-popular"><strong>Top
+                                                        {{ $loop->index + 1 }}</strong></span>
+                                            </span>
+                                        @endif
+                                    </div>
 
-                            </div>
-                            <div class="card-footer text-center py-4 mt-auto">
-                                <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
-                                    {{ $product->product_category->category_name }}</h6>
-                                <h3 class="font-size-1 font-weight-normal">
-                                    <h5>{{ $product->product_name }}</h5>
-                                </h3>
-                                <div class="d-block font-size-1">
-                                    <span class="font-weight-medium"><i
-                                            class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
                                 </div>
-                                <a href="" class="btn btn-outline-info mt-1 form-control" data-toggle="modal"
-                                    data-target="#viewProduct" wire:click="view({{ $product->id }})"><i
-                                        class="fa-solid fa-eye"></i> View</a>
-                            </div>
-                            <div class="d-flex font-size-1 mb-2">
-                                <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">Sold:
+                                <div class="card-footer text-center mb-3 mt-auto">
+                                    <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
+                                        {{ $product->product_category->category_name }}</h6>
+                                    <h3 class="font-size-1 font-weight-normal">
+                                        <h5>{{ $product->product_name }}</h5>
+                                    </h3>
+                                    <div class="d-block font-size-1">
+                                        <span class="font-weight-medium"><i
+                                                class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex font-size-1 mb-2">
+                                    <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">Sold:
 
-                                    {{ $product->product_sold }}
-                                </strong>
-                                <span class="font-weight-medium pr-2" style="position: absolute; bottom:0; right: 0;">
-                                    <i class="fa-solid fa-star"></i>
-                                    <strong>
-                                        {{ $product->product_rating }}/5
+                                        {{ $product->product_sold }}
                                     </strong>
+                                    <span class="font-weight-medium pr-2"
+                                        style="position: absolute; bottom:0; right: 0;">
+                                        <i class="fa-solid fa-star"></i>
+                                        <strong>
+                                            {{ $product->product_rating }}/5
+                                        </strong>
 
-                                    <span class="text-danger">({{ $product->product_votes }})</span>
-                                </span>
+                                        <span class="text-danger">({{ $product->product_votes }})</span>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
@@ -243,57 +245,57 @@
             <div class="grid">
                 @foreach ($latestProducts as $product)
                     <div class="grid-item col-md-3 col-sm-4 col-6">
-                        <div class="card shadow product show" id="product-card" style="min-width: 50px;">
-                            <div class="px-2" style="position: relative;">
-                                <div class="image-container">
-                                    @if (Storage::exists($product->product_image))
-                                        <img class="card-img-top mt-4"
-                                            src="{{ Storage::url($product->product_image) }}"
-                                            alt="{{ $product->product_name }}">
-                                    @else
-                                        <img class="card-img-top mt-4" src="{{ $product->product_image }}"
-                                            alt="{{ $product->product_name }}">
-                                    @endif
-                                </div>
+                        <a href="#" class="text-black" data-toggle="modal" data-target="#viewProduct"
+                            wire:click="view({{ $product->id }})">
+                            <div class="card shadow product show" id="product-card" style="min-width: 50px;">
+                                <div style="position: relative;">
+                                    <div class="image-container">
+                                        @if (Storage::exists($product->product_image))
+                                            <img class="card-img-top"
+                                                src="{{ Storage::url($product->product_image) }}"
+                                                alt="{{ $product->product_name }}">
+                                        @else
+                                            <img class="card-img-top" src="{{ $product->product_image }}"
+                                                alt="{{ $product->product_name }}">
+                                        @endif
+                                    </div>
 
-                                <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
-                                    <span class="px-2 pt-2 pb-1 rounded latest-bg">
-                                        <i class="fa-solid fa-megaphone fa-beat-fade latest-icon"></i>
-                                        <span class="latest"><strong>Latest</strong></span>
+                                    <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
+                                        <span class="px-2 pt-2 pb-1 rounded latest-bg">
+                                            <i class="fa-solid fa-megaphone fa-beat-fade latest-icon"></i>
+                                            <span class="latest"><strong>Latest</strong></span>
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <div class="card-footer text-center mb-3 mt-auto">
+                                    <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
+                                        {{ $product->product_category->category_name }}</h6>
+                                    <h3 class="font-size-1 font-weight-normal">
+                                        <h5>{{ $product->product_name }}</h5>
+                                    </h3>
+                                    <div class="d-block font-size-1">
+                                        <span class="font-weight-medium"><i
+                                                class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex font-size-1 mb-2">
+                                    <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">Sold:
+
+                                        {{ $product->product_sold }}
+                                    </strong>
+                                    <span class="font-weight-medium pr-2"
+                                        style="position: absolute; bottom:0; right: 0;">
+                                        <i class="fa-solid fa-star"></i>
+                                        <strong>
+                                            {{ $product->product_rating }}/5
+                                        </strong>
+
+                                        <span class="text-danger">({{ $product->product_votes }})</span>
                                     </span>
                                 </div>
-
                             </div>
-                            <div class="card-footer text-center py-4 mt-auto">
-                                <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
-                                    {{ $product->product_category->category_name }}</h6>
-                                <h3 class="font-size-1 font-weight-normal">
-                                    <h5>{{ $product->product_name }}</h5>
-                                </h3>
-                                <div class="d-block font-size-1">
-                                    <span class="font-weight-medium"><i
-                                            class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
-                                </div>
-                                <a href="" class="btn btn-outline-info mt-1 form-control" data-toggle="modal"
-                                    data-target="#viewProduct" wire:click="view({{ $product->id }})"><i
-                                        class="fa-solid fa-eye"></i>
-                                    View</a>
-                            </div>
-                            <div class="d-flex font-size-1 mb-2">
-                                <strong class="pl-2" style="position: absolute; bottom:0; left: 0;">Sold:
-
-                                    {{ $product->product_sold }}
-                                </strong>
-                                <span class="font-weight-medium pr-2" style="position: absolute; bottom:0; right: 0;">
-                                    <i class="fa-solid fa-star"></i>
-                                    <strong>
-                                        {{ $product->product_rating }}/5
-                                    </strong>
-
-                                    <span class="text-danger">({{ $product->product_votes }})</span>
-                                </span>
-                            </div>
-                        </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
