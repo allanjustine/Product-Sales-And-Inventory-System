@@ -192,7 +192,7 @@
     </div>
     <div class="d-flex align-items-center overflow-auto">
         <span class="mx-auto pt-3" id="paginate">
-            {{ $products->links('pagination::bootstrap-4') }}</span>
+            {{ $products->links() }}</span>
     </div>
 </div>
 

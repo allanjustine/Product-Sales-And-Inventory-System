@@ -15,9 +15,9 @@
                     <div class="row justify-content-center">
                         <div class="card w-100 shadow-none">
                             <div class="card-body">
-                                <h5>Are you sure you want to buy this product and place it to order?</h5>
 
                                 @if ($orderToBuy)
+                                    <h5>Are you sure you want to buy this product and place it to order?</h5>
 
                                     <div wire:loading>
                                         <div class="loading-overlay">

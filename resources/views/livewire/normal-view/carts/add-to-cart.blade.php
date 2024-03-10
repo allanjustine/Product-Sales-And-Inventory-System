@@ -22,12 +22,11 @@
 
                                         <button type="button" class="btn btn-primary form-control mt-5"
                                             data-dismiss="modal">Close</button>
-                                    @else
-                                        Are you sure you want to add this product to your cart?
                                     @endif
                                 </h5>
 
                                 @if ($productToBeCart)
+                                    <h5>Are you sure you want to add this product to your cart?</h5>
                                     <div class="text-center">
                                         @if (Storage::exists($productToBeCart->product_image))
                                             <img src="{{ Storage::url($productToBeCart->product_image) }}"
@@ -41,7 +40,8 @@
                                         <h6 class="mt-5"><strong>{{ $productToBeCart->product_name }}</strong></h6>
                                         <p><strong>&#8369;{{ number_format($productToBeCart->product_price, 2, '.', ',') }}</strong>
                                         </p>
-                                        <p><strong>Stock: {{ number_format($productToBeCart->product_price) }} PC(s)</strong>
+                                        <p><strong>Stock: {{ number_format($productToBeCart->product_price) }}
+                                                PC(s)</strong>
                                         </p>
                                         <form>
                                             @csrf
