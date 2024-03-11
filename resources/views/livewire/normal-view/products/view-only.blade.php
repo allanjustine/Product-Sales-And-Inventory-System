@@ -139,9 +139,9 @@
                             <div class="card-footer text-center mb-3 mt-auto">
                                 <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
                                     {{ $product->product_category->category_name }}</h6>
-                                <h3 class="font-size-1 font-weight-normal">
-                                    <h5 id="product_name">{{ $product->product_name }}</h5>
-                                </h3>
+                                <h5 class="font-size-1 font-weight-normal text-capitalize">
+                                    {{ $product->product_name }}
+                                </h5>
                                 <div class="d-block font-size-1 mb-2">
                                     <span class="font-weight-medium"><i
                                             class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
@@ -200,8 +200,3 @@
     </div>
 </div>
 
-<style>
-    #product_name {
-        text-transform: capitalize;
-    }
-</style>

@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/profile', [SiteController::class, 'profile']);
     Route::get('/products', [SiteController::class, 'product']);
     Route::get('/orders', [SiteController::class, 'order']);
+    Route::get('/favorites', [SiteController::class, 'favorite']);
     Route::get('/recent-orders', [SiteController::class, 'recentOrder']);
     // Route::get('/cart', [SiteController::class, 'myCart']);
 });

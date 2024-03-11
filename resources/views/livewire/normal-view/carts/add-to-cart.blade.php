@@ -1,7 +1,7 @@
 <div>
     <!-- Modal Add To Cart Info-->
     <div wire:ignore.self class="modal fade" id="addToCart" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLongTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">

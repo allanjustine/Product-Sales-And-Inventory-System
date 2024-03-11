@@ -52,9 +52,9 @@ class SiteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function favorite()
     {
-        //
+        return view('pages.normal-view.favorites.index');
     }
 
     /**

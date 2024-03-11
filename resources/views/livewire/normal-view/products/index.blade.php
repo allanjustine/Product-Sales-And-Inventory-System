@@ -127,7 +127,7 @@
     </div>
     @role('user')
         <div class="dropdown" wire:ignore.self>
-            <a class="float-right mt-4 mr-4 p-2 cartdropdown" id="cart-dropdown" data-bs-toggle="dropdown"
+            <a class="float-right mt-4 mr-4 p-2 cartdropdown" id="cart-dropdown" data-toggle="dropdown"
                 aria-expanded="false" href=""><i class="fa-regular fa-cart-shopping pt-3"></i>
                 <span class="badge badge-pill badge-danger" id="badge-cart"><span
                         style="font-size: 12px;">{{ $carts->count() }}</span></span>
@@ -201,9 +201,9 @@
         @if ($products->count() === 0)
             <h5 class="text-danger">No products found.</h5>
         @elseif (!empty($search))
-            <h5 class="text-danger">{{ $products->total() }} products founded.</h5>
+            <h5 class="text-danger">{{ $products->count() }} products founded.</h5>
         @else
-            <h5 class="text-danger">{{ $allDisplayProducts }} products found.</h5>
+            <h5 class="text-danger">{{ $allDisplayProducts }} products.</h5>
         @endif
         <hr>
         <div class="row">
@@ -249,9 +249,9 @@
                             <div class="card-footer text-center mb-3 mt-auto">
                                 <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
                                     {{ $product->product_category->category_name }}</h6>
-                                <h3 class="font-size-1 font-weight-normal">
-                                    <h5 id="product_name">{{ $product->product_name }}</h5>
-                                </h3>
+                                <h5 class="font-size-1 font-weight-normal text-capitalize">
+                                    {{ $product->product_name }}
+                                </h5>
                                 <div class="d-block font-size-1 mb-2">
                                     <span class="font-weight-medium"><i
                                             class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
@@ -271,6 +271,13 @@
                                                 class="fa-solid fa-cart-plus"></i>
                                             Add to Cart</a>
                                         <a wire:click="notAvailable()" class="btn btn-primary mt-1 form-control"><i
+                                                class="fa-solid fa-cart-shopping"></i>
+                                            Buy Now</a>
+                                    @elseif ($product->product_stock == 0)
+                                        <a wire:click="outOfStock()" class="btn btn-warning mt-1 form-control"><i
+                                                class="fa-solid fa-cart-plus"></i>
+                                            Add to Cart</a>
+                                        <a wire:click="outOfStock()" class="btn btn-primary mt-1 form-control"><i
                                                 class="fa-solid fa-cart-shopping"></i>
                                             Buy Now</a>
                                     @else
@@ -335,17 +342,11 @@
             {{ $products->links('pagination::bootstrap-4') }}</span>
     </div> --}}
     <div class="d-flex mb-2 align-items-center overflow-auto">
-        <a wire:click.prevent="loadMore()" class="mx-auto btn btn-link" {{ $products->count() >= $allDisplayProducts ? 'hidden' : '' }} id="paginate">
-            Load more...</a>
+        <a wire:click.prevent="loadMore()" class="mx-auto btn btn-link"
+            {{ $products->count() >= $allDisplayProducts && $search ? 'hidden' : '' }} id="paginate">
+            <span wire:loading>Loading...</span><span wire:loading.remove>Load more...</span></a>
     </div>
 </div>
-
-<style>
-    #product_name {
-
-        text-transform: capitalize;
-    }
-</style>
 
 <script>
     $(document).ready(function() {
@@ -356,15 +357,19 @@
     });
 
     window.addEventListener('success', event => {
+        $('#addToCart').modal('hide');
         toastr.success(event.detail.message);
     });
     window.addEventListener('error', event => {
+        $('#addToCart').modal('hide');
         toastr.error(event.detail.message);
     });
     window.addEventListener('warning', event => {
+        $('#addToCart').modal('hide');
         toastr.warning(event.detail.message);
     });
     window.addEventListener('info', event => {
+        $('#addToCart').modal('hide');
         toastr.info(event.detail.message);
     });
 </script>

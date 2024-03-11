@@ -99,7 +99,6 @@ class Index extends Component
             event(new UserSearchLog($log_entry));
         }
 
-
         return compact('products', 'carts', 'allDisplayProducts', 'searchLogs');
     }
 
@@ -122,6 +121,11 @@ class Index extends Component
     public function notAvailable()
     {
         $this->dispatchBrowserEvent('error', ['message' => 'This product is not available.']);
+    }
+
+    public function outOfStock()
+    {
+        $this->dispatchBrowserEvent('error', ['message' => 'This product is out of stock.']);
     }
 
     public function addToFavorite($id)

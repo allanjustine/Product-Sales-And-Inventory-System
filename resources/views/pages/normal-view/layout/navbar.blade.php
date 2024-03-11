@@ -85,6 +85,10 @@
                             <i class="fa-light fa-bag-shopping"></i>&nbsp;
                             <span>My Orders</span></a>
                         <div class="dropdown-divider"></div>
+                        <a class="nav-link p-3" href="/favorites">
+                            <i class="fa-light fa-heart"></i>&nbsp;
+                            <span>My Favorites</span></a>
+                        <div class="dropdown-divider"></div>
                     @endrole
                     <a class="nav-link p-3" href="#" data-toggle="modal" data-target="#logout"><i
                             class="fa-light fa-right-from-bracket"></i>&nbsp;
