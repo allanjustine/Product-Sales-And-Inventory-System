@@ -15,6 +15,13 @@
                     <div class="row justify-content-center">
                         <div class="card w-100 shadow-none">
                             <div class="card-body">
+                                @if (!$orderToBuy)
+                                    <div class="loading-overlay mt-3">
+                                        <div class="loading-message card p-3 bg-dark">
+                                            <span class="spinner-border"></span>
+                                        </div>
+                                    </div>
+                                @endif
 
                                 @if ($orderToBuy)
                                     <h5>Are you sure you want to buy this product and place it to order?</h5>
@@ -97,12 +104,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary form-control" wire:click="orderPlaceOrder()"><i
-                            class="fa-solid fa-cart-circle-check"></i> Place Order</button>
+                @if ($orderToBuy)
+                    <div class="modal-footer">
+                        <button type="button" wire:loading.attr="disabled" class="btn btn-primary form-control" wire:click="orderPlaceOrder()"><i
+                                class="fa-solid fa-cart-circle-check"></i> Place Order</button>
 
-                    <button type="button" class="btn btn-secondary form-control" data-dismiss="modal">Cancel</button>
-                </div>
+                        <button type="button" class="btn btn-secondary form-control"
+                            data-dismiss="modal">Cancel</button>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

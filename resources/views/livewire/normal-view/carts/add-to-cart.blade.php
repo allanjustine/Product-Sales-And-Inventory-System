@@ -15,15 +15,13 @@
                     <div class="row justify-content-center">
                         <div class="card w-100 shadow-none">
                             <div class="card-body">
-                                <h5>
-                                    @if (!$productToBeCart)
-                                        <span class="text-success"><i class="far fa-check-double"></i> Succes! added to
-                                            cart successfully you can now close the menu</span>
-
-                                        <button type="button" class="btn btn-primary form-control mt-5"
-                                            data-dismiss="modal">Close</button>
-                                    @endif
-                                </h5>
+                                @if (!$productToBeCart)
+                                    <div class="loading-overlay mt-3">
+                                        <div class="loading-message card p-3 bg-dark">
+                                            <span class="spinner-border"></span>
+                                        </div>
+                                    </div>
+                                @endif
 
                                 @if ($productToBeCart)
                                     <h5>Are you sure you want to add this product to your cart?</h5>

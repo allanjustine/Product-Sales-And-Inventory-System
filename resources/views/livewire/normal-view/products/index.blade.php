@@ -134,7 +134,6 @@
             </a>
             <ul id="myDiv" class="dropdown-menu dropdown-menu-end cartmenu" style="z-index: 1049;"
                 aria-labelledby="cart-dropdown" wire:ignore.self>
-                <a class="btn btn-link float-end" href="/products">Close</a>
                 <h4 class="pl-3"><strong><i class="fa-regular fa-cart-shopping"></i> My Cart
                         ({{ $carts->count() }})</strong>
                 </h4>
