@@ -84,7 +84,16 @@
                                                 alt="{{ $product->product_name }}">
                                         @endif
                                     </div>
-
+                                    @auth
+                                        <a href="#"
+                                            title="@if ($product->favorites->contains('user_id', auth()->user()->id)) {{ $product->favorites->count() }} people added this to favorites @else Add to favorites @endif"
+                                            class="btn btn-link position-absolute top-0 start-0"
+                                            wire:click.prevent="addToFavorite({{ $product->id }})">
+                                            <h2 class="text-danger"><i
+                                                    class="{{ $product->favorites->contains('user_id', auth()->user()->id) ? 'fas' : 'far' }} fa-heart"></i>
+                                            </h2>
+                                        </a>
+                                    @endauth
                                     <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
                                         @if ($loop->index == 0)
                                             <span class="px-2 pt-2 pb-1 rounded top-deals-bg">
@@ -104,9 +113,9 @@
                                 <div class="card-footer text-center mb-3 mt-auto">
                                     <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
                                         {{ $product->product_category->category_name }}</h6>
-                                    <h3 class="font-size-1 font-weight-normal">
-                                        <h5>{{ $product->product_name }}</h5>
-                                    </h3>
+                                    <h5 class="font-size-1 font-weight-normal text-capitalize">
+                                        {{ $product->product_name }}
+                                    </h5>
                                     <div class="d-block font-size-1">
                                         <span class="font-weight-medium"><i
                                                 class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
@@ -172,7 +181,16 @@
                                                 alt="{{ $product->product_name }}">
                                         @endif
                                     </div>
-
+                                    @auth
+                                        <a href="#"
+                                            title="@if ($product->favorites->contains('user_id', auth()->user()->id)) {{ $product->favorites->count() }} people added this to favorites @else Add to favorites @endif"
+                                            class="btn btn-link position-absolute top-0 start-0"
+                                            wire:click.prevent="addToFavorite({{ $product->id }})">
+                                            <h2 class="text-danger"><i
+                                                    class="{{ $product->favorites->contains('user_id', auth()->user()->id) ? 'fas' : 'far' }} fa-heart"></i>
+                                            </h2>
+                                        </a>
+                                    @endauth
                                     <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
                                         @if ($loop->index == 0)
                                             <span class="px-2 pt-2 pb-1 rounded top-popular-bg">
@@ -192,9 +210,9 @@
                                 <div class="card-footer text-center mb-3 mt-auto">
                                     <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
                                         {{ $product->product_category->category_name }}</h6>
-                                    <h3 class="font-size-1 font-weight-normal">
-                                        <h5>{{ $product->product_name }}</h5>
-                                    </h3>
+                                    <h5 class="font-size-1 font-weight-normal text-capitalize">
+                                        {{ $product->product_name }}
+                                    </h5>
                                     <div class="d-block font-size-1">
                                         <span class="font-weight-medium"><i
                                                 class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
@@ -259,7 +277,16 @@
                                                 alt="{{ $product->product_name }}">
                                         @endif
                                     </div>
-
+                                    @auth
+                                        <a href="#"
+                                            title="@if ($product->favorites->contains('user_id', auth()->user()->id)) {{ $product->favorites->count() }} people added this to favorites @else Add to favorites @endif"
+                                            class="btn btn-link position-absolute top-0 start-0"
+                                            wire:click.prevent="addToFavorite({{ $product->id }})">
+                                            <h2 class="text-danger"><i
+                                                    class="{{ $product->favorites->contains('user_id', auth()->user()->id) ? 'fas' : 'far' }} fa-heart"></i>
+                                            </h2>
+                                        </a>
+                                    @endauth
                                     <div class="pt-2 pr-2" style="position: absolute; top:0; right: 0;">
                                         <span class="px-2 pt-2 pb-1 rounded latest-bg">
                                             <i class="fa-solid fa-megaphone fa-beat-fade latest-icon"></i>
@@ -271,9 +298,9 @@
                                 <div class="card-footer text-center mb-3 mt-auto">
                                     <h6 class="d-inline-block text-secondary medium font-weight-medium mb-1">
                                         {{ $product->product_category->category_name }}</h6>
-                                    <h3 class="font-size-1 font-weight-normal">
-                                        <h5>{{ $product->product_name }}</h5>
-                                    </h3>
+                                    <h5 class="font-size-1 font-weight-normal text-capitalize">
+                                        {{ $product->product_name }}
+                                    </h5>
                                     <div class="d-block font-size-1">
                                         <span class="font-weight-medium"><i
                                                 class="fas fa-peso-sign"></i>{{ number_format($product->product_price, 2, '.', ',') }}</span>
@@ -336,4 +363,30 @@
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
+</script>
+
+<script>
+    $(document).ready(function() {
+        toastr.options = {
+            "progressBar": true,
+            "closeButton": true,
+        }
+    });
+
+    window.addEventListener('success', event => {
+        $('#addToCart').modal('hide');
+        toastr.success(event.detail.message);
+    });
+    window.addEventListener('error', event => {
+        $('#addToCart').modal('hide');
+        toastr.error(event.detail.message);
+    });
+    window.addEventListener('warning', event => {
+        $('#addToCart').modal('hide');
+        toastr.warning(event.detail.message);
+    });
+    window.addEventListener('info', event => {
+        $('#addToCart').modal('hide');
+        toastr.info(event.detail.message);
+    });
 </script>

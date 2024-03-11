@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\NormalView\Pages;
 
+use App\Models\Favorite;
 use App\Models\Product;
 use App\Models\User;
 use Livewire\Component;
@@ -9,34 +10,54 @@ use Livewire\Component;
 class Home extends Component
 {
 
-    public $topDeals;
-    public $popularityDeals;
-    public $productView;
-    public $latestProducts;
-    public $allLocations;
 
-    public function mount()
+    public $productView;
+
+    public function essentialItems()
     {
-        $this->topDeals = Product::orderBy('product_sold', 'desc')
+        $topDeals = Product::orderBy('product_sold', 'desc')
             ->whereNotIn('product_sold', [0])
             ->take(10)
             ->get();
-        $this->popularityDeals = Product::orderBy('product_votes', 'desc')
+        $popularityDeals = Product::orderBy('product_votes', 'desc')
             ->whereNotIn('product_votes', [0])
             ->take(10)
             ->get();
-        $this->latestProducts = Product::orderBy('created_at', 'desc')
+        $latestProducts = Product::orderBy('created_at', 'desc')
             ->take(10)
             ->get();
 
-        $this->allLocations = User::all();
+        $allLocations = User::all();
+
+        return compact('topDeals', 'popularityDeals', 'latestProducts', 'allLocations');
     }
     public function view($id)
     {
         $this->productView = Product::find($id);
     }
+
+    public function addToFavorite($id)
+    {
+        $productFav = Product::findOrFail($id);
+
+        $added = Favorite::where(['user_id' => auth()->user()->id, 'product_id' => $productFav->id, 'status' => true])->first();
+
+        if ($added) {
+            $added->delete();
+            $this->dispatchBrowserEvent('success', ['message' => 'Removed from favorites']);
+        } else {
+            Favorite::create([
+                'user_id'           =>      auth()->user()->id,
+                'product_id'        =>      $productFav->id,
+                'status'            =>      true
+            ]);
+
+            $this->dispatchBrowserEvent('success', ['message' => 'Added to favorites']);
+        }
+    }
+
     public function render()
     {
-        return view('livewire.normal-view.pages.home');
+        return view('livewire.normal-view.pages.home', $this->essentialItems());
     }
 }
