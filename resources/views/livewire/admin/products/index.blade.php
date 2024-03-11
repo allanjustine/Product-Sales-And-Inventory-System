@@ -162,11 +162,17 @@
                                         style="color: #ffd700;"></i></td>
                             @endif
                             <td>&#8369;{{ number_format($product->product_price, 2, '.', ',') }}</td>
-                            @if ($product->product_status === 'Available')
+                            {{-- @if ($product->product_status === 'Available')
                                 <td><span class="badge badge-success">AVAILABLE</span></td>
                             @else
                                 <td><span class="badge badge-danger">NOT AVAILABLE</span></td>
-                            @endif
+                            @endif --}}
+                            <td>
+                                <button
+                                    class="btn btn-{{ $product->product_status == 'Available' ? 'danger' : 'primary' }}"
+                                    wire:click="statusChange({{ $product->id }})">{{ $product->product_status == 'Available' ? 'Disable' : 'Enable' }}</button>
+
+                            </td>
                             <td>{{ $product->product_category->category_name }}</td>
                             @if ($product->product_sold === 0)
                                 <td>No sold yet</td>
@@ -217,6 +223,19 @@
             {{ $products->links('pages.admin.layout.pagination') }}</span>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        toastr.options = {
+            "progressBar": true,
+            "closeButton": true,
+        }
+    });
+
+    window.addEventListener('success', event => {
+        toastr.success(event.detail.message);
+    });
+</script>
 
 <style>
     .role-name {

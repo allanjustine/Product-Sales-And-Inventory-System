@@ -118,6 +118,25 @@ class Index extends Component
         }
     }
 
+    public function statusChange($id)
+    {
+        $product = Product::findOrFail($id);
+
+        if($product->product_status == 'Available')
+        {
+            $product->update([
+                'product_status'    =>      'Not Available'
+            ]);
+        } else {
+            $product->update([
+                'product_status'    =>      'Available'
+            ]);
+        }
+
+        $this->dispatchBrowserEvent('success', ['message' => 'Status changed to ' . $product->product_status]);
+    }
+
+
     public function update()
     {
         $this->validate([

@@ -71,7 +71,6 @@ in the orders add a display if the order was cancelled by the admin
 
 Admin side
 add users status for disable account, ban or restrict use a dropdown for clicks
-adjust the admin products status availability to Clickable switch
 add in the orders a cancel button if the admin want to cancel the order of the user and reason for cancellation
 add testimony and display
 
