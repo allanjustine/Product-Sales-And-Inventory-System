@@ -17,7 +17,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <img src="{{ Storage::url($productView->product_image) }}"
+                                            <img src="{{ Storage::exists($productView->product_image) ? Storage::url($productView->product_image) : $productView->product_image }}"
                                                 alt="{{ $productView->product_name }}" class="img-fluid"><br>
                                         </div>
                                         <div class="col-md-6">

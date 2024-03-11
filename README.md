@@ -67,7 +67,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 User side
-Add display all favorites product...
 in the orders add a display if the order was cancelled by the admin
 
 Admin side

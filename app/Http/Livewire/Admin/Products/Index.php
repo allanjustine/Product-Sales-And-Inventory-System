@@ -111,7 +111,7 @@ class Index extends Component
         $this->product_code = $this->productEdit->product_code;
 
         if (is_string($this->productEdit->product_image)) {
-            $this->product_image_url = Storage::url($this->productEdit->product_image);
+            $this->product_image_url = Storage::exists($this->productEdit->product_image) ? Storage::url($this->productEdit->product_image) : $this->productEdit->product_image;
         } else {
             $this->product_image = $this->productEdit->product_image;
             $this->product_image_url = $this->product_image->temporaryUrl();
