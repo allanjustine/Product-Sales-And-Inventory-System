@@ -35,7 +35,7 @@
                                                 alt="{{ $productToBeCart->product_name }}" class="img-fluid"
                                                 style="width: 150px; height: 150px;">
                                         @endif
-                                        <h6 class="mt-5"><strong>{{ $productToBeCart->product_name }}</strong></h6>
+                                        <h6 class="mt-5 text-capitalize"><strong>{{ $productToBeCart->product_name }}</strong></h6>
                                         <p><strong>&#8369;{{ number_format($productToBeCart->product_price, 2, '.', ',') }}</strong>
                                         </p>
                                         <p><strong>Stock: {{ number_format($productToBeCart->product_price) }}

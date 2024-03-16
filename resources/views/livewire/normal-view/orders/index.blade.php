@@ -81,7 +81,7 @@
                                                         alt="{{ $order->product->product_name }}">
                                                 @endif
                                             </span>
-                                            <strong class="info-box-text">{{ $order->product->product_name }}</strong>
+                                            <strong class="info-box-text text-capitalize">{{ $order->product->product_name }}</strong>
                                             <span
                                                 class="info-box-text">&#8369;{{ number_format($order->product->product_price, 2, '.', ',') }}</span>
                                             <span
@@ -182,7 +182,7 @@
                                                 @endif
                                             </span>
                                             <span
-                                                class="info-box-text"><strong>{{ $order->product->product_name }}</strong></span>
+                                                class="info-box-text text-capitalize"><strong>{{ $order->product->product_name }}</strong></span>
                                             <span
                                                 class="info-box-text">&#8369;{{ number_format($order->product->product_price, 2, '.', ',') }}</span>
                                             <span
@@ -267,7 +267,7 @@
                                                 @endif
                                             </span>
                                             <span
-                                                class="info-box-text"><strong>{{ $order->product->product_name }}</strong></span>
+                                                class="info-box-text text-capitalize"><strong>{{ $order->product->product_name }}</strong></span>
                                             <span
                                                 class="info-box-text">&#8369;{{ number_format($order->product->product_price, 2, '.', ',') }}</span>
                                             <span

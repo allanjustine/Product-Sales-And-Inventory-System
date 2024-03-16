@@ -270,7 +270,7 @@
 </div>
 
 <script>
-    var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+    var toggleSwitch = document.querySelector('.theme-switch #checkbox[type="checkbox"]');
     var currentTheme = localStorage.getItem('theme');
     var mainHeader = document.querySelector('.main-header');
 
@@ -321,7 +321,7 @@
         margin: 0;
     }
 
-    .theme-switch input[type="checkbox"] {
+    .theme-switch #checkbox[type="checkbox"] {
         opacity: 0;
         width: 0;
         height: 0;
@@ -351,15 +351,15 @@
         border-radius: 50%;
     }
 
-    input[type="checkbox"]:checked+.slider {
+    #checkbox[type="checkbox"]:checked+.slider {
         background-color: #2196F3;
     }
 
-    input[type="checkbox"]:focus+.slider {
+    #checkbox[type="checkbox"]:focus+.slider {
         box-shadow: 0 0 1px #2196F3;
     }
 
-    input[type="checkbox"]:checked+.slider:before {
+    #checkbox[type="checkbox"]:checked+.slider:before {
         transform: translateX(20px);
     }
 

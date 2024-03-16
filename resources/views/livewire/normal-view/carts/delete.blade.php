@@ -12,7 +12,7 @@
                 </div>
                 @if ($cartItemToRemove)
                     <div class="modal-body">
-                        This product <strong>"{{ $cartItemToRemove->product->product_name}} - x{{ $cartItemToRemove->quantity}}PC(s)"</strong> will be
+                        This product <strong class="text-capitalize">,"{{ $cartItemToRemove->product->product_name}} - x{{ $cartItemToRemove->quantity}}PC(s)"</strong> will be
                         removed to the cart and will deleted permanently.
                     </div>
                 @endif

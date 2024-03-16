@@ -12,7 +12,7 @@
                 </div>
                 @if ($productToDelete)
                     <div class="modal-body">
-                        This product  <strong>"{{ $productToDelete->product_name }}"</strong> will be
+                        This product  <strong class="text-capitalize">"{{ $productToDelete->product_name }}"</strong> will be
                         removed to the table and will deleted permanently.
                     </div>
                 @endif

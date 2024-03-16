@@ -28,7 +28,7 @@
                     <tr>
                         <td><strong>{{ $order->transaction_code }}</strong></td>
                         <td>{{ $order->user->name }}</td>
-                        <td>{{ $order->product->product_name }}</td>
+                        <td class="text-capitalize">{{ $order->product->product_name }}</td>
                         <td>P{{ $order->order_price }}</td>
                         <td>{{ number_format($order->order_quantity) }}PC(s)</td>
                         <td>P{{ number_format($order->order_total_amount, 2, '.', ',') }}</td>

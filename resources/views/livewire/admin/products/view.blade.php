@@ -21,7 +21,7 @@
                                                 alt="{{ $productView->product_name }}" class="img-fluid"><br>
                                         </div>
                                         <div class="col-md-6">
-                                            <h4 class="text-center border-bottom border-secondary py-2 border-1">
+                                            <h4 class="text-center text-capitalize border-bottom border-secondary py-2 border-1">
                                                 {{ $productView->product_name }}</h4>
                                             <p class="d-flex justify-content-between"><strong>Product Code:</strong>
                                                 <strong>{{ $productView->product_code }}</strong></p>

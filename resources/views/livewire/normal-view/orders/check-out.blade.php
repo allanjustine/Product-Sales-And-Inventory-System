@@ -31,7 +31,7 @@
                                         style="width: 150px; height: 150px;">
                                 @endif
                             </p>
-                            <p class="text-center">
+                            <p class="text-center text-capitalize">
                                 <strong>
                                     {{ $cartItemToCheckOut->product->product_name }}
                                 </strong>

@@ -54,7 +54,7 @@
                                 <i class="fa-thin fa-sort"></i>
                             @endif Buyer
                         </th>
-                        <th wire:click="sortBy('product_name')" style="cursor: pointer;">
+                        <th class="text-capitalize" wire:click="sortBy('product_name')" style="cursor: pointer;">
                             @if ($sortBy === 'product_name')
                                 @if ($sortDirection === 'asc')
                                     <i class="fa-light fa-sort-alpha-up"></i>
@@ -128,7 +128,7 @@
                         <tr>
                             <td><strong>{{ $order->transaction_code }}</strong></td>
                             <td>{{ $order->user->name }}</td>
-                            <td>{{ $order->product->product_name }}</td>
+                            <td class="text-capitalize">{{ $order->product->product_name }}</td>
                             <td>&#8369;{{ $order->order_price }}</td>
                             <td>{{ number_format($order->order_quantity) }}PC(s)</td>
                             <td>&#8369;{{ number_format($order->order_total_amount, 2, '.', ',') }}</td>

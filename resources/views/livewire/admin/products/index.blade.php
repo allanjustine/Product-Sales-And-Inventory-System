@@ -149,7 +149,7 @@
                                         alt="{{ $product->product_name }}">
                                 @endif
                             </td>
-                            <td>{{ $product->product_name }}</td>
+                            <td class="text-capitalize">{{ $product->product_name }}</td>
                             @if ($product->product_stock)
                                 <td><span>{{ number_format($product->product_stock) }} PC(s)</span></td>
                             @else
@@ -167,10 +167,26 @@
                             @else
                                 <td><span class="badge badge-danger">NOT AVAILABLE</span></td>
                             @endif --}}
-                            <td>
-                                <button
+                            <td class="text-center">
+                                @if ($product->product_status == 'Available')
+                                    <div class="custom-control custom-switch">
+                                        <input wire:click="statusChange({{ $product->id }})" type="checkbox"
+                                            class="custom-control-input" id="customSwitch1{{ $product->id }}" checked>
+                                        <label class="custom-control-label" style="cursor: pointer;"
+                                            for="customSwitch1{{ $product->id }}" ></label>
+                                    </div>
+                                @else
+                                    <div class="custom-control custom-switch">
+                                        <input wire:click="statusChange({{ $product->id }})" type="checkbox"
+                                            class="custom-control-input" id="customSwitch1{{ $product->id }}">
+                                        <label class="custom-control-label" style="cursor: pointer;"
+                                            for="customSwitch1{{ $product->id }}"></label>
+                                    </div>
+                                @endif
+
+                                {{-- <button
                                     class="btn btn-{{ $product->product_status == 'Available' ? 'danger' : 'primary' }}"
-                                    wire:click="statusChange({{ $product->id }})">{{ $product->product_status == 'Available' ? 'Disable' : 'Enable' }}</button>
+                                    wire:click="statusChange({{ $product->id }})">{{ $product->product_status == 'Available' ? 'Disable' : 'Enable' }}</button> --}}
 
                             </td>
                             <td>{{ $product->product_category->category_name }}</td>
@@ -187,14 +203,17 @@
                                             class="fas fa-plus-circle fa-fw rounded-circle"></i>
                                     </span>
                                     <div class="dropdown-menu text-center p-2" aria-labelledby="dropdownMenuButton">
-                                        <a href="" class="btn btn-warning mt-1 form-control" data-toggle="modal"
-                                            data-target="#viewProduct" wire:click="view({{ $product->id }})"><i
-                                                class="fa-solid fa-eye"></i> View</a>
-                                        <a href="" class="btn btn-primary mt-1 form-control" data-toggle="modal"
-                                            data-target="#updateProduct" wire:click="edit({{ $product->id }})"><i
+                                        <a href="" class="btn btn-warning mt-1 form-control"
+                                            data-toggle="modal" data-target="#viewProduct"
+                                            wire:click="view({{ $product->id }})"><i class="fa-solid fa-eye"></i>
+                                            View</a>
+                                        <a href="" class="btn btn-primary mt-1 form-control"
+                                            data-toggle="modal" data-target="#updateProduct"
+                                            wire:click="edit({{ $product->id }})"><i
                                                 class="fa-light fa-pen-to-square"></i> Update</a>
-                                        <a href="" class="btn btn-danger mt-1 form-control" data-toggle="modal"
-                                            data-target="#deleteProduct" wire:click="delete({{ $product->id }})"><i
+                                        <a href="" class="btn btn-danger mt-1 form-control"
+                                            data-toggle="modal" data-target="#deleteProduct"
+                                            wire:click="delete({{ $product->id }})"><i
                                                 class="fa-solid fa-trash"></i> Remove</a>
                                     </div>
                                 </div>

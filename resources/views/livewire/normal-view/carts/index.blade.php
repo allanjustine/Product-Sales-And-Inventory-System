@@ -18,7 +18,7 @@
                     @foreach ($cartItems as $item)
                         <tr>
                             <td><img style="width: 70px; height: 70px; border-radius:50%;" src="{{ Storage::url($item->product->product_image) }}" alt=""></td>
-                            <td>{{ $item->product->product_name }}</td>
+                            <td class="text-capitalize">{{ $item->product->product_name }}</td>
                             <td>&#8369;{{ number_format($item->product->product_price, 2, '.', ',') }}</td>
                             <td>{{ $item->quantity }}</td>
                             <td>&#8369;{{ number_format($item->quantity * $item->product->product_price, 2, '.', ',') }}</td>

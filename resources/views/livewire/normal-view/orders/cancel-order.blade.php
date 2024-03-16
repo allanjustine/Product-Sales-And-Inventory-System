@@ -12,7 +12,7 @@
                 </div>
                 @if ($cancel)
                     <div class="modal-body">
-                        Cancelling this product <strong>"{{ $cancel->product->product_name }} -
+                        Cancelling this product <strong class="text-capitalize">"{{ $cancel->product->product_name }} -
                             x{{ $cancel->order_quantity }}PC(s)"</strong> will be
                         removed from your pending orders.
                     </div>

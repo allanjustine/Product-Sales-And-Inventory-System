@@ -159,7 +159,7 @@
                                 <img style="width: 70px; height: 70px; border-radius:10%;"
                                     src="{{ url($item->product->product_image) }}" alt="">
                             @endif
-                            &nbsp;&nbsp;<span><strong>{{ $item->product->product_name }}</strong></span>
+                            &nbsp;&nbsp;<span><strong class="text-capitalize">{{ $item->product->product_name }}</strong></span>
                         </div>
                         <div class="cart-item-price mt-2">
                             &#8369;{{ number_format($item->product->product_price, 2, '.', ',') }}

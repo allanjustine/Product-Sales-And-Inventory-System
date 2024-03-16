@@ -33,7 +33,7 @@
                         <tr>
                             <td><strong>{{ $order->transaction_code }}</strong></td>
                             <td>{{ $order->user->name }} - {{ $order->user->phone_number }}</td>
-                            <td>{{ $order->product->product_name }}</td>
+                            <td class="text-capitalize">{{ $order->product->product_name }}</td>
                             <td>&#8369;{{ number_format($order->order_price, 2, '.', ',') }}</td>
                             <td>{{ number_format($order->order_quantity) }}PC(s)</td>
                             <td>&#8369;{{ number_format($order->order_price * $order->order_quantity, 2, '.', ',') }}

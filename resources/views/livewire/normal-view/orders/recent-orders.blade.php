@@ -31,7 +31,7 @@
             <tbody>
                 @foreach ($orders as $order)
                     <tr>
-                        <td>{{ $order->product->product_name }}</td>
+                        <td class="text-capitalize">{{ $order->product->product_name }}</td>
                         <td>&#8369;{{ number_format($order->product->product_price, 2, '.', ',') }}</td>
                         <td>{{ number_format($order->order_quantity) }}</td>
                         <td>&#8369;{{ number_format($order->order_total_amount, 2, '.', ',') }}</td>
