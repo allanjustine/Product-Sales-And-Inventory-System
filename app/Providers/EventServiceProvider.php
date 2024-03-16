@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\UserLoginHistory;
 use App\Events\UserSearchLog;
 use App\Listeners\SearchLogListener;
+use App\Listeners\UserLoginHistoryListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserSearchLog::class => [
             SearchLogListener::class
+        ],
+        UserLoginHistory::class => [
+            UserLoginHistoryListener::class
         ]
     ];
 

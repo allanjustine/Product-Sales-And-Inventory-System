@@ -54,7 +54,7 @@
 </head>
 
 <body style="overflow-x: hidden;">
-
+    {{ $slot ?? '' }}
     @yield('content')
 
     @include('sweetalert::alert')

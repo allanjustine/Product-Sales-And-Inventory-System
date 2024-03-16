@@ -99,11 +99,7 @@
                                 <p class="text-muted">{{ $user->gender }}</p>
 
                             </div>
-
-                            <a href="#" id="logout-btn" class="btn btn-primary btn-block" data-toggle="modal"
-                                data-target="#logout"><i
-                                    class="fa-solid fa-arrow-right-from-bracket mr-2"></i><b>Logout</b></a>
-
+                            @livewire('auth.user-login-history')
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\NormalView\Carts;
 
 use App\Models\Cart;
-use App\Models\Product;
 use Livewire\Component;
 
 class Index extends Component
@@ -17,8 +16,9 @@ class Index extends Component
     }
 
 
+
     public function render()
     {
-        return view('livewire.normal-view.carts.index');
+        return view('livewire.normal-view.carts.index')->layout('pages.normal-view.layout.base');
     }
 }

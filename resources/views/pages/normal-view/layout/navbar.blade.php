@@ -81,6 +81,10 @@
                         <div class="dropdown-divider"></div>
                     @endrole
                     @role('user')
+                        <a class="nav-link p-3" href="/carts">
+                            <i class="fa-light fa-shopping-cart"></i>&nbsp;
+                            <span>My Carts</span></a>
+                        <div class="dropdown-divider"></div>
                         <a class="nav-link p-3" href="/orders">
                             <i class="fa-light fa-bag-shopping"></i>&nbsp;
                             <span>My Orders</span></a>

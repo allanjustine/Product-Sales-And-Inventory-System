@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Events\UserLoginHistory;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -49,9 +50,20 @@ class Login extends Component
         }
 
         if (Auth::attempt($validatedData)) {
+
+            $ip_address = request()->ip();
+
+            $browser_address = request()->header('User-Agent');
+
             if (auth()->user()->is_admin) {
+
+                event(new UserLoginHistory($ip_address, $browser_address));
+
                 return redirect()->intended('/admin/dashboard');
             } else {
+
+                event(new UserLoginHistory($ip_address, $browser_address));
+
                 return redirect()->intended('/');
             }
         } else {

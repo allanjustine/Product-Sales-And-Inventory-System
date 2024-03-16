@@ -70,8 +70,8 @@ class User extends Authenticatable
         return $this->hasMany(SearchLog::class);
     }
 
-    public function users()
+    public function userLoginHistories()
     {
-        return $this->hasMany(Cart::class);
+        return $this->hasMany(UserLoginHistory::class);
     }
 }

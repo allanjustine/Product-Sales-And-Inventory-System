@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminSiteController;
 use App\Http\Controllers\Normal_View\SiteController;
+use App\Http\Livewire\NormalView\Carts\Index;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/orders', [SiteController::class, 'order']);
     Route::get('/favorites', [SiteController::class, 'favorite']);
     Route::get('/recent-orders', [SiteController::class, 'recentOrder']);
+    Route::get('/carts', Index::class);
     // Route::get('/cart', [SiteController::class, 'myCart']);
 });
 
