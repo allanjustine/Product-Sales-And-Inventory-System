@@ -12,6 +12,9 @@ class Home extends Component
 
 
     public $productView;
+    public $morning;
+    public $afternoon;
+    public $evening;
 
     public function essentialItems()
     {
@@ -31,6 +34,17 @@ class Home extends Component
 
         return compact('topDeals', 'popularityDeals', 'latestProducts', 'allLocations');
     }
+
+    public function mount()
+    {
+        $time = now()->format('H');
+
+        $this->morning = $time >= 0 && $time < 12;
+        $this->afternoon = $time >= 12 && $time < 18;
+        $this->evening = $time >= 18 && $time <= 23;
+    }
+
+
     public function view($id)
     {
         $this->productView = Product::find($id);

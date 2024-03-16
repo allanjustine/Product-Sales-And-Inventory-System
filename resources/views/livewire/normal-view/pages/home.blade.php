@@ -14,8 +14,18 @@
                         tells it what to do.</h3>
                     @if (auth()->check())
                         <a href="#" class="btn" id="view-btn" data-toggle="tooltip" data-placement="bottom"
-                            title="Have a nice day, {{ auth()->user()->name }}">Have a nice day,
-                            {{ auth()->user()->name }}</a>
+                            title="Have a nice day, {{ auth()->user()->name }}">
+                            @if ($morning)
+                                Good Morning
+                            @elseif($afternoon)
+                                Good Afternoon
+                            @elseif($evening)
+                                Good Evening
+                            @else
+                                Have a nice day
+                            @endif,
+                            {{ auth()->user()->name }}
+                        </a>
                         <a href="/products" class="btn btn-primary mt-1">Order now</a>
                     @else
                         <a href="/view-products" class="btn" id="view-btn">View Products</a>
@@ -29,7 +39,17 @@
                     <h3 id="car-title" class="py-3">A restaurant should be a place where you can eat food that has
                         been cooked with passion, served with warmth, and enjoyed with pleasure.</h3>
                     @if (auth()->check())
-                        <a href="#" class="btn" id="view-btn">Have a nice day, {{ auth()->user()->name }}</a>
+                        <a href="#" class="btn" id="view-btn">
+                            @if ($morning)
+                                Good Morning
+                            @elseif($afternoon)
+                                Good Afternoon
+                            @elseif($evening)
+                                Good Evening
+                            @else
+                                Have a nice day
+                            @endif, {{ auth()->user()->name }}
+                        </a>
                         <a href="/products" class="btn btn-primary mt-1">Order now</a>
                     @else
                         <a href="/view-products" class="btn" id="view-btn">View Products</a>
@@ -43,7 +63,17 @@
                     <h3 id="car-title" class="py-3">Food delivery is not just a service, it's a relationship between
                         the restaurant and the customer.</h3>
                     @if (auth()->check())
-                        <a href="#" class="btn" id="view-btn">Have a nice day, {{ auth()->user()->name }}</a>
+                        <a href="#" class="btn" id="view-btn">
+                            @if ($morning)
+                                Good Morning
+                            @elseif($afternoon)
+                                Good Afternoon
+                            @elseif($evening)
+                                Good Evening
+                            @else
+                                Have a nice day
+                            @endif, {{ auth()->user()->name }}
+                        </a>
                         <a href="/products" class="btn btn-primary mt-1">Order now</a>
                     @else
                         <a href="/view-products" class="btn" id="view-btn">View Products</a>
