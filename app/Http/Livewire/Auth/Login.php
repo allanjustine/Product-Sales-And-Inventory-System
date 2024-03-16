@@ -51,9 +51,13 @@ class Login extends Component
 
         if (Auth::attempt($validatedData)) {
 
-            $ip_address = request()->ip();
+            $ip_address = request()->ip() ?? 'Unknown IP';
 
-            $browser_address = request()->header('User-Agent');
+            $userUse = request()->header('User-Agent');
+
+            $browserUse = get_browser($userUse, true);
+
+            $browser_address = $browserUse['browser'] ?? 'Unknown Browser';
 
             if (auth()->user()->is_admin) {
 
