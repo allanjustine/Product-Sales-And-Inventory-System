@@ -100,6 +100,7 @@
     </div>
     <div class="container mt-5">
         <h3><i class="fa-light fa-box-open"></i> Products</h3>
+
         @if ($products->count() === 0)
             <h5>-</h5>
         @else
@@ -195,8 +196,10 @@
             {{ $products->links('pagination::bootstrap-4') }}</span>
     </div> --}}
     <div class="d-flex mb-2 align-items-center overflow-auto">
-        <a wire:click.prevent="loadMore()" class="mx-auto btn btn-link" {{ $products->count() >= $allDisplayProducts ? 'hidden' : '' }} id="paginate">
-            Load more...</a>
+        <a wire:click.prevent="loadMore()" class="mx-auto btn btn-link"
+            {{ $products->count() >= $allDisplayProducts ? 'hidden' : '' }} id="paginate">
+            <span wire:loading.remove>Load more...</span>
+            <span wire:loading>Loading...</span>
+        </a>
     </div>
 </div>
-

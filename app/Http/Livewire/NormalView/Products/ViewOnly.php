@@ -21,7 +21,6 @@ class ViewOnly extends Component
     public $product_rating = 'All';
     public $productView;
     public $allDisplayProducts;
-
     public $loadMore = 20;
 
     public function loadMore()

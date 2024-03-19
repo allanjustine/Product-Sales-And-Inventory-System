@@ -53,6 +53,8 @@ class ProductFactory extends Factory
             'https://images.unsplash.com/photo-1471943038886-87c772c31367?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
         ];
         $product_nameFake = fake()->numberBetween(4, 8);
+        $randomTimestamp = now()->subDays(rand(1, 30))->addHours(rand(0, 23))->addMinutes(rand(0, 59))->addSeconds(rand(0, 59));
+
         return [
             'product_category_id' => fake()->numberBetween(1, 12),
             'product_name' => fake()->word($product_nameFake, true),
@@ -65,6 +67,8 @@ class ProductFactory extends Factory
             'product_votes' =>  fake()->numberBetween(0, 1000),
             'product_code' => 'AJM-' . fake()->unique()->bothify('??#?#?##'),
             'product_image' => fake()->randomElement($products),
+            'created_at' => $randomTimestamp,
+            'updated_at' => $randomTimestamp,
         ];
     }
 }
