@@ -64,7 +64,7 @@
                         <button type="button" wire:loading.attr="disabled" class="btn btn-primary form-control"
                             wire:click="addToCartNow()">
                             <span>
-                                <i class="fa-solid fa-cart-plus"></i> Add toCart
+                                <i class="fa-solid fa-cart-plus"></i> Add to Cart
                             </span>
                         </button>
                         <button type="button" class="btn btn-secondary form-control"

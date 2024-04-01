@@ -16,15 +16,14 @@
                         <a href="#" class="btn" id="view-btn" data-toggle="tooltip" data-placement="bottom"
                             title="Have a nice day, {{ auth()->user()->name }}">
                             @if ($morning)
-                                Good Morning
+                                <i class="fas fa-sunrise text-warning"></i> Good Morning
                             @elseif($afternoon)
-                                Good Afternoon
+                                <i class="fas fa-sun text-warning"></i> Good Afternoon
                             @elseif($evening)
-                                Good Evening
+                                <i class="fas fa-moon-stars text-dark"></i> Good Evening
                             @else
                                 Have a nice day
-                            @endif,
-                            {{ auth()->user()->name }}
+                            @endif, {{ auth()->user()->name }}
                         </a>
                         <a href="/products" class="btn btn-primary mt-1">Order now</a>
                     @else
@@ -107,7 +106,8 @@
                                 <div style="position: relative;">
                                     <div class="image-container">
                                         @if (Storage::exists($product->product_image))
-                                            <img class="card-img-top" src="{{ Storage::url($product->product_image) }}"
+                                            <img class="card-img-top"
+                                                src="{{ Storage::url($product->product_image) }}"
                                                 alt="{{ $product->product_name }}">
                                         @else
                                             <img class="card-img-top" src="{{ $product->product_image }}"

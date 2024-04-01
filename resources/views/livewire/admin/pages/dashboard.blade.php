@@ -1,4 +1,17 @@
 <div>
+
+    <div class="callout bg-info border-dark mt-1">
+        @if ($morning)
+            <i class="fas fa-sunrise text-warning"></i> Good Morning
+        @elseif($afternoon)
+            <i class="fas fa-sun text-warning"></i> Good Afternoon
+        @elseif($evening)
+            <i class="fas fa-moon-stars text-dark"></i> Good Evening
+        @else
+            Have a nice day
+        @endif, {{ auth()->user()->name }}
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-4">
@@ -114,7 +127,8 @@
                             <span class="info-box-text" style="font-size: 11px;">
                                 MONTHLY REVENUE
                             </span>
-                            <span class="info-box-number">&#8369;{{ number_format($monthlyTotal, 2, '.', ',') }}</span>
+                            <span
+                                class="info-box-number">&#8369;{{ number_format($monthlyTotal, 2, '.', ',') }}</span>
                         </div>
                         <span class="info-box-icon"><i class="fa-solid fa-calendar-days"
                                 style="font-size: 43px;"></i></span>
@@ -160,6 +174,10 @@
     }
 
     .dark-mode .info-box.dash {
+        border-color: white !important;
+    }
+
+    .dark-mode .border-dark {
         border-color: white !important;
     }
 

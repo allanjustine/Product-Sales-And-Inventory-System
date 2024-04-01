@@ -15,7 +15,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($cartItems as $item)
+                        @forelse ($cartItems as $item)
                             <tr>
                                 <td>
                                     @if (Storage::exists($item->product->product_image))
@@ -32,7 +32,16 @@
                                 <td>&#8369;{{ number_format($item->quantity * $item->product->product_price, 2, '.', ',') }}
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <h5><i class="fa-regular fa-cart-xmark" style="font-size: 50px;"></i><br>
+                                        Your cart is empty. <a href="/products">Click
+                                            here to add an product to cart.</a></h5>
+                                </td>
+                            </tr>
+                        @endforelse
+
                         <tr>
                             <td colspan="5" class="text-end">
                                 <strong>Grand total:

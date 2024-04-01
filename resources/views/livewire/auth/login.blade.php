@@ -1,5 +1,6 @@
 <div>
     @include('livewire.auth.forgot-password')
+    @livewire('auth.resend-email')
     <div class="container mb-5">
         <div class="col-md-6 offset-md-3 mt-5">
             <div class="card-img-top d-flex justify-content-center align-items-center mb-3">
@@ -35,7 +36,8 @@
                             <input type="password" id="password" wire:model.defer="password" class="form-control"
                                 placeholder="Password">
                             <label for="password"><i class="fas fa-key"></i> Password</label>
-                            <button type="button" class="position-absolute no-focus top-50 end-0 mr-2 translate-middle-y"
+                            <button type="button"
+                                class="position-absolute no-focus top-50 end-0 mr-2 translate-middle-y"
                                 onclick="togglePasswordVisibility()">
                                 <i id="password-toggle-icon" class="fas fa-eye-slash"></i>
                             </button>
@@ -48,7 +50,9 @@
                                 <a href="" class="float-end" data-toggle="modal"
                                     data-target="#forgotPassword">Forgot password?</a>
                                 <p><input type="checkbox" wire:model.defer="remember"> Remember me</p>
-                                <p href="/register">Don't have an account? <a href="/register">Register</a></p>
+                                <p>Don't have an account? <a href="/register">Register</a></p>
+                                <p>Didn't receive email verification? <a href="#" data-toggle="modal"
+                                        data-target="#resend">Resend</a></p>
                             </div>
                         </div>
                         <button type="submit" class="mt-3 btn btn-primary form-control">Login</button>
@@ -61,14 +65,15 @@
 
 <style>
     .no-focus:focus {
-      outline: none;
+        outline: none;
     }
+
     .no-focus {
         border: none;
         background: transparent;
         font-size: 18px;
     }
-  </style>
+</style>
 
 <script>
     $(document).ready(function() {

@@ -30,6 +30,10 @@
                         <a class="nav-link text-white text-center {{ 'orders' == request()->path() ? 'active2' : '' }}"
                             href="/orders"><i class="fa-light fa-bag-shopping"></i> My Orders</a>
                     </li>
+                    <li class="nav-item p-2">
+                        <a class="nav-link text-white text-center {{ 'carts' == request()->path() ? 'active2' : '' }}"
+                            href="/carts"><i class="fa-light fa-shopping-cart"></i> My Carts</a>
+                    </li>
                 @endrole
             @else
                 <li class="nav-item p-2">

@@ -10,7 +10,7 @@ html {
     scroll-behavior: smooth;
 }
 body {
-    background-color: rgb(230, 225, 225);
+    background-color: #dce1de;
     height: 100vh;
     padding-right: 0 !important;
 }

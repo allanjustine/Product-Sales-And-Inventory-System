@@ -56,7 +56,7 @@
                                     @endif
                                 </form>
                             </div>
-                            <h3 class="profile-username text-center">{{ $user->name }}</h3>
+                            <h3 class="profile-username text-center">{{ $user->name }} <i class="fas fa-badge-check text-primary" {{ auth()->user()->email_verified_at ?? 'hidden' }} style="font-size: 14px;"></i></h3>
 
                             <p class="text-muted text-center">
                                 @if ($user->isAdmin())

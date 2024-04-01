@@ -159,7 +159,8 @@
                                 <img style="width: 70px; height: 70px; border-radius:10%;"
                                     src="{{ url($item->product->product_image) }}" alt="">
                             @endif
-                            &nbsp;&nbsp;<span><strong class="text-capitalize">{{ $item->product->product_name }}</strong></span>
+                            &nbsp;&nbsp;<span><strong
+                                    class="text-capitalize">{{ $item->product->product_name }}</strong></span>
                         </div>
                         <div class="cart-item-price mt-2">
                             &#8369;{{ number_format($item->product->product_price, 2, '.', ',') }}
@@ -182,7 +183,7 @@
                     {{-- <button wire:click.prevent="checkOutAll()">Checkout all</button> --}}
                     @if ($carts->count() === 0)
                         <p class="text-center">
-                            <i class="fa-regular fa-xmark-to-slot mt-5" style="font-size: 50px;"></i>
+                            <i class="fa-regular fa-cart-xmark mt-5" style="font-size: 50px;"></i>
                         </p>
                         <p class="text-center mb-5">No Product Added Yet.</p>
                     @else
@@ -265,31 +266,14 @@
                                     </span>
                                 </div>
                                 @role('user')
-                                    @if ($product->product_status === 'Not Available')
-                                        <a wire:click="notAvailable()" class="btn btn-warning mt-1 form-control"><i
-                                                class="fa-solid fa-cart-plus"></i>
-                                            Add to Cart</a>
-                                        <a wire:click="notAvailable()" class="btn btn-primary mt-1 form-control"><i
-                                                class="fa-solid fa-cart-shopping"></i>
-                                            Buy Now</a>
-                                    @elseif ($product->product_stock == 0)
-                                        <a wire:click="outOfStock()" class="btn btn-warning mt-1 form-control"><i
-                                                class="fa-solid fa-cart-plus"></i>
-                                            Add to Cart</a>
-                                        <a wire:click="outOfStock()" class="btn btn-primary mt-1 form-control"><i
-                                                class="fa-solid fa-cart-shopping"></i>
-                                            Buy Now</a>
-                                    @else
-                                        <a class="btn btn-warning mt-1 form-control" data-toggle="modal"
-                                            data-target="#addToCart"
-                                            wire:click.prevent="addToCart({{ $product->id }})"><i
-                                                class="fa-solid fa-cart-plus"></i>
-                                            Add to Cart</a>
+                                    <a class="btn btn-warning mt-1 form-control" data-toggle="modal"
+                                        data-target="#addToCart" wire:click.prevent="addToCart({{ $product->id }})"><i
+                                            class="fa-solid fa-cart-plus"></i>
+                                        Add to Cart</a>
 
-                                        <a class="btn btn-primary mt-1 form-control btn-block" data-toggle="modal"
-                                            data-target="#toBuyNow" wire:click.prevent="toBuyNow({{ $product->id }})"><i
-                                                class="fa-solid fa-cart-shopping"></i> Buy Now</a>
-                                    @endif
+                                    <a class="btn btn-primary mt-1 form-control btn-block" data-toggle="modal"
+                                        data-target="#toBuyNow" wire:click.prevent="toBuyNow({{ $product->id }})"><i
+                                            class="fa-solid fa-cart-shopping"></i> Buy Now</a>
                                 @endrole
                                 @role('admin')
                                     <a href="/admin/products" class="btn btn-primary mt-1 form-control btn-block"><i

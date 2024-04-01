@@ -128,6 +128,18 @@
         background: transparent;
         font-size: 18px;
     }
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
 </style>
 
 <script>
@@ -149,6 +161,7 @@
             passwordToggleIcon.classList.add("fa-eye-slash");
         }
     }
+
     function toggleConfirmPasswordVisibility() {
         var passwordInput = document.getElementById("password_confirmation");
         var passwordToggleIcon = document.getElementById("password_confirmation-toggle-icon");

@@ -94,9 +94,12 @@ class Index extends Component
         $searchLogs = SearchLog::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->take(5)->get();
 
         if ($this->search) {
-            SearchLog::where('log_entry', $this->search)->delete();
-            $log_entry = $this->search;
-            event(new UserSearchLog($log_entry));
+            $searchLog = SearchLog::where('log_entry', $this->search)->first();
+
+            if (!$searchLog) {
+                $log_entry = $this->search;
+                event(new UserSearchLog($log_entry));
+            }
         }
 
         return compact('products', 'carts', 'allDisplayProducts', 'searchLogs');
@@ -104,9 +107,10 @@ class Index extends Component
 
     public function searchDelete($id)
     {
-        SearchLog::find($id)->delete();
+        SearchLog::findOrFail($id)->delete();
         $this->reset();
     }
+
 
     public function clearAllLogs()
     {
@@ -118,15 +122,15 @@ class Index extends Component
         }
     }
 
-    public function notAvailable()
-    {
-        $this->dispatchBrowserEvent('error', ['message' => 'This product is not available.']);
-    }
+    // public function notAvailable()
+    // {
+    //     $this->dispatchBrowserEvent('error', ['message' => 'This product is not available.']);
+    // }
 
-    public function outOfStock()
-    {
-        $this->dispatchBrowserEvent('error', ['message' => 'This product is out of stock.']);
-    }
+    // public function outOfStock()
+    // {
+    //     $this->dispatchBrowserEvent('error', ['message' => 'This product is out of stock.']);
+    // }
 
     public function addToFavorite($id)
     {
@@ -188,7 +192,7 @@ class Index extends Component
         }
 
         $this->dispatchBrowserEvent('success', ['message' => 'Product added to cart successfully.']);
-        $this->reset();
+        // $this->reset();
 
         // alert()->success('Success', 'Product added to cart successfully.');
 

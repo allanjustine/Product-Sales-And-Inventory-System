@@ -160,7 +160,7 @@
                             @endif
                             <span class="ml-3">
                                 <strong>Grand Total:
-                                    &#8369;{{ number_format($grandTotalCancelled, 2, '.', ',') }}</strong>
+                                    &#8369;{{ number_format($grandTotalPending, 2, '.', ',') }}</strong>
                             </span>
                         </div>
                         <div class="tab-pane fade" id="recent" role="tabpanel"
@@ -245,7 +245,7 @@
                             @endif
                             <span class="ml-3">
                                 <strong>Grand Total:
-                                    &#8369;{{ number_format($grandTotalCancelled, 2, '.', ',') }}</strong>
+                                    &#8369;{{ number_format($grandTotalRecent, 2, '.', ',') }}</strong>
                             </span>
                         </div>
 
