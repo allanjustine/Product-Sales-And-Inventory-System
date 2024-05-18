@@ -1,6 +1,6 @@
 @extends('pages.normal-view.layout.base')
 
-@section('title', '| Cart')
+@section('title', '| My Carts')
 
 @section('content')
     <div>

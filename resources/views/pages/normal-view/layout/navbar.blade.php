@@ -34,6 +34,10 @@
                         <a class="nav-link text-white text-center {{ 'carts' == request()->path() ? 'active2' : '' }}"
                             href="/carts"><i class="fa-light fa-shopping-cart"></i> My Carts</a>
                     </li>
+                    <li class="nav-item p-2">
+                        <a class="nav-link text-white text-center {{ 'favorites' == request()->path() ? 'active2' : '' }}"
+                            href="/favorites"><i class="fa-light fa-heart"></i> My Favorites</a>
+                    </li>
                 @endrole
             @else
                 <li class="nav-item p-2">

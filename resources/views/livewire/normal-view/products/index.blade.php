@@ -172,7 +172,7 @@
                                 wire:click="checkOut({{ $item->id }})">
                                 <i class="fas fa-check"></i>&nbsp;Checkout
                             </button><br>
-                            <span><strong>Total:
+                            <span><strong>Sub total:
                                     &#8369;{{ number_format($this->getProductTotalAmount($item->product_id), 2, '.', ',') }}</strong></span>
                         </div>
 
@@ -187,7 +187,7 @@
                         </p>
                         <p class="text-center mb-5">No Product Added Yet.</p>
                     @else
-                        <span class="px-3 py-2"><strong>Sub Total:
+                        <span class="px-3 py-2"><strong>Grand total:
                                 &#8369;{{ number_format($total, 2, '.', ',') }}</strong></span>
                     @endif
                 </li>
