@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Jenssegers\Agent\Agent;
 
 class Login extends Component
 {
@@ -51,13 +52,11 @@ class Login extends Component
 
         if (Auth::attempt($validatedData)) {
 
+            $agent = new Agent();
+
             $ip_address = request()->ip() ?? 'Unknown IP';
 
-            $userUse = request()->header('User-Agent');
-
-            $browserUse = get_browser($userUse, true);
-
-            $browser_address = $browserUse['browser'] ?? 'Unknown Browser';
+            $browser_address = $agent->platform() . ", " .  $agent->browser() ?? 'Unknown Browser';
 
             if (auth()->user()->is_admin) {
 
