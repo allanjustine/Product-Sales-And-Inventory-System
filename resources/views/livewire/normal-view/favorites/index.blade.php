@@ -67,25 +67,25 @@
                                 </div>
                                 @role('user')
                                     @if ($favorite->product->product_status === 'Not Available')
-                                        <a wire:click="notAvailable()" class="btn btn-warning mt-1 form-control"><i
+                                        {{-- <a wire:click="notAvailable()" class="btn btn-warning mt-1 form-control"><i
                                                 class="fa-solid fa-cart-plus"></i>
-                                            Add to Cart</a>
+                                            Add to Cart</a> --}}
                                         <a wire:click="notAvailable()" class="btn btn-primary mt-1 form-control"><i
                                                 class="fa-solid fa-cart-shopping"></i>
                                             Buy Now</a>
                                     @elseif ($favorite->product->product_stock == 0)
-                                        <a wire:click="outOfStock()" class="btn btn-warning mt-1 form-control"><i
+                                        {{-- <a wire:click="outOfStock()" class="btn btn-warning mt-1 form-control"><i
                                                 class="fa-solid fa-cart-plus"></i>
-                                            Add to Cart</a>
+                                            Add to Cart</a> --}}
                                         <a wire:click="outOfStock()" class="btn btn-primary mt-1 form-control"><i
                                                 class="fa-solid fa-cart-shopping"></i>
                                             Buy Now</a>
                                     @else
-                                        <a class="btn btn-warning mt-1 form-control" data-toggle="modal"
+                                        {{-- <a class="btn btn-warning mt-1 form-control" data-toggle="modal"
                                             data-target="#addToCart"
                                             wire:click.prevent="addToCart({{ $favorite->product->id }})"><i
                                                 class="fa-solid fa-cart-plus"></i>
-                                            Add to Cart</a>
+                                            Add to Cart</a> --}}
 
                                         <a class="btn btn-primary mt-1 form-control btn-block" data-toggle="modal"
                                             data-target="#toBuyNow"

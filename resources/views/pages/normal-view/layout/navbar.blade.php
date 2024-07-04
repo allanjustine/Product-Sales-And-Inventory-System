@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark shadow">
     <h1 class="ms-5">
-        <strong id="branding-ajm">AJM</strong>
+        <strong id="branding-ajm">Sud-an Kinalamian</strong>
     </h1>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
         aria-expanded="false" aria-label="Toggle navigation">

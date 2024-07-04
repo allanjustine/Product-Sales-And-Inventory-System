@@ -192,6 +192,20 @@ class Index extends Component
         return redirect('/admin/users');
     }
 
+    public function directVerified($id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            alert()->error('Error', 'No user found.');
+        } else {
+            $user->email_verified_at = now();
+            $user->save();
+        }
+        alert()->success('Verified Success', 'The user "' . $user->name . '" has been verified successfully');
+        return redirect('/admin/users');
+    }
+
     public function view($id)
     {
         $this->userView = User::find($id);
@@ -205,6 +219,7 @@ class Index extends Component
             'profile_image'         =>      'required|image|max:10000|mimes:jpeg,png,gif,webp,svg|not_in:ico'
         ]);
     }
+
 
     public function render()
     {

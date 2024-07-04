@@ -1,14 +1,14 @@
 <div>
     @include('livewire.normal-view.products.view')
     <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
-        <ol class="carousel-indicators">
+        {{-- <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
+        </ol> --}}
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="images/slide1.jpg" alt="First slide">
+                <img class="d-block w-100" src="images/bg.png" alt="First slide">
                 <div class="carousel-caption text-center top-0">
                     <h3 id="car-title" class="py-3">Food is not just fuel, it's information. It talks to your DNA and
                         tells it what to do.</h3>
@@ -32,7 +32,7 @@
                     @endif
                 </div>
             </div>
-            <div class="carousel-item">
+            {{-- <div class="carousel-item">
                 <img class="d-block w-100" src="images/slide2.jpg" alt="Second slide">
                 <div class="carousel-caption text-center top-0">
                     <h3 id="car-title" class="py-3">A restaurant should be a place where you can eat food that has
@@ -79,16 +79,16 @@
                         <a href="/login" class="btn btn-primary">Get Started</a>
                     @endif
                 </div>
-            </div>
+            </div> --}}
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        {{-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
         <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
-        </a>
+        </a> --}}
     </div>
 
     <h3 class="text-center bg-dark mt-3 p-3"><i class="fa-sharp fa-regular fa-arrow-down fa-bounce"></i> TOP SELLING
@@ -381,7 +381,7 @@
             Bohol <i class="fa-solid fa-location-dot fa-shake fa-xl" style="color: #ad0000;"></i></span></h4>
     <div class="container d-flex justify-content-center mt-5 mb-3">
         <iframe class="elevation-3 rounded"
-            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d413.07098686836446!2d123.970567480301!3d9.949291019306209!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOcKwNTYnNTcuMCJOIDEyM8KwNTgnMTMuOCJF!5e0!3m2!1sen!2sph!4v1681485598511!5m2!1sen!2sph"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15733.529951932846!2d123.864238!3d9.6483221!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33aa4d92b03f03ab%3A0x63d9eaa894d4fb7e!2sSMCT%20Group%20of%20Companies!5e0!3m2!1sen!2sph!4v1720059304982!5m2!1sen!2sph"
             width="700" height="350" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
             tabindex="0"></iframe>
     </div>

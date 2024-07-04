@@ -266,10 +266,10 @@
                                     </span>
                                 </div>
                                 @role('user')
-                                    <a class="btn btn-warning mt-1 form-control" data-toggle="modal"
+                                    {{-- <a class="btn btn-warning mt-1 form-control" data-toggle="modal"
                                         data-target="#addToCart" wire:click.prevent="addToCart({{ $product->id }})"><i
                                             class="fa-solid fa-cart-plus"></i>
-                                        Add to Cart</a>
+                                        Add to Cart</a> --}}
 
                                     <a class="btn btn-primary mt-1 form-control btn-block" data-toggle="modal"
                                         data-target="#toBuyNow" wire:click.prevent="toBuyNow({{ $product->id }})"><i

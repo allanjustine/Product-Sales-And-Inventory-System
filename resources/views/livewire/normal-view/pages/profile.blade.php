@@ -11,7 +11,7 @@
                             <div class="text-center profile-pic-div">
                                 <div wire:loading wire:target="updatePhoto, profile_image">
                                     <img class="profile-user-img img-fluid img-circle"
-                                        src="{{ Storage::url('asset/loading.gif') }}" alt="loading"
+                                        src="/images/loading.gif" alt="loading"
                                         style="height: 150px; width: 150px; border-radius: 50%;">
                                 </div>
                                 <div wire:loading wire:target="updateProfile, changePassword">

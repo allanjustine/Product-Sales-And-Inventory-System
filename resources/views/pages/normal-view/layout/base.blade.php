@@ -71,18 +71,16 @@
     <div class="container">
         <div class="row p-2">
             <div class="col-md-4">
-                <h5>AJM Company</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore
-                    et dolore magna aliqua.</p>
+                <h5>Ireca Tindahan</h5>
+                <p>Palit mog sud an kina lamian</p>
             </div>
 
             <div class="col-md-4">
                 <h5>Contact Us</h5>
                 <ul class="list-unstyled">
-                    <li><i class="fas fa-map-marker-alt"></i> Address: Tinangnan, Tubigon, Bohol - Purok 2</li>
-                    <li><i class="fas fa-phone"></i> Phone: 09512072888</li>
-                    <li><i class="fas fa-envelope"></i> Email: mydummy.2022.2023@gmail.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Address: J.A Clarin St.</li>
+                    {{-- <li><i class="fas fa-phone"></i> Phone: 09512072888</li> --}}
+                    {{-- <li><i class="fas fa-envelope"></i> Email: mydummy.2022.2023@gmail.com</li> --}}
                 </ul>
             </div>
 
@@ -90,7 +88,7 @@
                 <h5>Follow Us</h5>
                 <ul class="list-inline social-icons">
                     <li class="list-inline-item">
-                        <a href="https://facebook.com/1down" id="facebook" target="_blank">
+                        <a href="https://facebook.com/" id="facebook" target="_blank">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </li>

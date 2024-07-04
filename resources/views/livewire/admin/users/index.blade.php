@@ -137,6 +137,10 @@
                                         <a href="" class="btn btn-danger mt-1 form-control" data-toggle="modal"
                                             data-target="#deleteUser" wire:click="delete({{ $user->id }})"><i
                                                 class="fa-solid fa-trash"></i> Remove</a>
+                                        @if ($user->email_verified_at === null)
+                                            <a href="#" class="btn btn-success mt-1 form-control" wire:click="directVerified({{ $user->id }})"><i
+                                                class="fa-solid fa-badge-check"></i> Verified</a>
+                                        @endif
                                     </div>
                                 </div>
                             </td>

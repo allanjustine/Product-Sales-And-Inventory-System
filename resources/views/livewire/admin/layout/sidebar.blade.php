@@ -38,7 +38,7 @@
             <a href="/admin/dashboard" class="brand-link">
                 <img src="/images/mylogo.jpg" alt="AJM logo" class="brand-image img-circle elevation-0"
                     style="opacity: .8; border-radius: 50%;">
-                <span class="brand-text"><strong id="branding-ajm">AJM</strong></span>
+                <span class="brand-text"><strong id="branding-ajm">Ireca Admin Panel</strong></span>
             </a>
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
