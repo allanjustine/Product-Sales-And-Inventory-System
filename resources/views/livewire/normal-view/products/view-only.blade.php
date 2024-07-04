@@ -1,4 +1,4 @@
-<div wire:poll>
+<div wire:poll.keep-alive.15s>
     @include('livewire.normal-view.products.view')
     <div style="backdrop-filter: blur(15px);" class="bg-transparent sticky-top rounded" id="cats">
         <details>
@@ -98,7 +98,7 @@
             </div>
         </details>
     </div>
-    <div class="container mt-5">
+    <div class="container-fluid px-5 mt-5">
         <h3><i class="fa-light fa-box-open"></i> Products</h3>
 
         @if ($products->count() === 0)

@@ -1,4 +1,4 @@
-<div wire:poll>
+<div wire:poll.keep-alive.15s>
     @include('livewire.admin.users.delete')
     @include('livewire.admin.users.edit')
     @include('livewire.admin.users.create')

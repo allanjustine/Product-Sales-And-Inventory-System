@@ -1,4 +1,4 @@
-<div wire:poll>
+<div>
     <h3 class="mt-3">About Ireca Sud-an Kinalamian</h3>
     <hr>
     <div class="container mt-5">

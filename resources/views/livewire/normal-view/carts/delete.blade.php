@@ -1,4 +1,4 @@
-<div wire:poll>
+<div>
     <!-- Modal Delete To Cart -->
     <div wire:ignore.self class="modal fade" id="remove" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLongTitle" aria-hidden="true">

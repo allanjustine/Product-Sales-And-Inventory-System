@@ -1,4 +1,4 @@
-<div wire:poll>
+<div>
     @include('livewire.normal-view.products.view')
     @include('livewire.normal-view.carts.add-to-cart')
     @include('livewire.normal-view.orders.buy-now')

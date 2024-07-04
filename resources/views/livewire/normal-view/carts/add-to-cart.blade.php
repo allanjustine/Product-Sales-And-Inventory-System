@@ -1,4 +1,4 @@
-<div wire:poll>
+<div>
     <!-- Modal Add To Cart Info-->
     <div wire:ignore.self class="modal fade" id="addToCart" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLongTitle" aria-hidden="true">

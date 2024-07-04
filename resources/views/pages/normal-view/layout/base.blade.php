@@ -78,7 +78,7 @@
             <div class="col-md-4">
                 <h5>Contact Us</h5>
                 <ul class="list-unstyled">
-                    <li><i class="fas fa-map-marker-alt"></i> Address: J.A Clarin St.</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Address: J.A Clarin St. Tagbilaran City</li>
                     {{-- <li><i class="fas fa-phone"></i> Phone: 09512072888</li> --}}
                     {{-- <li><i class="fas fa-envelope"></i> Email: mydummy.2022.2023@gmail.com</li> --}}
                 </ul>

@@ -1,4 +1,4 @@
-<div wire:poll>
+<div>
     <div class="wrapper">
         {{-- <div class="preloader flex-column justify-content-center align-items-center">
             <div class="ring">Loading

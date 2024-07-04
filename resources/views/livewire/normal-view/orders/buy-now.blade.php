@@ -1,4 +1,4 @@
-<div wire:poll>
+<div>
     <!-- Modal Buy Now Info-->
     <div wire:ignore.self class="modal fade" id="toBuyNow" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLongTitle" aria-hidden="true">

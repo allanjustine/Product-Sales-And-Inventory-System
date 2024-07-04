@@ -1,4 +1,4 @@
-<div wire:poll>
+<div>
 
     <a href="#" id="loginhistory-btn" class="btn btn-primary btn-block" data-toggle="modal" data-target="#loginhistory"
         wire:click="showLoginHistory()"><i class="fa-solid fa-history mr-2"></i><b>Login Activity

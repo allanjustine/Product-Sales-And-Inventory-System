@@ -1,4 +1,4 @@
-<div wire:poll>
+<div wire:poll.keep-alive.15s>
     <div class="container" style="height: 200vh;">
         <div class="card">
             <div class="card-body">

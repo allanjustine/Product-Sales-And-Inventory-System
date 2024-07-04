@@ -1,4 +1,4 @@
-<div wire:poll>
+<div>
     <!-- Modal Cancel Order -->
     <div wire:ignore.self class="modal fade" id="cancel" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLongTitle" aria-hidden="true">

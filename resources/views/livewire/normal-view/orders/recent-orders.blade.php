@@ -1,4 +1,4 @@
-<div wire:poll>
+<div>
     <div class="container">
         <h1 class="mt-3">Recent Orders</h1>
         <hr>

@@ -1,4 +1,4 @@
-<div wire:poll>
+<div>
 
     <div class="container">
         <h3 class="mb-4 mt-3">Contact Us</h3>

@@ -1,6 +1,6 @@
 @section('title', '| My Carts')
 
-<div wire:poll>
+<div>
     @include('livewire.normal-view.carts.delete')
     @include('livewire.normal-view.orders.check-out')
     <div class="container">

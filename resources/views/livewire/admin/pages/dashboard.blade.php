@@ -1,4 +1,4 @@
-<div wire:poll>
+<div>
 
     <div class="callout bg-info border-dark mt-1">
         @if ($morning)

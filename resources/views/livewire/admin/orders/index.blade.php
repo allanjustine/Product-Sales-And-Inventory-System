@@ -1,4 +1,4 @@
-<div wire:poll>
+<div wire:poll.keep-alive.15s>
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <h6 class="text-center">
