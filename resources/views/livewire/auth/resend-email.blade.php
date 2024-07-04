@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     <!-- Modal Resend Email-->
     <div wire:ignore.self class="modal fade" id="resend" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLongTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">

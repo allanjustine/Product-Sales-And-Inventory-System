@@ -1,21 +1,21 @@
-<div>
-    <h3 class="mt-3">About AJM Restaurant</h3>
+<div wire:poll>
+    <h3 class="mt-3">About Ireca Sud-an Kinalamian</h3>
     <hr>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6">
-                <img src="images/slide2.jpg" alt="AJM Restaurant" class="img-fluid mb-3">
+                <img src="images/slide2.jpg" alt="Ireca Sud-an Kinalamian" class="img-fluid mb-3">
             </div>
             <div class="col-md-6">
-                <p class="lead">Welcome to AJM Restaurant, where we serve the most delicious and authentic cuisine in
+                <p class="lead">Welcome to Ireca Sud-an Kinalamian, where we serve the most delicious and authentic cuisine in
                     town.</p>
                 <p>Our restaurant was founded with a passion for good food and a desire to share our love of cuisine
                     with the world. We use only the freshest ingredients and traditional cooking methods to bring you
                     the very best in flavor and quality.</p>
-                <p>At AJM Restaurant, we take pride in our warm and welcoming atmosphere, where you can relax and enjoy
+                <p>At Ireca Sud-an Kinalamian, we take pride in our warm and welcoming atmosphere, where you can relax and enjoy
                     a memorable dining experience with family and friends. Whether you're in the mood for a quick lunch
                     or a leisurely dinner, we have something to suit every taste and appetite.</p>
-                <p>So come visit us today and discover why AJM Restaurant is the best place to eat in town!</p>
+                <p>So come visit us today and discover why Ireca Sud-an Kinalamian is the best place to eat in town!</p>
             </div>
         </div>
     </div>
@@ -23,18 +23,18 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6">
-                <p class="lead">Welcome to AJM Restaurant, where we serve the most delicious and authentic cuisine in
+                <p class="lead">Welcome to Ireca Sud-an Kinalamian, where we serve the most delicious and authentic cuisine in
                     town.</p>
                 <p>Our restaurant was founded with a passion for good food and a desire to share our love of cuisine
                     with the world. We use only the freshest ingredients and traditional cooking methods to bring you
                     the very best in flavor and quality.</p>
-                <p>At AJM Restaurant, we take pride in our warm and welcoming atmosphere, where you can relax and enjoy
+                <p>At Ireca Sud-an Kinalamian, we take pride in our warm and welcoming atmosphere, where you can relax and enjoy
                     a memorable dining experience with family and friends. Whether you're in the mood for a quick lunch
                     or a leisurely dinner, we have something to suit every taste and appetite.</p>
-                <p>So come visit us today and discover why AJM Restaurant is the best place to eat in town!</p>
+                <p>So come visit us today and discover why Ireca Sud-an Kinalamian is the best place to eat in town!</p>
             </div>
             <div class="col-md-6">
-                <img src="images/slide1.jpg" alt="AJM Restaurant" class="img-fluid mb-3">
+                <img src="images/slide1.jpg" alt="Ireca Sud-an Kinalamian" class="img-fluid mb-3">
             </div>
         </div>
     </div>
@@ -54,7 +54,7 @@
                                 <blockquote class="blockquote mb-0">
                                     <p>"I am extremely satisfied with the service I received. The team was very
                                         professional and helpful throughout the process."</p>
-                                    <footer class="blockquote-footer">Allan Justine Mascariñas</footer>
+                                    <footer class="blockquote-footer">Juan Dela Cruz</footer>
                                 </blockquote>
                             </div>
                         </div>

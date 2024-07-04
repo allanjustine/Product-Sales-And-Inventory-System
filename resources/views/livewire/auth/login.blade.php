@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     @include('livewire.auth.forgot-password')
     @livewire('auth.resend-email')
     <div class="container mb-5">

@@ -1,5 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark shadow">
     <h1 class="ms-5">
+        <img src="/images/icon.png" alt="AJM logo" class="brand-image img-circle img-fluid"
+        style="opacity: .8; border-radius: 50%; width: 60px;">
         <strong id="branding-ajm">Sud-an Kinalamian</strong>
     </h1>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"

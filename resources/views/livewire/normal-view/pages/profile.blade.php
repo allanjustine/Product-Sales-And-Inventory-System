@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     <h4 class="p-2"><u>{{ Auth::user()->name }}</u></h4>
     <hr>
     <section class="content py-2">

@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     <div class="container" style="height: 200vh;">
         <div class="card">
             <div class="card-body">

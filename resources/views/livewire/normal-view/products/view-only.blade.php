@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     @include('livewire.normal-view.products.view')
     <div style="backdrop-filter: blur(15px);" class="bg-transparent sticky-top rounded" id="cats">
         <details>

@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     <h3>Product Sales</h3>
     <div class="card">
         <table style="font-size: 11px;">

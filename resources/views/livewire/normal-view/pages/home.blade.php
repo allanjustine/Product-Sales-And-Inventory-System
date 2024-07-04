@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     @include('livewire.normal-view.products.view')
     <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
         {{-- <ol class="carousel-indicators">

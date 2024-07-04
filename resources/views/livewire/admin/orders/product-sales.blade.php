@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     <div class="table-responsive card card-primary card-outline card-outline-tabs" id="product-table"
         style="height: 515px;">
         <div class="card-body">

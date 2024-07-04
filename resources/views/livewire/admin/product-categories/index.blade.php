@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     @include('livewire.admin.product-categories.delete')
     @include('livewire.admin.product-categories.edit')
     @include('livewire.admin.product-categories.create')

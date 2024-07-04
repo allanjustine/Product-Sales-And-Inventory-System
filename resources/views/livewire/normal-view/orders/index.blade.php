@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     @include('livewire.normal-view.orders.cancel-order')
     @include('livewire.normal-view.orders.order-received')
     <div class="container">

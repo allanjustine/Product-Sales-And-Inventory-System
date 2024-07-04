@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     <div class="wrapper">
         {{-- <div class="preloader flex-column justify-content-center align-items-center">
             <div class="ring">Loading
@@ -36,7 +36,7 @@
         </nav>
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="/admin/dashboard" class="brand-link">
-                <img src="/images/mylogo.jpg" alt="AJM logo" class="brand-image img-circle elevation-0"
+                <img src="/images/icon.png" alt="AJM logo" class="brand-image img-circle elevation-0"
                     style="opacity: .8; border-radius: 50%;">
                 <span class="brand-text"><strong id="branding-ajm">Ireca Admin Panel</strong></span>
             </a>
@@ -77,7 +77,7 @@
                         </li>
                         <li class="nav-header">ORDERS MANAGEMENT</li>
                         <li
-                            class="nav-item {{ in_array(request()->path(), ['admin/orders', 'admin/product-sales']) ? 'menu-open' : '' }}">
+                            class="nav-item menu-open {{ in_array(request()->path(), ['admin/orders', 'admin/product-sales']) ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa-solid fa-hand-pointer"></i>
                                 <p>
@@ -112,7 +112,7 @@
                         </li>
                         <li class="nav-header">PRODUCT MANAGEMENT</li>
                         <li
-                            class="nav-item {{ in_array(request()->path(), ['admin/products', 'admin/product-categories']) ? 'menu-open' : '' }}">
+                            class="nav-item menu-open {{ in_array(request()->path(), ['admin/products', 'admin/product-categories']) ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa-solid fa-hand-pointer"></i>
                                 <p>
