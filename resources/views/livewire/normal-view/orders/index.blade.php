@@ -302,11 +302,20 @@
                                             Cancelled
                                         </a>
 
+                                        @if ($order->reason_of_cancellation != null)
+                                        <a href="#" class="btn btn-info
+                                            mt-1" data-toggle="modal" data-target="#showReason{{ $order->id }}">
+                                            <i class="fa-regular fa-circle-exclamation"></i>
+                                            Reason
+                                        </a>
+                                        @include('livewire.normal-view.orders.reason')
+                                        @else
                                         <a href="#" class="btn btn-primary mt-1"
                                             wire:click="rePurchaseOrder({{ $order->id }})">
                                             <i class="fa-solid fa-rotate-right"></i>
                                             Re-purchase
                                         </a>
+                                        @endif
                                         @endif
                                     </span>
                                 </div>

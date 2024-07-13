@@ -8,6 +8,9 @@ use Livewire\Component;
 class Index extends Component
 {
 
+    public $orderToCancel;
+    public $reason_of_cancellation;
+
     public function processOrder($id)
     {
         $order = Order::findOrFail($id);
@@ -101,6 +104,26 @@ class Index extends Component
             ->get();
 
         return compact('orders', 'grandTotal');
+    }
+
+    public function cancelOrder($id)
+    {
+        $this->orderToCancel = Order::find($id);
+    }
+
+    public function cancel()
+    {
+        $this->validate([
+            'reason_of_cancellation'         =>              ['required', 'min:10', 'max:255']
+        ]);
+
+        $order = Order::where('id', $this->orderToCancel->id)->first();
+        $order->order_status = 'Cancelled';
+        $order->reason_of_cancellation = $this->reason_of_cancellation;
+        $order->save();
+
+        alert()->success('Success Cancellation', 'The order ' . $order->product->product_name . ' cancelled successfully');
+        return redirect('/admin/orders');
     }
 
     public function render()

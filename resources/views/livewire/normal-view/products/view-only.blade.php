@@ -197,7 +197,7 @@
     </div> --}}
     <div class="d-flex mb-2 align-items-center overflow-auto">
         <a wire:click.prevent="loadMore()" class="mx-auto btn btn-link"
-            {{ $products->count() >= $allDisplayProducts ? 'hidden' : '' }} id="paginate">
+            {{ $products->count() >= $allDisplayProducts || $search ? 'hidden' : '' }} id="paginate">
             <span wire:loading.remove>Load more...</span>
             <span wire:loading>Loading...</span>
         </a>

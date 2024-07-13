@@ -17,8 +17,6 @@ class Index extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    protected $listeners = ['resetInputs'];
-
     public $category_name = 'All';
     public $perPage = 5;
     public $search;
@@ -122,8 +120,7 @@ class Index extends Component
     {
         $product = Product::findOrFail($id);
 
-        if($product->product_status == 'Available')
-        {
+        if ($product->product_status == 'Available') {
             $product->update([
                 'product_status'    =>      'Not Available'
             ]);
