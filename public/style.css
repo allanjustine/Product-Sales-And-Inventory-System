@@ -1,9 +1,9 @@
 * {
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
 }
 html {
-    font-size: 14px;
     -webkit-scroll-behavior: smooth;
     -moz-scroll-behavior: smooth;
     -ms-scroll-behavior: smooth;
