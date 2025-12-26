@@ -44,7 +44,7 @@
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
                         <img id="sidebar-img"
-                            src="{{ Auth::user()->profile_image === null ? Storage::url('asset/profile-pic.jpg') : Storage::url(Auth::user()->profile_image) }}"
+                            src="{{ Auth::user()->profile_image === null ? '/images/profile.png' : Storage::url(Auth::user()->profile_image) }}"
                             class="img-circle elevation-2" alt="User Image"
                             style="border-radius: 50%; width: 40px; height: 40px;">
                     </div>
@@ -249,7 +249,7 @@
 
 <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4>Are you sure you want to logout?</h4>
