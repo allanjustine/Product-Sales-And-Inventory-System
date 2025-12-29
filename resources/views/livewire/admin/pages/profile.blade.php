@@ -14,7 +14,7 @@
                                 </div>
                                 <div wire:loading wire:target="updateProfile, changePassword">
                                     <img class="profile-user-img img-fluid img-circle"
-                                        src="{{ Auth::user()->profile_image === null ? Storage::url('asset/profile-pic.jpg') : Storage::url(Auth::user()->profile_image) }}"
+                                        src="{{ Auth::user()->profile_image === null ? '/images/profile.png' : Storage::url(Auth::user()->profile_image) }}"
                                         alt="loading" style="height: 150px; width: 150px; border-radius: 50%;">
                                 </div>
                                 <div wire:loading.remove>
@@ -25,13 +25,13 @@
                                     @else
                                         @if (!$profile_image)
                                             <img class="profile-user-img img-fluid img-circle"
-                                                src="{{ Auth::user()->profile_image === null ? Storage::url('asset/profile-pic.jpg') : Storage::url(Auth::user()->profile_image) }}"
+                                                src="{{ Auth::user()->profile_image === null ? '/images/profile.png' : Storage::url(Auth::user()->profile_image) }}"
                                                 alt="{{ $user->name }} photo" id="photo"
                                                 style="height: 150px; width: 150px; border-radius: 50%;">
                                         @endif
                                         @if ($profile_image)
                                             <img class="profile-user-img img-fluid img-circle"
-                                                src="{{ Auth::user()->profile_image === null ? Storage::url('asset/profile-pic.jpg') : Storage::url(Auth::user()->profile_image) }}"
+                                                src="{{ Auth::user()->profile_image === null ? '/images/profile.png' : Storage::url(Auth::user()->profile_image) }}"
                                                 alt="{{ $user->name }} photo" id="photo"
                                                 style="height: 150px; width: 150px; border-radius: 50%;"><br>
                                             <span
@@ -229,7 +229,7 @@
 
 <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4>Are you sure you want to logout?</h4>
