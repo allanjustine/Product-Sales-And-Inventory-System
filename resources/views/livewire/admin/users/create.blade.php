@@ -2,7 +2,7 @@
     <!-- Modal Add User-->
     <div wire:ignore.self class="modal fade" id="addUser" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLongTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="exampleModalLongTitle">Add User</h3>
