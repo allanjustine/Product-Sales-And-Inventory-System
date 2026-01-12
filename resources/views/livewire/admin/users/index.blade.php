@@ -92,7 +92,7 @@
                     @foreach ($users as $user)
                         <tr>
                             <td>
-                                <img src="{{ $user->profile_image === null ? Storage::url('asset/profile-pic.jpg') : Storage::url($user->profile_image) }}"
+                                <img src="{{ $user->profile_image === null ? '/images/profile.png' : Storage::url($user->profile_image) }}"
                                     style="height: 50px; width: 60px; border-radius: 5px;"
                                     alt="{{ $user->profile_name }}">
                             </td>
