@@ -157,7 +157,7 @@
         </ul>
     </div>
     @endrole
-    <div class="container-fluid px-5">
+    <div class="container-fluid px-md-5">
 
         <br><br>
         <h3 class="mt-5"><i class="fa-light fa-box-open"></i> Products</h3>
