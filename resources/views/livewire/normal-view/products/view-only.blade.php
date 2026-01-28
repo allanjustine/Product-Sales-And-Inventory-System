@@ -98,7 +98,7 @@
             </div>
         </details>
     </div>
-    <div class="container-fluid px-5 mt-5">
+    <div class="container-fluid px-md-5 mt-5">
         <h3><i class="fa-light fa-box-open"></i> Products</h3>
 
         @if ($products->count() === 0)
