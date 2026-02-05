@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="style.css">
 
     <link rel="icon" href="images/mylogo.jpg">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
 
 
     <title>My Web @yield('title')</title>
