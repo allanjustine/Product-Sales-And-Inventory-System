@@ -55,7 +55,7 @@
                     <div class="outline mx-auto"
                         style="width: 48px; height: 50px; border-radius: 50%; border: 2px solid white;">
                         <img style="width: 45px; height: 45px; border-radius: 50%;"
-                            src="{{ auth()->user()->profile_image === null ? Storage::url('asset/profile-pic.jpg') : Storage::url(auth()->user()->profile_image) }}"
+                            src="{{ auth()->user()->profile_image === null ? '/images/profile.png' : Storage::url(auth()->user()->profile_image) }}"
                             alt="{{ auth()->user()->name }}">
                     </div>
                 @else
@@ -71,7 +71,7 @@
                             <div class="outline mb-3"
                                 style="width: 45px; height: 46px; border-radius: 50%; border: 2px solid white;">
                                 <img style="width: 41px; height: 41px; border-radius: 50%;"
-                                    src="{{ auth()->user()->profile_image === null ? Storage::url('asset/profile-pic.jpg') : Storage::url(auth()->user()->profile_image) }}"
+                                    src="{{ auth()->user()->profile_image === null ? '/images/profile.png' : Storage::url(auth()->user()->profile_image) }}"
                                     alt="{{ auth()->user()->name }}">
                             </div>
                             <div class="text-center">
@@ -121,7 +121,7 @@
 
 <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4>Are you sure you want to logout?</h4>
